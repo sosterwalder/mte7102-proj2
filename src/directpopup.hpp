@@ -14,6 +14,7 @@ public:
 
     void setXOffset(int xOffset) { mXOffset = xOffset; }
     void setAnchorPos(const Vector2i &anchorPos) { mAnchorPos = anchorPos + Vector2i(mXOffset, 0); }
+    virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers);
 
 protected:
     /// Internal helper function to maintain nested window position values

@@ -9,7 +9,13 @@ ClickableLabel::ClickableLabel(
 
 bool ClickableLabel::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
 {
+    spdlog::get("qde")->debug(
+        "ClickableLabel '{}': Received click at ({},{})",
+        mCaption, p.x(), p.y()
+    );
+
     Widget::mouseButtonEvent(p, button, down, modifiers);
+
     /* Temporarily increase the reference count of the button in case the
        button causes the parent window to be destructed */
     ref<ClickableLabel> self = this;

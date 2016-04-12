@@ -1,12 +1,21 @@
 [submodule "ext/eigen"]
-	path = ext/eigen
+	path = src/ext/eigen
 	url = https://github.com/libigl/eigen.git
 [submodule "ext/nanogui"]
-	path = ext/nanogui
+	path = src/ext/nanogui
 	url = https://github.com/wjakob/nanogui
 [submodule "ext/nanovg"]
-	path = ext/nanovg
+	path = src/ext/nanovg
 	url = https://github.com/wjakob/nanovg
 [submodule "ext/spdlog"]
-	path = ext/spdlog
+	path = src/ext/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "ext/jinja2cpplight"]
+	path = src/ext/jinja2cpplight
+	url = https://github.com/hughperkins/Jinja2CppLight.git
+[submodule "ext/pugixml"]
+	path = src/ext/pugixml
+	url = https://github.com/zeux/pugixml.git
+[submodule "ext/glfw"]
+	path = src/ext/glfw
+	url = https://github.com/glfw/glfw.git

@@ -3,23 +3,31 @@
 GraphNode::GraphNode(Widget *parent, const std::string &title) :
     Window(parent, title),
     mAnchorPos(Vector2i::Zero()),
-    mAnchorHeight(30)
+    mAnchorHeight(30),
+    mShaderObject(nullptr)
 {
     mSize = Vector2i(100, 80);
-}
 
-Vector2i GraphNode::getInputSlotPosition(const int slotNumber) const
-{
-    float offset = ((float)slotNumber + 1.0f) / ((float)mNumInputs + 1);
+    mPopup = new DirectPopup(this, this);
+    mPopup->setId("graphNodePopup");
+    mPopup->setSize(Vector2i(10, 10));
+    mPopup->setLayout(new GroupLayout());
+    mPopup->setVisible(false);
 
-    return this->getSlotPosition(offset);
-}
-
-Vector2i GraphNode::getOutputSlotPosition(const int slotNumber) const
-{
-    float offset = ((float)slotNumber + 1.0f) / ((float)mNumOutputs + 1);
-
-    return this->getSlotPosition(offset);
+    ClickableLabel *removeButton  = new ClickableLabel(mPopup, "Remove");
+    removeButton->setId("removeGraphNodeButton");
+    removeButton->setCallback([this](const Vector2i &p) {
+        spdlog::get("qde")->debug(
+            "GraphNode '{}': Removing",
+            mTitle
+        );
+        mShaderObject->decTimesUsed();
+        // TODO: Check if this really is the proper way to delete an
+        // object. What happens with the instance here?
+        Graph *parentGraph = dynamic_cast<Graph *>(mParent);
+        parentGraph->removeChild(this);
+        mPopup->setVisible(false);
+    });
 }
 
 void GraphNode::draw(NVGcontext* ctx)
@@ -74,9 +82,42 @@ void GraphNode::removeOutputSink(const OutputSink *sink)
     sink->decRef();
 }
 
-void GraphNode::refreshRelativePlacement()
+bool GraphNode::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
 {
-    // Will be overridden in child classes
+    Window::mouseButtonEvent(p, button, down, modifiers);
+
+    if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
+        int offsetX = p.x() - mPos.x();
+        int offsetY = p.y() - mPos.y();
+        Vector2i position(offsetX, offsetY);
+        mPopup->setAnchorPos(position);
+        mPopup->setVisible(!mPopup->visible());
+
+        return true;
+    }
+
+    return false;
+}
+
+// May be overridden by child classes.
+std::string GraphNode::calculateOutput()
+{
+    fmt::MemoryWriter output;
+
+    for (auto input : mInputs) {
+        if (input->link()) {
+            GraphNodeLink *link = input->link();
+            // spdlog::get("qde")->debug("Node '{}': Input has link: '{}'", mId, link->id());
+
+            if (link->source()) {
+                GraphNode *node = dynamic_cast<GraphNode *>(link->source()->parent());
+                output << node->calculateOutput();
+                spdlog::get("qde")->debug("Node '{}': Link has source: '{}'", mId, node->id());
+            }
+        }
+    }
+
+    return output.str();
 }
 
 Vector2i GraphNode::getSlotPosition(const float offset) const

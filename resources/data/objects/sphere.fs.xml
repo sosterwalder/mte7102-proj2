@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>sphere</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>position</name>
+            <builtin>vec3</builtin>
+            <type>property</type>
+        </parameter>
+        <parameter>
+            <name>radius</name>
+            <builtin>float</builtin>
+            <type>property</type>
+        </parameter>
+    </parameters>
+    <source>
+        // Returns the signed distance to a sphere with given radius for the
+        // given position.
+        float sphere(vec3 position, float radius)
+        {
+            return length(position) - radius;
+        }
+    </source>
+</function>

@@ -13,8 +13,20 @@ public:
     virtual bool keyboardEvent(int key, int scancode, int action, int modifiers);
     void setIntensity(const float intensity) { mIntensity = intensity; }
     void bindShader();
+    const std::vector<GraphNode *> &nodeTypes() const { return mNodeTypes; }
+    void addShaderToOutput(GLShaderObject *shaderObject);
+    void setShaderOutput(const std::string &output);
+
 
 private:
-    nanogui::GLShader mShader;
+    OpenGLShader mShader;
+    ref<Graph> mNodeGraph;
+    std::vector<GraphNode *> mNodeTypes;
     float mIntensity;
+    double mStartTime;
+    double mUpdateTime;
+    int mNumFrames;
+
+    void initializeShaderObjects();
+    void initializeShader();
 };

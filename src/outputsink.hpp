@@ -5,9 +5,8 @@
 class OutputSink : public Sink
 {
 public:
-    OutputSink(Widget *parent, const std::string &label);
-    virtual void draw(NVGcontext* ctx);
+    OutputSink(Widget *parent, Graph *parentGraph, const std::string &label);
 
 protected:
-    virtual void refreshRelativePlacement();
+    virtual Vector2i relativePosition();
 };

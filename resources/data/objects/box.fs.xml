@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>box</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>position</name>
+            <builtin>vec3</builtin>
+            <type>property</type>
+        </parameter>
+        <parameter>
+            <name>dimension</name>
+            <builtin>vec3</builtin>
+            <type>property</type>
+        </parameter>
+    </parameters>
+    <source>
+        // Returns the signed distance to a box with given dimension for the
+        // given position.
+        float box(vec3 position, vec3 dimension)
+        {
+            position = abs(position) - dimension;
+            return max(max(position.x, position.y), position.z);
+        }
+    </source>
+</function>
