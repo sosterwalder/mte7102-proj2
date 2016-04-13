@@ -6,21 +6,21 @@ class GraphNodeLink : public Widget
 {
 public:
     GraphNodeLink(Widget *parent);
-    GraphNodeLink(Widget *parent, Sink *source);
-    GraphNodeLink(Widget *parent, Sink *source, Sink *target);
-    void setSource(const ref<Sink> source) { mSource = source; }
-    Sink *source() { return mSource; }
-    const Sink *source() const { return mSource.get(); }
-    void setTarget(const ref<Sink> target) { mTarget = target; }
-    Sink *target() { return mTarget; }
-    const Sink *target() const { return mTarget.get(); }
+    GraphNodeLink(Widget *parent, Source *source);
+    GraphNodeLink(Widget *parent, Source *source, Sink *sink);
+    void setSource(const ref<Source> source) { mSource = source; }
+    Source *source() { return mSource; }
+    const Source *source() const { return mSource.get(); }
+    void setSink(const ref<Sink> sink) { mSink = sink; }
+    Sink *sink() { return mSink; }
+    const Sink *sink() const { return mSink.get(); }
     void setTargetPosition(const Vector2i &pos);
     virtual void draw(NVGcontext* ctx);
 
 protected:
-    ref<Sink> mSource;
-    ref<Sink> mTarget;
+    ref<Source> mSource;
+    ref<Sink> mSink;
     Vector2i  mTargetPosition;
 
-    bool hasTarget() { return mTarget != nullptr; }
+    bool hasTarget() { return mSink != nullptr; }
 };

@@ -53,7 +53,7 @@ void OpenGLShader::addShaderObjectToOutput(const std::string &id)
                 object->definition()
             );
             mShaderObjectsOutput.push_back(id);
-            spdlog::get("qde")->debug("Shader: Added ShaderObject {} to output: {}", object->name(), mFragmentShaderObjects);
+            spdlog::get("qde")->debug("Shader: Added ShaderObject {} to output", object->name());
         }
         else {
             spdlog::get("qde")->warn(
@@ -68,7 +68,7 @@ void OpenGLShader::addShaderObjectToOutput(const std::string &id)
             mFragmentShaderUniforms,
             object->uniforms()
         );
-        spdlog::get("qde")->debug("Shader: Added Uniforms of ShaderObject {} to output: {}", id, mFragmentShaderUniforms);
+        spdlog::get("qde")->debug("Shader: Added Uniforms of ShaderObject {}", id);
     }
     else {
         spdlog::get("qde")->warn(
@@ -85,7 +85,7 @@ bool OpenGLShader::recompile()
 {
 
     parseFragmentShaderTemplate();
-    spdlog::get("qde")->debug("Shader: Recompiling: {}", mFragmentShaderSource);
+    spdlog::get("qde")->debug("Shader: Recompiling {}", mName);
 
     return init(
         mName,

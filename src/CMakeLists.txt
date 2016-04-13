@@ -86,9 +86,9 @@ set(SOURCES
   glshader.hpp glshader.cpp
   clickablelabel.hpp clickablelabel.cpp
   directpopup.hpp directpopup.cpp
+  connector.hpp connector.cpp
   sink.hpp sink.cpp
-  inputsink.hpp inputsink.cpp
-  outputsink.hpp outputsink.cpp
+  source.hpp source.cpp
   graphnodelink.hpp graphnodelink.cpp
   graphnode.hpp graphnode.cpp
   outputgraphnode.hpp outputgraphnode.cpp

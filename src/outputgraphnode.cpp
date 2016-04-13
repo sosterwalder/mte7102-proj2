@@ -5,9 +5,9 @@ OutputGraphNode::OutputGraphNode(Widget *parent, const std::string &title) :
 {
     setId(fmt::format("outputGraphNode-{}", 0));
     Graph *parentGraph = dynamic_cast<Graph *>(parent);
-    InputSink *sink = new InputSink(this, parentGraph, "Out");
+    Sink *sink = new Sink(this, parentGraph, "Out");
     sink->setId("outputGraphNodeInputSink");
-    addInputSink(sink);
+    addSink(sink);
 }
 
 void OutputGraphNode::performLayout(NVGcontext *ctx)

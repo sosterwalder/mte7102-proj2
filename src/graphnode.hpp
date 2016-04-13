@@ -10,15 +10,15 @@ public:
     const Vector2i &anchorPos() const { return mAnchorPos; }
     void setAnchorHeight(int anchorHeight) { mAnchorHeight = anchorHeight; }
     int anchorHeight() const { return mAnchorHeight; }
-    const std::vector<InputSink *> &inputs() const { return mInputs; }
-    const std::vector<OutputSink *> &outputs() const { return mOutputs; }
+    const std::vector<Sink *> &inputs() const { return mInputs; }
+    const std::vector<Source *> &outputs() const { return mOutputs; }
     virtual void draw(NVGcontext* ctx);
-    void addInputSink(InputSink *sink);
-    void removeInputSink(const int index);
-    void removeInputSink(const InputSink *sink);
-    void addOutputSink(OutputSink *sink);
-    void removeOutputSink(const int index);
-    void removeOutputSink(const OutputSink *sink);
+    void addSink(Sink *sink);
+    void removeSink(const int index);
+    void removeSink(const Sink *sink);
+    void addSource(Source *source);
+    void removeSource(const int index);
+    void removeSource(const Source *source);
     void setShaderObject(GLShaderObject *shaderObject) { mShaderObject = shaderObject; }
     virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers);
     virtual std::string calculateOutput();
@@ -27,8 +27,8 @@ protected:
     DirectPopup *mPopup;
     int mNumInputs, mNumOutputs;
     bool mDrag;
-    std::vector<InputSink *> mInputs;
-    std::vector<OutputSink *> mOutputs;
+    std::vector<Sink *> mInputs;
+    std::vector<Source *> mOutputs;
     Vector2i mAnchorPos;
     int mAnchorHeight;
     ref<GLShaderObject> mShaderObject;

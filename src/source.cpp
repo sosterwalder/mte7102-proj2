@@ -1,11 +1,11 @@
 #include "main.hpp"
 
-OutputSink::OutputSink(Widget *parent, Graph *parentGraph, const std::string &label) :
-    Sink(parent, parentGraph, label)
+Source::Source(Widget *parent, Graph *parentGraph, const std::string &label) :
+    Connector(parent, parentGraph, label)
 {
 }
 
-Vector2i OutputSink::relativePosition()
+Vector2i Source::relativePosition()
 {
     return Vector2i(
         mParent->size().x() - 10,

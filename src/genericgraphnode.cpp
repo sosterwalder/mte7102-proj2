@@ -5,13 +5,13 @@ GenericGraphNode::GenericGraphNode(Widget *parent, const std::string &title) :
 {
     {
         Graph *parentGraph = dynamic_cast<Graph *>(parent);
-        OutputSink *sink = new OutputSink(this, parentGraph, "Output");
-        sink->setId(fmt::format("{}GraphNodeOutputSink", title));
-        addOutputSink(sink);
+        Source *source = new Source(this, parentGraph, "Output");
+        source->setId(fmt::format("{}GraphNodeSource", title));
+        addSource(source);
     }
 }
 
-void GenericGraphNode::performLayout(NVGcontext *ctx)
+/*void GenericGraphNode::performLayout(NVGcontext *ctx)
 {
     GraphNode::performLayout(ctx);
     mPos = Vector2i(
@@ -19,6 +19,7 @@ void GenericGraphNode::performLayout(NVGcontext *ctx)
         mParent->size().y() / 2 - mSize.y() / 2
     );
 }
+*/
 
 std::string GenericGraphNode::calculateOutput()
 {

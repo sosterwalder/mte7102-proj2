@@ -3,26 +3,26 @@
 GraphNodeLink::GraphNodeLink(Widget *parent) :
     Widget(parent),
     mSource(nullptr),
-    mTarget(nullptr),
+    mSink(nullptr),
     mTargetPosition(Vector2i::Zero())
 {
-    spdlog::get("qde")->debug("Link: Constructor without sinks");
+    spdlog::get("qde")->debug("Link: Constructor without connectors");
 }
 
-GraphNodeLink::GraphNodeLink(Widget *parent, Sink *source) :
+GraphNodeLink::GraphNodeLink(Widget *parent, Source *source) :
     Widget(parent),
     mSource(source),
-    mTarget(nullptr)
+    mSink(nullptr)
 {
     mTargetPosition = source->absolutePosition();
-    spdlog::get("qde")->debug("Link: Constructor with source sink");
+    spdlog::get("qde")->debug("Link: Constructor with source");
 }
 
-GraphNodeLink::GraphNodeLink(Widget *parent, Sink *source, Sink *target) :
+GraphNodeLink::GraphNodeLink(Widget *parent, Source *source, Sink *sink) :
     Widget(parent),
     mSource(source),
-    mTarget(target),
-    mTargetPosition(target->position())
+    mSink(sink),
+    mTargetPosition(sink->position())
 {
     spdlog::get("qde")->debug("Link: Constructor with both sinks");
 }
@@ -49,7 +49,10 @@ void GraphNodeLink::draw(NVGcontext* ctx)
         //     mTarget->absolutePosition().x() - mParent->absolutePosition().x(),
         //     mTarget->absolutePosition().y() - mParent->absolutePosition().y() + 10
         // );
-        outputPosition = mTarget->absolutePosition();
+        //outputPosition = mParent->absolutePosition() + mTarget->absolutePosition();
+        Vector2i pos = /*mTarget->absolutePosition() - */mSink->position();
+        outputPosition = pos;
+        spdlog::get("qde")->debug("Link: {} having target {}", id(), mSink->id());
     }
     else {
         Vector2i offset = mSource->absolutePosition() - mParent->absolutePosition();

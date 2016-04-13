@@ -10,9 +10,9 @@ class Graph : public Window
 {
 public:
     Graph(Widget *parent, Qce *qce, const std::string &title = "Untitled graph");
-    void setActiveSink(Sink *sink) { mActiveSink = sink; }
-    Sink *activeSink() { return mActiveSink; }
-    const Sink *activeSink() const { return mActiveSink.get(); }
+    void setActiveConnector(Connector *connector) { mActiveConnector = connector; }
+    Connector *activeConnector() { return mActiveConnector; }
+    const Connector *activeConnector() const { return mActiveConnector.get(); }
     void addNodeType(GLShaderObject *shaderObject);
     void calculateOutput();
     virtual void drawContents();
@@ -22,7 +22,7 @@ public:
 protected:
     ref<Qce> mQce;
     DirectPopup *mPopup;
-    ref<Sink> mActiveSink;
+    ref<Connector> mActiveConnector;
     ref<GraphNode> mOutputNode;
     std::vector<GraphNode> mNodes;
     std::vector<GraphNodeLink> mNodeLinks;

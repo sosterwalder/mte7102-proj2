@@ -36,20 +36,20 @@ void GraphNode::draw(NVGcontext* ctx)
     Window::draw(ctx);
 }
 
-void GraphNode::addInputSink(InputSink* sink)
+void GraphNode::addSink(Sink* sink)
 {
     mInputs.push_back(sink);
     sink->incRef();
 }
 
-void GraphNode::removeInputSink(const int index)
+void GraphNode::removeSink(const int index)
 {
-    InputSink *sink = mInputs[index];
+    Sink *sink = mInputs[index];
     mInputs.erase(mInputs.begin() + index);
     sink->decRef();
 }
 
-void GraphNode::removeInputSink(const InputSink *sink)
+void GraphNode::removeSink(const Sink *sink)
 {
     mInputs.erase(std::remove(
         mInputs.begin(),
@@ -59,27 +59,27 @@ void GraphNode::removeInputSink(const InputSink *sink)
     sink->decRef();
 }
 
-void GraphNode::addOutputSink(OutputSink *sink)
+void GraphNode::addSource(Source *source)
 {
-    mOutputs.push_back(sink);
-    sink->incRef();
+    mOutputs.push_back(source);
+    source->incRef();
 }
 
-void GraphNode::removeOutputSink(const int index)
+void GraphNode::removeSource(const int index)
 {
-    OutputSink *sink = mOutputs[index];
+    Source *source = mOutputs[index];
     mOutputs.erase(mOutputs.begin() + index);
-    sink->decRef();
+    source->decRef();
 }
 
-void GraphNode::removeOutputSink(const OutputSink *sink)
+void GraphNode::removeSource(const Source *source)
 {
     mOutputs.erase(std::remove(
         mOutputs.begin(),
         mOutputs.end(),
-        sink
+        source
     ), mOutputs.end());
-    sink->decRef();
+    source->decRef();
 }
 
 bool GraphNode::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)

@@ -3,51 +3,16 @@
 Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     Window(parent, title),
     mQce(qce),
-    mActiveSink(nullptr),
+    mActiveConnector(nullptr),
     mSelectedNodeIndex(-1)
 {
-    {
-        mPopup = new DirectPopup(this, this);
-        mPopup->setId("addPopup");
-        mPopup->setSize(Vector2i(10, 10));
-        mPopup->setLayout(new GroupLayout());
-        mPopup->setVisible(false);
-    }
-
-    /*
-    {
-        for (GraphNode nodeType : mQce->nodeTypes()) {
-            spdlog::get("qde")->debug(
-                "Adding nodeType for selection: {}",
-                nodeType.id()
-            );
-            ClickableLabel *addNodeButton  = new ClickableLabel(
-                mPopup,
-                fmt::format("Add {} node", nodeType.id())
-            );
-            addNodeButton->setCallback([this](const Vector2i &p) {
-                this->addNodeButtonEvent(p);
-            });
-        }
-    }
-    */
+    mPopup = new DirectPopup(this, this);
+    mPopup->setId("addPopup");
+    mPopup->setSize(Vector2i(10, 10));
+    mPopup->setLayout(new GroupLayout());
+    mPopup->setVisible(false);
 
     mOutputNode = new OutputGraphNode(this, "Output");
-
-    /*
-    DummyGraphNode *node = new DummyGraphNode(this, "Dummy node");
-    node->setId("dummyGraphNode");
-    node->setPosition(Vector2i(100, 100));
-    OutputSink *outsink = new OutputSink(node, this, "Output");
-    outsink->setId("dummyGraphNodeOutputSink");
-    node->addOutputSink(outsink);
-
-    GraphNodeLink *link = new GraphNodeLink(this, outsink, sink);
-    link->setId(fmt::format(
-        "{}-{}",
-        sink->id(), outsink->id()
-    ));
-    */
 }
 
 void Graph::addNodeType(GLShaderObject *shaderObject)
@@ -107,13 +72,13 @@ void Graph::performLayout(NVGcontext *ctx)
 
 void Graph::addNodeButtonEvent(const Vector2i &p, GLShaderObject *shaderObject)
 {
-    spdlog::get("qde")->debug("Add node button was pressed on '{}'", mTitle);
-    spdlog::get("qde")->debug("Add node button was pressed at ({}, {})", p.x(), p.y());
+    spdlog::get("qde")->debug("Graph: Add node button was pressed at ({}, {})", p.x(), p.y());
 
     GenericGraphNode *node = new GenericGraphNode(this, shaderObject->id());
     shaderObject->incTimesUsed();
     node->setId(shaderObject->id());
     node->setPosition(p);
+    spdlog::get("qde")->debug("Graph: Set node position to ({}, {})", p.x(), p.y());
     node->setEnabled(true);
     node->setVisible(true);
     node->setShaderObject(shaderObject);

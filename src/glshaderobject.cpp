@@ -50,8 +50,6 @@ std::string GLShaderObject::uniforms()
         }
     }
 
-    spdlog::get("qde")->debug("ShaderObject {}: Uniforms: {}", name(), (void*)this, out.str());
-
     return out.str();
 }
 
@@ -80,7 +78,7 @@ std::string GLShaderObject::call()
     }
     out << ");";
 
-    spdlog::get("qde")->debug("ShaderObject {}: Calculated output {}", name(), out.str());
+    spdlog::get("qde")->debug("ShaderObject {}: Calculated output", name());
 
     return out.str();
 }
@@ -111,7 +109,7 @@ void GLShaderObject::parseFromFile(const std::string &filename)
 
     mDefinition = shaderFunction.child_value("source");
 
-    spdlog::get("qde")->debug("ShaderObject {}: Parsed file {}: {}", name(), filename, mDefinition);
+    spdlog::get("qde")->debug("ShaderObject {}: Parsed file {}", name(), filename);
 }
 
 /*
