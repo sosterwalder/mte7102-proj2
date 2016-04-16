@@ -5,6 +5,7 @@
 #include <fstream>
 
 // Project imports
+#include <boost/variant.hpp>
 #include <spdlog/spdlog.h>
 #include <src/pugixml.hpp>
 #include <src/stringhelper.h>
@@ -20,7 +21,7 @@
 #include <nanogui/entypo.h>
 #include <nanogui/glutil.h>
 #include "util.hpp"
-#include "property.hpp"
+#include "glshaderparameter.hpp"
 #include "glshaderobject.hpp"
 #include "glshader.hpp"
 #include "clickablelabel.hpp"
