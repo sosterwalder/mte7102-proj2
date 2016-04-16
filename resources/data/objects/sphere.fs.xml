@@ -7,11 +7,13 @@
             <name>position</name>
             <builtin>vec3</builtin>
             <type>property</type>
+            <call>position - {}</call>
         </parameter>
         <parameter>
             <name>radius</name>
             <builtin>float</builtin>
             <type>property</type>
+            <call>{}</call>
         </parameter>
     </parameters>
     <source>
