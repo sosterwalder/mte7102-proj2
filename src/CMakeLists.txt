@@ -83,7 +83,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/jinja2cpplight)
 
 # Set source files
 set(SOURCES
-  # Merge GLFW into the source
   util.hpp util.cpp
   glshaderparameter.hpp
   glshaderobject.hpp glshaderobject.cpp
@@ -106,15 +105,12 @@ set(SOURCES
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../lib)
 
 # Resource file (icons etc.)
-set(EXTRA_SOURCE "")
-if (APPLE)
-  set(EXTRA_SOURCE
-    "${CMAKE_CURRENT_SOURCE_DIR}/../resources/im.icns"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/sphere.fs.xml"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml"
-  )
-endif()
+set(EXTRA_SOURCE
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/im.icns"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/sphere.fs.xml"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml"
+)
 
 
 # Add external libraries (which have no CMakeLists file)
@@ -126,18 +122,35 @@ set(EXTERNAL_SOURCE
 
 
 # Specify executable file for output
+if (APPLE)
 add_executable(mte7102 MACOSX_BUNDLE
     ${SOURCES}
     ${EXTRA_SOURCE}
     ${EXTERNAL_SOURCE}
 )
+else()
+add_executable(mte7102
+    ${SOURCES}
+    ${EXTRA_SOURCE}
+    ${EXTERNAL_SOURCE}
+)
+endif()
 
 # Link needed libraries
+if (APPLE)
 target_link_libraries(mte7102
     ${OPENGL_LIBRARY}
     ${GLFW_LIBRARIES}
     libnanogui.dylib
 )
+else()
+target_link_libraries(mte7102
+    ${OPENGL_LIBRARY}
+    ${GLFW_LIBRARIES}
+    pthread
+    nanogui
+)
+endif()
 
 # Set output directory of executable
 set_target_properties(mte7102 PROPERTIES
@@ -174,10 +187,20 @@ if (APPLE)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/objects/)
 else()
   # Insulate from a few types of ABI changes by statically linking against libgcc and libstdc++
-  set_target_properties(mte7102 PROPERTIES LINK_FLAGS "-static-libgcc")
-  #set_target_properties(mte7102 PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
+  # set_target_properties(mte7102 PROPERTIES LINK_FLAGS "-static-libgcc")
+  set_target_properties(mte7102 PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
 endif()
 
 if (UNIX AND NOT ${U_CMAKE_BUILD_TYPE} MATCHES DEBUG)
   add_custom_command(TARGET mte7102 POST_BUILD COMMAND strip $<TARGET_FILE:mte7102>)
+endif()
+
+if (UNIX)
+  # Deploy files
+  message(STATUS "Deploying resource files to: ${CMAKE_CURRENT_SOURCE_DIR}/../bin/" )
+  install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data)
+  install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects)
+  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/)
+  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/sphere.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects/)
+  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects/)
 endif()
