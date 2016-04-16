@@ -107,21 +107,25 @@ void Qce::bindShader()
     mShader.bind();
     mShader.uploadIndices(indices);
     mShader.uploadAttrib("position", positions);
-    // mShader.setUniform("intensity", mIntensity);
+
+    mShader.setUniforms();
+
     mShader.setUniform("globalShowDistance", 1);
-    mShader.setUniform("sphere_0_radius", 0.2f);
-    mShader.setUniform("sphere_0_position", Vector3f(-3.0f, 1.0f, 1.0f));
+    // mShader.setUniform("intensity", mIntensity);
+    // mShader.setUniform("sphere_0_radius", 0.2f);
+    // mShader.setUniform("sphere_0_position", Vector3f(-3.0f, 1.0f, 1.0f));
     // spdlog::get("qde")->debug("QCE: Shader output: {}", mShader.fragmentShaderSource());
 }
 
-// When adding/connecting node
+// When connecting node
 void Qce::addShaderToOutput(GLShaderObject *shaderObject)
 {
     spdlog::get("qde")->debug(
-        "QCE: Added shader object to output: {}",
+        "QCE: Adding shader object to output: {}",
         shaderObject->name()
     );
     mShader.addShaderObjectToOutput(shaderObject->name());
+    mShader.setUniforms();
     mShader.recompile();
 }
 
