@@ -2,26 +2,6 @@
 
 #include "main.hpp"
 
-enum class GLShaderBuiltinType
-{
-    UNKNOWN,
-    FLOAT,
-    VEC3
-};
-
-enum class GLShaderType
-{
-    UNKNOWN,
-    PROPERTY,
-    SINK
-};
-
-struct GLShaderBuiltin
-{
-    std::string name;
-    GLShaderBuiltinType builtinType;
-    GLShaderType type;
-};
 
 class GLShaderObject : public nanogui::Object
 {
@@ -41,23 +21,25 @@ public:
     void incTimesUsed() { mId = mTimesUsed; mTimesUsed++; }
     void decTimesUsed() { mTimesUsed--; }
     int timesUsed() { return mTimesUsed; }
+    std::vector<GLShaderParameter> parameters() { return mParameters; }
+    //const std::vector<GLShaderParameter> &parameters { return mParameters; }
 
 protected:
-    static std::map<std::string, GLShaderBuiltinType> BUILTIN_STR_TO_TYPE;
-    static std::map<GLShaderBuiltinType, std::string> TYPE_TO_BUILTIN_STR;
-    static std::map<std::string, GLShaderType> STR_TO_TYPE;
-    static std::map<GLShaderType, std::string> TYPE_TO_STR;
+    static std::map<std::string, BuiltinType> BUILTIN_STR_TO_TYPE;
+    static std::map<BuiltinType, std::string> TYPE_TO_BUILTIN_STR;
+    static std::map<std::string, ParameterType> PARAM_STR_TO_TYPE;
+    static std::map<ParameterType, std::string> PARAM_TYPE_TO_STR;
 
     int mId;
     std::string mName;
     std::string mFunctionName;
     std::string mReturnType;
     std::string mDefinition;
-    TypedProperties<GLShaderBuiltin> mParameters;
-
-    void addParameterFromBuiltin(const GLShaderBuiltin &builtin);
+    std::vector<GLShaderParameter> mParameters;
 
 private:
     static int mTimesUsed;
-};
 
+    void parseParameters(pugi::xml_node xmlNode);
+    void addParameterFromXmlNode(pugi::xml_node xmlNode);
+};

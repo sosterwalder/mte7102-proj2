@@ -1,25 +1,25 @@
 #include "main.hpp"
 
 
-std::map<std::string, GLShaderBuiltinType> GLShaderObject::BUILTIN_STR_TO_TYPE = {
-    { "unknown", GLShaderBuiltinType::UNKNOWN},
-    { "float",   GLShaderBuiltinType::FLOAT  },
-    { "vec3",    GLShaderBuiltinType::VEC3   }
+std::map<std::string, BuiltinType> GLShaderObject::BUILTIN_STR_TO_TYPE = {
+    { "unknown", BuiltinType::UNKNOWN},
+    { "float",   BuiltinType::FLOAT  },
+    { "vec3",    BuiltinType::VEC3   }
 };
-std::map<GLShaderBuiltinType, std::string> GLShaderObject::TYPE_TO_BUILTIN_STR = {
-    { GLShaderBuiltinType::UNKNOWN, "unknown"},
-    { GLShaderBuiltinType::FLOAT,   "float"  },
-    { GLShaderBuiltinType::VEC3,    "vec3"   }
+std::map<BuiltinType, std::string> GLShaderObject::TYPE_TO_BUILTIN_STR = {
+    { BuiltinType::UNKNOWN, "unknown"},
+    { BuiltinType::FLOAT,   "float"  },
+    { BuiltinType::VEC3,    "vec3"   }
 };
-std::map<std::string, GLShaderType> GLShaderObject:: STR_TO_TYPE = {
-    { "unknown",  GLShaderType::UNKNOWN },
-    { "property", GLShaderType::PROPERTY},
-    { "sink",     GLShaderType::SINK    }
+std::map<std::string, ParameterType> GLShaderObject::PARAM_STR_TO_TYPE = {
+    { "unknown",  ParameterType::UNKNOWN },
+    { "property", ParameterType::PROPERTY},
+    { "sink",     ParameterType::SINK    }
 };
-std::map<GLShaderType, std::string> GLShaderObject:: TYPE_TO_STR = {
-    { GLShaderType::UNKNOWN,  "unknown"  },
-    { GLShaderType::PROPERTY, "property" },
-    { GLShaderType::SINK,     "sink"     }
+std::map<ParameterType, std::string> GLShaderObject::PARAM_TYPE_TO_STR = {
+    { ParameterType::UNKNOWN,  "unknown"  },
+    { ParameterType::PROPERTY, "property" },
+    { ParameterType::SINK,     "sink"     }
 };
 int GLShaderObject::mTimesUsed = 0;
 
@@ -35,17 +35,20 @@ GLShaderObject::GLShaderObject() :
 std::string GLShaderObject::uniforms()
 {
     fmt::MemoryWriter out;
-    size_t uniformsRemaining = mParameters.size();
+    size_t remainingParamters = mParameters.size();
 
-    for (auto i = mParameters.begin(); i != mParameters.end(); ++i)
-    {
-        auto property = (*i).second;
-        auto builtin = property.first;
-        auto name = fmt::format(builtin.name, mId);
+    for (auto i = mParameters.begin(); i != mParameters.end(); ++i) {
+        auto parameter = *i;
+        auto name = parameter.name();
 
-        out << "uniform " << TYPE_TO_BUILTIN_STR[builtin.builtinType] << " " << name <<";";
+        out << "uniform ";
+        out << TYPE_TO_BUILTIN_STR[parameter.builtinType()];
+        out << " ";
+        out << name;
+        out << ";";
 
-        if (uniformsRemaining-- != 1) {
+        // If we are not at the last parameter, add a new line
+        if (remainingParamters-- != 1) {
             out << "\n";
         }
     }
@@ -56,23 +59,20 @@ std::string GLShaderObject::uniforms()
 std::string GLShaderObject::call()
 {
     fmt::MemoryWriter out;
-    size_t uniformsTotal     = mParameters.size();
-    size_t uniformsRemaining = mParameters.size();
+    size_t remainingParamters = mParameters.size();
 
     out << mFunctionName << "(";
+
     for (auto i = mParameters.begin(); i != mParameters.end(); ++i)
     {
-        auto property = (*i).second;
-        auto builtin = property.first;
-        auto name = fmt::format(builtin.name, mId);
+        auto parameter = *i;
+        auto name = parameter.name();
+        auto call = fmt::format(parameter.call(), name);
 
-        if (uniformsTotal == uniformsRemaining) {
-            out << "position - ";
-        }
+        out << call;
 
-        out << name;
-
-        if (uniformsRemaining-- != 1) {
+        // If we are not at the last parameter add a comma for separatation
+        if (remainingParamters-- != 1) {
             out << ", ";
         }
     }
@@ -97,93 +97,58 @@ void GLShaderObject::parseFromFile(const std::string &filename)
     spdlog::get("qde")->debug("ShaderObject {}: Found function {}", name(), mFunctionName);
 
     pugi::xml_node shaderParameters = shaderFunction.child("parameters");
-    for (pugi::xml_node param : shaderParameters) {
-        spdlog::get("qde")->debug("ShaderObject {}: Found parameter {}", name(), param.child_value("name"));
-        GLShaderBuiltin builtin = {
-            fmt::format("{}_{{}}_{}", mName, param.child_value("name")),
-            BUILTIN_STR_TO_TYPE[param.child_value("builtin")],
-            STR_TO_TYPE[param.child_value("type")]
-        };
-        addParameterFromBuiltin(builtin);
-    }
+    parseParameters(shaderParameters);
 
     mDefinition = shaderFunction.child_value("source");
 
     spdlog::get("qde")->debug("ShaderObject {}: Parsed file {}", name(), filename);
 }
 
-/*
-std::string GLShaderObject::parseTuFunction(glsl::astFunction *fct)
+void GLShaderObject::parseParameters(pugi::xml_node xmlNode)
 {
-        spdlog::get("qde")->debug("ShaderObject {}: AST {}: Function: {}", mIdentifier, (void*)mAstTu, fct->name);
-
-        fmt::MemoryWriter out;
-
-        out << kTypes[((glsl::astBuiltin*)fct->returnType)->type];
-        out << " ";
-        out << fct->name;
-        out << "(";
-
-        for (auto parameter : fct->parameters) {
-            out << kTypes[((glsl::astBuiltin*)parameter->baseType)->type];
-            out << " ";
-            out << parameter->name;
-
-            if (parameter != fct->parameters.back()) {
-                out << ", ";
-            }
-        }
-
-        out << ")\n{\n";
-
-        // TODO: Add statements instead of static code
-        // for (auto statement : fct->statements) {
-        //     out << statement->name();
-        //     out << "\n";
-        // }
-        out << "\t return length(position) - radius;\n";
-
-        out << "}";
-
-        spdlog::get("qde")->debug("ShaderObject {}({}): AST {}: Parsed Function: {}", mIdentifier, (void*)this, (void*)mAstTu, fct->name);
-
-        return out.str();
+    for (pugi::xml_node param : xmlNode) {
+        addParameterFromXmlNode(param);
+    }
 }
 
-void GLShaderObject::parseTuGlobals(std::vector<glsl::astGlobalVariable *> globals)
+void GLShaderObject::addParameterFromXmlNode(pugi::xml_node xmlNode)
 {
-        for (auto global : globals) {
-            std::string type = kTypes[((glsl::astBuiltin*)global->baseType)->type];
+    auto nameTemplate = xmlNode.child_value("name");
+    auto name = fmt::format("{}_{}_{}", mName, mTimesUsed, nameTemplate);
+    auto callTemplate = xmlNode.child_value("call");
+    auto call = fmt::format(callTemplate, name);
+    auto builtinTemplate = xmlNode.child_value("builtin");
+    auto builtin = BUILTIN_STR_TO_TYPE[builtinTemplate];
+    auto parameterTypeTemplate = xmlNode.child_value("type");
+    auto parameterType = PARAM_STR_TO_TYPE[parameterTypeTemplate];
 
-            spdlog::get("qde")->debug("ShaderObject {}: AST {}: Global: {} {}", (void*) this, (void*)mAstTu, type, global->name);
+    spdlog::get("qde")->debug("ShaderObject {}: Found parameter {}", id(), name);
 
-            if (type == "float") {
-                mUniforms.add<float>(global->name, type, 0.0f);
-            }
-            else if (type == "vec3") {
-                mUniforms.add<Vector3f>(global->name, type, Vector3f::Zero());
-            }
-            else {
-                spdlog::get("qde")->error("Error while parsing global '{}': Unknown type '{}'", global->name, type);
-            }
-        }
-}
-*/
-
-void GLShaderObject::addParameterFromBuiltin(const GLShaderBuiltin &builtin)
-{
-    switch (builtin.builtinType) {
-        case GLShaderBuiltinType::FLOAT:
-            mParameters.add(builtin.name, builtin, 0.0f);
+    switch (builtin) {
+        case BuiltinType::FLOAT:
+            mParameters.push_back(GLShaderParameter(
+                name,
+                call,
+                0.0f,
+                builtin,
+                parameterType
+            ));
             break;
 
-        case GLShaderBuiltinType::VEC3:
-            mParameters.add(builtin.name, builtin, Vector3f(Vector3f::Zero()));
+        case BuiltinType::VEC3:
+            mParameters.push_back(GLShaderParameter(
+                name,
+                call,
+                Vector3f(0.0f, 0.0f, 0.0f),
+                builtin,
+                parameterType
+            ));
             break;
 
         default:
-            throw new std::runtime_error("Unknown bultin type");
+            throw new std::runtime_error("Unknown builtin type");
             break;
     }
-    spdlog::get("qde")->debug("ShaderObject {}: Added param from builtin: {}", name(), builtin.name);
+
+    spdlog::get("qde")->debug("ShaderObject {}: Added parameter: {}", id(), name);
 }
