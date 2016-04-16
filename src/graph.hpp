@@ -15,6 +15,8 @@ public:
     const Connector *activeConnector() const { return mActiveConnector.get(); }
     void addNodeType(GLShaderObject *shaderObject);
     void calculateOutput();
+    void setNodeAsSelected(GraphNode *node);
+    void nodeConnectedEvent(GraphNode *node);
     virtual void drawContents();
     virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers);
     virtual void performLayout(NVGcontext *ctx);

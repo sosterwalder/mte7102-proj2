@@ -39,6 +39,17 @@ void Graph::calculateOutput()
     mQce->setShaderOutput(output);
 }
 
+void Graph::setNodeAsSelected(GraphNode *node)
+{
+    spdlog::get("qde")->debug("Graph: Node '{}' was selected", node->id());
+}
+
+void Graph::nodeConnectedEvent(GraphNode *node)
+{
+    spdlog::get("qde")->debug("Graph: A node {} was connected", node->id());
+    mQce->addShaderToOutput(node->shaderObject());
+}
+
 void Graph::drawContents()
 {
     // mOutputNode->drawContents();
@@ -82,8 +93,6 @@ void Graph::addNodeButtonEvent(const Vector2i &p, GLShaderObject *shaderObject)
     node->setEnabled(true);
     node->setVisible(true);
     node->setShaderObject(shaderObject);
-
-    mQce->addShaderToOutput(shaderObject);
 
     mPopup->setVisible(false);
     mQce->performLayout();

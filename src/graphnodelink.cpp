@@ -42,17 +42,9 @@ void GraphNodeLink::draw(NVGcontext* ctx)
     Vector2i outputPosition(Vector2i::Zero());
 
     if (hasTarget()) {
-        // Vector2i offset = mTarget->absolutePosition() - mParent->absolutePosition();
-        // Vector2i delta = mTarget->position() - mSource->position();
-        // outputPosition = offset + delta;
-        // outputPosition = Vector2i(
-        //     mTarget->absolutePosition().x() - mParent->absolutePosition().x(),
-        //     mTarget->absolutePosition().y() - mParent->absolutePosition().y() + 10
-        // );
-        //outputPosition = mParent->absolutePosition() + mTarget->absolutePosition();
-        Vector2i pos = /*mTarget->absolutePosition() - */mSink->position();
-        outputPosition = pos;
-        spdlog::get("qde")->debug("Link: {} having target {}", id(), mSink->id());
+        // Get relative position of parent (node) of the target (sink)
+        Vector2i delta = mSink->parent()->absolutePosition() - mSink->parent()->position();
+        outputPosition = mSink->absolutePosition() - delta;
     }
     else {
         Vector2i offset = mSource->absolutePosition() - mParent->absolutePosition();

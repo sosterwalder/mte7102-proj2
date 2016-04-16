@@ -20,6 +20,7 @@ public:
     void removeSource(const int index);
     void removeSource(const Source *source);
     void setShaderObject(GLShaderObject *shaderObject) { mShaderObject = shaderObject; }
+    ref<GLShaderObject> shaderObject() { return mShaderObject; }
     virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers);
     virtual std::string calculateOutput();
 

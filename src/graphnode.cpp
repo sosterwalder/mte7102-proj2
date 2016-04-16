@@ -86,6 +86,11 @@ bool GraphNode::mouseButtonEvent(const Vector2i &p, int button, bool down, int m
 {
     Window::mouseButtonEvent(p, button, down, modifiers);
 
+    if (button == GLFW_MOUSE_BUTTON_1 && mEnabled && down) {
+        Graph *parentGraph = dynamic_cast<Graph *>(mParent);
+        parentGraph->setNodeAsSelected(this);
+    }
+
     if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
         int offsetX = p.x() - mPos.x();
         int offsetY = p.y() - mPos.y();

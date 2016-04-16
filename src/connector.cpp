@@ -24,6 +24,14 @@ void Connector::draw(NVGcontext* ctx)
     nvgText(ctx, mPos.x() + 1.2f * mSize.y(), mPos.y() + mSize.y() * 0.1f, mLabel.c_str(), nullptr);
 
     // Draw body
+    nvgBeginPath(ctx);
+    nvgRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y());
+    nvgFillColor(ctx, mTheme->mBorderMedium);
+    nvgStrokeColor(ctx, mTheme->mBorderLight);
+    nvgStroke(ctx);
+    nvgFill(ctx);
+    
+    /*
     Vector2f center = mPos.cast<float>() + mSize.cast<float>() * 0.5f;
     float radius = (int)(mSize.y()*0.5f);
     NVGpaint knobShadow = nvgRadialGradient(ctx, mPos.x(), mPos.y(), radius-3, radius+3, Color(0, 64), mTheme->mTransparent);
@@ -54,7 +62,6 @@ void Connector::draw(NVGcontext* ctx)
         nvgFill(ctx);
     }
 
-    /*
     nvgFillPaint(ctx, bg);
     nvgFill(ctx);
 
@@ -91,6 +98,12 @@ void Connector::refreshRelativePlacement()
 {
     mRelativePosition = relativePosition();
     mPos = mRelativePosition;
+    /*
+    spdlog::get("qde")->debug(
+        "Connector '{}': At ({},{})",
+        mLabel, mPos.x(), mPos.y()
+    );
+    */
 }
 
 bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
@@ -117,6 +130,8 @@ bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int m
                 "Connector '{}': Created a new link ({},{})",
                 mLabel, p.x(), p.y()
             );
+
+            mParentGraph->nodeConnectedEvent(dynamic_cast<GraphNode*>(parent()));
         }
 
         if (mDrag) {
@@ -134,7 +149,7 @@ bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int m
                 this->label(), activeConnector->label()
             ));
             spdlog::get("qde")->debug("Connector '{}': setting active Connector '{}'", mLabel, (void*)activeConnector);
-            
+
             // Get source link
             mLink = activeConnector->link();
             mLink->setSink(dynamic_cast<Sink*>(this));
