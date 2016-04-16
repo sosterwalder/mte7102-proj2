@@ -33,7 +33,7 @@ void OpenGLShader::addShaderObject(GLShaderObject *object)
     }
 }
 
-// When adding/connecting node
+// When connecting node
 void OpenGLShader::addShaderObjectToOutput(const std::string &id)
 {
     auto shaderObject = mShaderObjects.find(id);
@@ -68,7 +68,7 @@ void OpenGLShader::addShaderObjectToOutput(const std::string &id)
             mFragmentShaderUniforms,
             object->uniforms()
         );
-        spdlog::get("qde")->debug("Shader: Added Uniforms of ShaderObject {}", id);
+        spdlog::get("qde")->debug("Shader: Added uniform defintions of ShaderObject {}", id);
     }
     else {
         spdlog::get("qde")->warn(
@@ -93,6 +93,33 @@ bool OpenGLShader::recompile()
         mFragmentShaderSource,
         mGeometryShaderSource
     );
+}
+
+void OpenGLShader::setUniforms()
+{
+    // TODO: Refactor this! Seriously! SERIOUSLY!
+    for (const std::string &shaderObjectId : mShaderObjectsOutput) {
+        const auto &shaderObject = mShaderObjects.at(shaderObjectId);
+        for (auto parameter : shaderObject->parameters()) {
+            // TODO: Put this in a function on shader object
+            if (parameter.builtinType() == BuiltinType::FLOAT) {
+                setUniform(parameter.name(), boost::get<float>(parameter.data()));
+            }
+            else if (parameter.builtinType() == BuiltinType::VEC3) {
+                setUniform(parameter.name(), boost::get<Vector3f>(parameter.data()));
+            }
+            else {
+                throw new std::runtime_error("Unknown bultin type");
+            }
+
+            /*
+            spdlog::get("qde")->debug(
+                "Shader: Set uniform: {}",
+                parameter.name()
+            );
+            */
+        }
+    }
 }
 
 void OpenGLShader::parseFragmentShaderTemplate()

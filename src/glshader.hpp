@@ -15,9 +15,9 @@ public:
     const std::string &fragmentShaderCalls() const { return mFragmentShaderCalls; }
     void setVertexShaderSource(const std::string &vertexSource) { mVertexShaderSource = vertexSource; }
     void setGeometryShaderSource(const std::string &geometrySource) { mGeometryShaderSource = geometrySource; }
-
     void addShaderObjectToOutput(const std::string &id);
     bool recompile();
+    void setUniforms();
 
 protected:
     std::string mFragmentShaderTemplate;
