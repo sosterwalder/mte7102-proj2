@@ -27,7 +27,7 @@ protected:
 template<typename T>
 class TypedProperties
 {
-    typedef std::map<std::string, std::pair<T, BaseProperty*>> mapping;
+    typedef std::map<std::string, std::pair<T, Property<T>*>> mapping;
 
 public:
     ~TypedProperties()
@@ -57,7 +57,7 @@ public:
     template<typename U>
     void add(std::string name, T type, U data)
     {
-        mProperties[name] = std::make_pair(type, new Property<U>(data));
+        mProperties[name] = std::make_pair(type, data);
     }
 
     template<typename U>

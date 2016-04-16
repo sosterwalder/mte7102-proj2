@@ -59,6 +59,9 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 # Use package PkgConfig
 find_package(PkgConfig REQUIRED)
 
+# Use boost :(
+FIND_PACKAGE(Boost 1.6 REQUIRED)
+
 # Use package OpenGL
 find_package(OpenGL REQUIRED)
 if(OPENGL_FOUND)
@@ -69,6 +72,7 @@ endif(OPENGL_FOUND)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw)
 
 # Specify additional include directories
+include_directories(${Boost_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/eigen)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/nanovg/src)
@@ -81,7 +85,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/jinja2cpplight)
 set(SOURCES
   # Merge GLFW into the source
   util.hpp util.cpp
-  property.hpp
+  glshaderparameter.hpp
   glshaderobject.hpp glshaderobject.cpp
   glshader.hpp glshader.cpp
   clickablelabel.hpp clickablelabel.cpp
