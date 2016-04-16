@@ -91,6 +91,8 @@ enum class ParameterType
     SINK
 };
 
+typedef boost::variant<Eigen::Vector3f, float> paramVariant;
+
 class GLShaderParameter : public nanogui::Object
 {
 public:
