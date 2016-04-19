@@ -69,7 +69,7 @@ if(OPENGL_FOUND)
 endif(OPENGL_FOUND)
 
 # Specify additional subdirectories (needs CMakeLists.txt)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/nanogui)
 
 # Specify additional include directories
 include_directories(${Boost_INCLUDE_DIR})
@@ -83,8 +83,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/jinja2cpplight)
 
 # Set source files
 set(SOURCES
+  common.hpp
   util.hpp util.cpp
-  glshaderparameter.hpp
+  glshaderparameter.hpp glshaderparameter.cpp
   glshaderobject.hpp glshaderobject.cpp
   glshader.hpp glshader.cpp
   clickablelabel.hpp clickablelabel.cpp
@@ -102,7 +103,8 @@ set(SOURCES
 )
 
 # Specify additional linking directories
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../lib)
+# link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../lib)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build/ext/nanogui)
 
 # Resource file (icons etc.)
 set(EXTRA_SOURCE
