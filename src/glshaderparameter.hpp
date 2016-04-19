@@ -1,8 +1,97 @@
 #pragma once
 
-#include "main.hpp"
+NAMESPACE_BEGIN(QCE);
+
+class OpenGLShader;
+
+
+enum class BuiltinType
+{
+    UNKNOWN,
+    FLOAT,
+    VEC3
+};
+
+enum class ParameterType
+{
+    UNKNOWN,
+    PROPERTY,
+    SINK
+};
+
+class GLShaderParameter
+{
+public:
+    virtual ~GLShaderParameter() {}
+
+    void setName(const std::string &name) { mName = name; }
+    const std::string &name() const { return mName; }
+    void setCall(const std::string &call) { mCall = call; }
+    const std::string &call() const { return mCall; }
+    void setBuiltinType(BuiltinType builtinType) { mBuiltinType = builtinType; }
+    BuiltinType builtinType() { return mBuiltinType; }
+    void setParameterType(ParameterType parameterType) { mParameterType = parameterType; }
+    ParameterType parameterType() { return mParameterType; }
+    virtual void setUniform(OpenGLShader *shader) = 0;
+    // template<typename T> void setData(T data);
+    // template <typename T> T data();
+    
+protected:
+    std::string mName;
+    std::string mCall;
+    BuiltinType mBuiltinType;
+    ParameterType mParameterType;
+};
+
+class GLShaderFloatParameter : public GLShaderParameter
+{
+public:
+    GLShaderFloatParameter();
+    
+    void setData(float data) { mData = data; }
+    void setUniform(OpenGLShader *shader);
+    
+protected:
+    float mData;
+};
+
+class GLShaderVector3fParameter: public GLShaderParameter
+{
+public:
+    GLShaderVector3fParameter();
+    
+    void setData(Eigen::Vector3f data) { mData = data; }
+    void setUniform(OpenGLShader *shader);
+    
+protected:
+    Eigen::Vector3f mData;
+};
 
 /*
+public:
+    GLShaderFloatParameter();
+
+    float data() { return mData; }
+    void setData(float data) { mData = data; }
+    void setUniform(const std::string &name, const OpenGLShader* const shader) { shader->setUniform(name, mData); }
+
+private:
+    float mData;
+};
+
+class GLShaderVector3fParameter: public GLShaderParameter<Vector3f>
+{
+public:
+    GLShaderFloatParameter();
+
+    float data() { return mData; }
+    void setData(Vector3f data) { mData = data; }
+    void setUniform(const std::string &name, const OpenGLShader* const shader) { shader->setUniform(name, mData); }
+
+private:
+    float mData;
+};
+
 class GLShaderParameterInterface : public nanogui::Object
 {
 public:
@@ -77,20 +166,8 @@ private:
     std::unique_ptr<GLShaderParameterInterface> mData;
 };
 */
-enum class BuiltinType
-{
-    UNKNOWN,
-    FLOAT,
-    VEC3
-};
 
-enum class ParameterType
-{
-    UNKNOWN,
-    PROPERTY,
-    SINK
-};
-
+/*
 typedef boost::variant<Eigen::Vector3f, float> paramVariant;
 
 class GLShaderParameter : public nanogui::Object
@@ -128,3 +205,7 @@ protected:
     BuiltinType mBuiltinType;
     ParameterType mParameterType;
 };
+
+*/
+
+NAMESPACE_END(QCE);

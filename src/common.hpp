@@ -1,13 +1,19 @@
-//
-//  common.h
-//  MTE7102
-//
-//  Created by Sven Osterwalder on 18/04/16.
-//
-//
+#pragma once
 
-#ifndef common_h
-#define common_h
+// System imports
+#include <string>
+#include <map>
+#include <iostream>
+#include <fstream>
+
+// Project imports
+#include <spdlog/spdlog.h>
+#include <Eigen/Core>
 
 
-#endif /* common_h */
+#if !defined(NAMESPACE_BEGIN)
+#define NAMESPACE_BEGIN(name) namespace name {
+#endif
+#if !defined(NAMESPACE_END)
+#define NAMESPACE_END(name) }
+#endif

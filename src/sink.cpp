@@ -1,14 +1,23 @@
-#include "main.hpp"
+#include <nanogui/widget.h>
+#include "common.hpp"
+#include "connector.hpp"
+#include "graph.hpp"
+#include "sink.hpp"
 
-Sink::Sink(Widget *parent, Graph *parentGraph, const std::string &label) :
+
+NAMESPACE_BEGIN(QCE);
+
+Sink::Sink(nanogui::Widget *parent, Graph *parentGraph, const std::string &label) :
     Connector(parent, parentGraph, label)
 {
 }
 
-Vector2i Sink::relativePosition()
+Eigen::Vector2i Sink::relativePosition()
 {
-    return Vector2i(
-        10,
-        (mParent->size().y() + mTheme->mWindowHeaderHeight) / 2 - mSize.y() / 2
+    return Eigen::Vector2i(
+        5,
+        mParent->size().y() * 0.5f
     );
 }
+
+NAMESPACE_END(QCE);

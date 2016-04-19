@@ -1,4 +1,11 @@
-#include "main.hpp"
+#include <nanogui/common.h>
+#include <nanogui/label.h>
+#include <nanogui/opengl.h>
+#include <nanogui/theme.h>
+#include "common.hpp"
+#include "clickablelabel.hpp"
+
+NAMESPACE_BEGIN(QCE);
 
 ClickableLabel::ClickableLabel(
     Widget *parent, const std::string &caption,
@@ -7,7 +14,7 @@ ClickableLabel::ClickableLabel(
 {
 }
 
-bool ClickableLabel::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
+bool ClickableLabel::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
 {
     spdlog::get("qde")->debug(
         "ClickableLabel '{}': Received click at ({},{})",
@@ -18,7 +25,7 @@ bool ClickableLabel::mouseButtonEvent(const Vector2i &p, int button, bool down, 
 
     /* Temporarily increase the reference count of the button in case the
        button causes the parent window to be destructed */
-    ref<ClickableLabel> self = this;
+    nanogui::ref<ClickableLabel> self = this;
 
     if (button == GLFW_MOUSE_BUTTON_1 && mEnabled) {
         if (down) {
@@ -26,7 +33,7 @@ bool ClickableLabel::mouseButtonEvent(const Vector2i &p, int button, bool down, 
         }
         else if (mPushed) {
             if (contains(p) && mCallback) {
-                Vector2i parentPos = this->parent()->position();
+                Eigen::Vector2i parentPos = this->parent()->position();
                 mCallback(parentPos);
             }
             mPushed = false;
@@ -67,3 +74,5 @@ void ClickableLabel::draw(NVGcontext *ctx)
         }
     }
 }
+
+NAMESPACE_END(QCE);

@@ -1,26 +1,33 @@
 #pragma once
 
-#include "main.hpp"
+#include <nanogui/widget.h>
 
-class GraphNodeLink : public Widget
+NAMESPACE_BEGIN(QCE);
+
+class Connector;
+
+
+class GraphNodeLink : public nanogui::Widget
 {
 public:
-    GraphNodeLink(Widget *parent);
-    GraphNodeLink(Widget *parent, Source *source);
-    GraphNodeLink(Widget *parent, Source *source, Sink *sink);
-    void setSource(const ref<Source> source) { mSource = source; }
-    Source *source() { return mSource; }
-    const Source *source() const { return mSource.get(); }
-    void setSink(const ref<Sink> sink) { mSink = sink; }
-    Sink *sink() { return mSink; }
-    const Sink *sink() const { return mSink.get(); }
-    void setTargetPosition(const Vector2i &pos);
+    GraphNodeLink(nanogui::Widget *parent);
+    GraphNodeLink(nanogui::Widget *parent, Connector *source);
+    GraphNodeLink(nanogui::Widget *parent, Connector *source, Connector *sink);
+    void setSource(const nanogui::ref<Connector> source) { mSource = source; }
+    Connector *source() { return mSource; }
+    const Connector *source() const { return mSource.get(); }
+    void setSink(const nanogui::ref<Connector> sink) { mSink = sink; }
+    Connector *sink() { return mSink; }
+    const Connector *sink() const { return mSink.get(); }
+    void setTargetPosition(const Eigen::Vector2i &pos);
     virtual void draw(NVGcontext* ctx);
 
 protected:
-    ref<Source> mSource;
-    ref<Sink> mSink;
-    Vector2i  mTargetPosition;
+    nanogui::ref<Connector> mSource;
+    nanogui::ref<Connector> mSink;
+    Eigen::Vector2i         mTargetPosition;
 
     bool hasTarget() { return mSink != nullptr; }
 };
+
+NAMESPACE_END(QCE);

@@ -1,20 +1,35 @@
-#include "main.hpp"
+#include <nanogui/common.h>
+#include <nanogui/opengl.h>
+#include <nanogui/theme.h>
+#include <nanovg.h>
+#include <spdlog/spdlog.h>
+#include "graph.hpp"
+#include "graphnodelink.hpp"
+#include "graphnode.hpp"
+#include "connector.hpp"
+#include "sink.hpp"
 
-Connector::Connector(Widget *parent, Graph *parentGraph, const std::string &label) :
-    Widget(parent),
+
+NAMESPACE_BEGIN(QCE);
+
+Connector::Connector(nanogui::Widget *parent, Graph *parentGraph, const std::string &label) :
+    nanogui::Widget(parent),
     mParentGraph(parentGraph),
     mLink(nullptr),
     mLabel(label),
-    mTextColor(Color(0, 0)),
+    mTextColor(nanogui::Color(0, 0)),
     mDrag(false),
-    mRelativePosition(Vector2i::Zero())
+    mRelativePosition(Eigen::Vector2i::Zero())
 {
-    
+    mFixedSize = Eigen::Vector2i(15, 15);
 }
 
 void Connector::draw(NVGcontext* ctx)
 {
     refreshRelativePlacement();
+    
+    Eigen::Vector2f center = mPos.cast<float>() + mSize.cast<float>() * 0.5f;
+    float radius = (int)(mSize.y() * 0.5f);
 
     // Draw label
     nvgFontSize(ctx, fontSize());
@@ -25,69 +40,34 @@ void Connector::draw(NVGcontext* ctx)
 
     // Draw body
     nvgBeginPath(ctx);
-    nvgRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y());
+    nvgCircle(ctx, center.x(), center.y(), radius);
+    // nvgRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y());
     nvgFillColor(ctx, mTheme->mBorderMedium);
     nvgStrokeColor(ctx, mTheme->mBorderLight);
     nvgStroke(ctx);
     nvgFill(ctx);
     
-    /*
-    Vector2f center = mPos.cast<float>() + mSize.cast<float>() * 0.5f;
-    float radius = (int)(mSize.y()*0.5f);
-    NVGpaint knobShadow = nvgRadialGradient(ctx, mPos.x(), mPos.y(), radius-3, radius+3, Color(0, 64), mTheme->mTransparent);
-
-    nvgBeginPath(ctx);
-
-    nvgCircle(ctx, mPos.x(), mPos.y(), radius);
-    nvgPathWinding(ctx, NVG_HOLE);
-    nvgFillPaint(ctx, knobShadow);
-    nvgFill(ctx);
-
-    NVGpaint knob = nvgLinearGradient(ctx, mPos.x(), center.y() - radius, mPos.x(), center.y() + radius, mTheme->mBorderLight, mTheme->mBorderMedium);
-    NVGpaint knobReverse = nvgLinearGradient(ctx, mPos.x(), center.y() - radius, mPos.x(), center.y() + radius, mTheme->mBorderMedium, mTheme->mBorderLight);
-
-    nvgBeginPath(ctx);
-    nvgCircle(ctx, mPos.x(), mPos.y(), radius);
-    nvgStrokeColor(ctx, mTheme->mBorderDark);
-    nvgFillPaint(ctx, knob);
-    nvgStroke(ctx);
-    nvgFill(ctx);
-
     if (isConnected()) {
+        NVGpaint knobReverse = nvgLinearGradient(ctx, mPos.x(), center.y() - radius, mPos.x(), center.y() + radius, mTheme->mBorderMedium, mTheme->mBorderLight);
+        
         nvgBeginPath(ctx);
-        nvgCircle(ctx, mPos.x(), mPos.y(), radius / 2);
-        nvgFillColor(ctx, Color(150, mEnabled ? 255 : 100));
+        nvgCircle(ctx, center.x(), center.y(), radius * 0.5f);
+        nvgFillColor(ctx, nanogui::Color(150, mEnabled ? 255 : 100));
         nvgStrokePaint(ctx, knobReverse);
         nvgStroke(ctx);
         nvgFill(ctx);
     }
-
-    nvgFillPaint(ctx, bg);
-    nvgFill(ctx);
-
-    if (isConnected()) {
-        nvgFontSize(ctx, 1.8 * mSize.y());
-        nvgFontFace(ctx, "icons");
-        nvgFillColor(ctx, mEnabled ? mTheme->mIconColor
-                                   : mTheme->mDisabledTextColor);
-        nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-        nvgText(ctx, mPos.x() + mSize.y() * 0.5f + 1,
-                mPos.y() + mSize.y() * 0.5f, utf8(ENTYPO_ICON_CHECK).data(),
-                nullptr);
-    }
-
-    */
     Widget::draw(ctx);
 }
 
-Vector2i Connector::preferredSize(NVGcontext *ctx) const
+Eigen::Vector2i Connector::preferredSize(NVGcontext *ctx) const
 {
-    if (mFixedSize != Vector2i::Zero()) {
+    if (mFixedSize != Eigen::Vector2i::Zero()) {
         return mFixedSize;
     }
     nvgFontSize(ctx, fontSize());
     nvgFontFace(ctx, "sans");
-    return Vector2i(
+    return Eigen::Vector2i(
         nvgTextBounds(ctx, 0, 0, mLabel.c_str(), nullptr, nullptr) +
         1.7f * fontSize(),
         fontSize() * 1.3f
@@ -106,7 +86,7 @@ void Connector::refreshRelativePlacement()
     */
 }
 
-bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
+bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
 {
     spdlog::get("qde")->debug(
         "Connector '{}': Received mouse button event at ({},{})",
@@ -124,14 +104,12 @@ bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int m
         mDrag = down && (p.y() - mPos.y()) < mTheme->mWindowHeaderHeight;
 
         if (!isConnected() && !wasDragged && mDrag) {
-            mLink = new GraphNodeLink(mParentGraph, dynamic_cast<Source*>(this));
+            mLink = new GraphNodeLink(mParentGraph, this);
             mLink->setTargetPosition(p);
             spdlog::get("qde")->debug(
                 "Connector '{}': Created a new link ({},{})",
                 mLabel, p.x(), p.y()
             );
-
-            mParentGraph->nodeConnectedEvent(dynamic_cast<GraphNode*>(parent()));
         }
 
         if (mDrag) {
@@ -157,6 +135,8 @@ bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int m
                 "{}-{}",
                 activeConnector->id(), this->id()
             ));
+            // TODO: Fix this, this feels horribly wrong!
+            mParentGraph->nodeConnectedEvent(dynamic_cast<GraphNode*>(activeConnector->parent()));
             mParentGraph->calculateOutput();
         }
         // TODO: Fix this
@@ -185,7 +165,7 @@ bool Connector::mouseButtonEvent(const Vector2i &p, int button, bool down, int m
 }
 
 
-bool Connector::mouseDragEvent(const Vector2i &p, const Vector2i &rel, int button, int modifiers)
+bool Connector::mouseDragEvent(const Eigen::Vector2i &p, const Eigen::Vector2i &rel, int button, int modifiers)
 {
     /*
     spdlog::get("qde")->debug(
@@ -207,7 +187,7 @@ bool Connector::mouseDragEvent(const Vector2i &p, const Vector2i &rel, int butto
     return false;
 }
 
-bool Connector::mouseEnterEvent(const Vector2i &p, bool enter)
+bool Connector::mouseEnterEvent(const Eigen::Vector2i &p, bool enter)
 {
     spdlog::get("qde")->debug(
         "Connector '{}': Mouse entered at ({},{})",
@@ -215,3 +195,5 @@ bool Connector::mouseEnterEvent(const Vector2i &p, bool enter)
     );
     return Widget::mouseEnterEvent(p, enter);
 }
+
+NAMESPACE_END(QCE);

@@ -1,23 +1,25 @@
 #pragma once
 
-#include "main.hpp"
+#include <nanogui/label.h>
 
-using namespace nanogui;
+NAMESPACE_BEGIN(QCE);
 
-class ClickableLabel : public Label
+class ClickableLabel : public nanogui::Label
 {
 public:
     ClickableLabel(Widget *parent, const std::string &caption,
           const std::string &font = "sans", int fontSize = -1);
     bool pushed() const { return mPushed; }
     void setPushed(bool pushed) { mPushed = pushed; }
-    std::function<void(Vector2i)> callback() const { return mCallback; }
-    void setCallback(const std::function<void(Vector2i)> &callback) { mCallback = callback; }
+    std::function<void(Eigen::Vector2i)> callback() const { return mCallback; }
+    void setCallback(const std::function<void(Eigen::Vector2i)> &callback) { mCallback = callback; }
 
-    virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers);
+    virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
     virtual void draw(NVGcontext *ctx);
 
 protected:
     bool mPushed;
-    std::function<void(Vector2i)> mCallback;
+    std::function<void(Eigen::Vector2i)> mCallback;
 };
+
+NAMESPACE_END(QCE);

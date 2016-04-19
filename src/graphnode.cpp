@@ -1,22 +1,36 @@
-#include "main.hpp"
+#include <spdlog/spdlog.h>
+#include <src/pugixml.hpp>
+#include <nanogui/layout.h>
+#include <nanogui/opengl.h>
+#include "glshaderobject.hpp"
+#include "clickablelabel.hpp"
+#include "directpopup.hpp"
+#include "sink.hpp"
+#include "source.hpp"
+#include "graphnodelink.hpp"
+#include "graphnode.hpp"
+#include "graph.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 GraphNode::GraphNode(Widget *parent, const std::string &title) :
     Window(parent, title),
-    mAnchorPos(Vector2i::Zero()),
+    mAnchorPos(Eigen::Vector2i::Zero()),
     mAnchorHeight(30),
     mShaderObject(nullptr)
 {
-    mSize = Vector2i(100, 80);
+    mSize = Eigen::Vector2i(100, 80);
 
     mPopup = new DirectPopup(this, this);
     mPopup->setId("graphNodePopup");
-    mPopup->setSize(Vector2i(10, 10));
-    mPopup->setLayout(new GroupLayout());
+    mPopup->setSize(Eigen::Vector2i(10, 10));
+    mPopup->setLayout(new nanogui::GroupLayout());
     mPopup->setVisible(false);
 
     ClickableLabel *removeButton  = new ClickableLabel(mPopup, "Remove");
     removeButton->setId("removeGraphNodeButton");
-    removeButton->setCallback([this](const Vector2i &p) {
+    removeButton->setCallback([this](const Eigen::Vector2i &p) {
         spdlog::get("qde")->debug(
             "GraphNode '{}': Removing",
             mTitle
@@ -82,19 +96,21 @@ void GraphNode::removeSource(const Source *source)
     source->decRef();
 }
 
-bool GraphNode::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
+bool GraphNode::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
 {
     Window::mouseButtonEvent(p, button, down, modifiers);
 
     if (button == GLFW_MOUSE_BUTTON_1 && mEnabled && down) {
         Graph *parentGraph = dynamic_cast<Graph *>(mParent);
         parentGraph->setNodeAsSelected(this);
+        
+        return true;
     }
 
     if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
         int offsetX = p.x() - mPos.x();
         int offsetY = p.y() - mPos.y();
-        Vector2i position(offsetX, offsetY);
+        Eigen::Vector2i position(offsetX, offsetY);
         mPopup->setAnchorPos(position);
         mPopup->setVisible(!mPopup->visible());
 
@@ -125,10 +141,4 @@ std::string GraphNode::calculateOutput()
     return output.str();
 }
 
-Vector2i GraphNode::getSlotPosition(const float offset) const
-{
-    return Vector2i(
-        mPos.x(),
-        mPos.y() + mSize.y() * offset
-    );
-}
+NAMESPACE_END(QCE);

@@ -1,4 +1,12 @@
-#include "main.hpp"
+#include <src/stringhelper.h>
+#include <src/Jinja2CppLight.h>
+#include <nanogui/glutil.h>
+#include "common.hpp"
+#include "glshaderobject.hpp"
+#include "glshader.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 OpenGLShader::OpenGLShader() :
     mFragmentShaderTemplate(""),
@@ -98,28 +106,32 @@ bool OpenGLShader::recompile()
 void OpenGLShader::setUniforms()
 {
     // TODO: Refactor this! Seriously! SERIOUSLY!
-    for (const std::string &shaderObjectId : mShaderObjectsOutput) {
-        const auto &shaderObject = mShaderObjects.at(shaderObjectId);
-        for (auto parameter : shaderObject->parameters()) {
-            // TODO: Put this in a function on shader object
-            if (parameter.builtinType() == BuiltinType::FLOAT) {
-                setUniform(parameter.name(), boost::get<float>(parameter.data()));
-            }
-            else if (parameter.builtinType() == BuiltinType::VEC3) {
-                setUniform(parameter.name(), boost::get<Vector3f>(parameter.data()));
-            }
-            else {
-                throw new std::runtime_error("Unknown bultin type");
-            }
+    // for (const std::string &shaderObjectId : mShaderObjectsOutput) {
+        // const auto &shaderObject = mShaderObjects.at(shaderObjectId);
+        // for (auto parameter: shaderObject->parameters()) {
+        // }
+ 
+        // TODO: Fix this
+        // for (auto &parameter: shaderObject->parameters()) {
+        //     parameter.setUniform(this);
+        //         
+        //     // TODO: Put this in a function on shader object
+        //     if (parameter.builtinType() == BuiltinType::FLOAT) {
+        //         setUniform(parameter.name(), boost::get<float>(parameter.data()));
+        //     }
+        //     else if (parameter.builtinType() == BuiltinType::VEC3) {
+        //         setUniform(parameter.name(), boost::get<Vector3f>(parameter.data()));
+        //     }
+        //     else {
+        //         throw new std::runtime_error("Unknown bultin type");
+        //     }
 
-            /*
-            spdlog::get("qde")->debug(
-                "Shader: Set uniform: {}",
-                parameter.name()
-            );
-            */
-        }
-    }
+        //     spdlog::get("qde")->debug(
+        //         "Shader: Set uniform: {}",
+        //         parameter.name()
+        //     );
+        // }
+    // }
 }
 
 void OpenGLShader::parseFragmentShaderTemplate()
@@ -130,3 +142,5 @@ void OpenGLShader::parseFragmentShaderTemplate()
     shaderTemplate.setValue("calls",              mFragmentShaderCalls);
     mFragmentShaderSource = shaderTemplate.render();
 }
+
+NAMESPACE_END(QCE);

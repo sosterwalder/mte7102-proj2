@@ -1,4 +1,8 @@
-#include "main.hpp"
+#include <spdlog/spdlog.h>
+#include <nanogui/common.h>
+#include "common.hpp"
+#include "qce.hpp"
+// #include "main.hpp"
 
 int main(int /* argc */, char ** /* argv */)
 {
@@ -8,7 +12,7 @@ int main(int /* argc */, char ** /* argv */)
         spdlog::get("qde")->info("Initializing GUI");
         nanogui::init();
         {
-            nanogui::ref<Qce> qce = new Qce();
+            nanogui::ref<QCE::Qce> qce = new QCE::Qce();
             qce->drawAll();
             qce->setVisible(true);
             nanogui::mainloop();
@@ -18,7 +22,7 @@ int main(int /* argc */, char ** /* argv */)
     catch (const std::runtime_error &e) {
         std::string error_msg = std::string("Caught a fatal error: ") + std::string(e.what());
         spdlog::get("qde")->error(error_msg);
-        std::cerr << error_msg << endl;
+        std::cerr << error_msg << std::endl;
 
         return -1;
     }

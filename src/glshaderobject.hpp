@@ -1,7 +1,12 @@
 #pragma once
 
-#include "main.hpp"
+// System imports
+#include <nanogui/object.h>
+#include <src/pugixml.hpp>
+#include "glshaderparameter.hpp"
 
+
+NAMESPACE_BEGIN(QCE);
 
 class GLShaderObject : public nanogui::Object
 {
@@ -21,8 +26,7 @@ public:
     void incTimesUsed() { mId = mTimesUsed; mTimesUsed++; }
     void decTimesUsed() { mTimesUsed--; }
     int timesUsed() { return mTimesUsed; }
-    std::vector<GLShaderParameter> parameters() { return mParameters; }
-    //const std::vector<GLShaderParameter> &parameters { return mParameters; }
+    std::vector<std::unique_ptr<GLShaderParameter>> const &parameters() const { return mParameters; }
 
 protected:
     static std::map<std::string, BuiltinType> BUILTIN_STR_TO_TYPE;
@@ -35,11 +39,15 @@ protected:
     std::string mFunctionName;
     std::string mReturnType;
     std::string mDefinition;
-    std::vector<GLShaderParameter> mParameters;
+    std::vector<std::unique_ptr<GLShaderParameter>> mParameters;
 
 private:
     static int mTimesUsed;
 
     void parseParameters(pugi::xml_node xmlNode);
     void addParameterFromXmlNode(pugi::xml_node xmlNode);
+    void addFloatParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType);
+    void addVector3fParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType);
 };
+
+NAMESPACE_END(QCE);

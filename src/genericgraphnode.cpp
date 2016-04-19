@@ -1,4 +1,11 @@
-#include "main.hpp"
+#include "common.hpp"
+#include "glshaderobject.hpp"
+#include "source.hpp"
+#include "graph.hpp"
+#include "genericgraphnode.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 GenericGraphNode::GenericGraphNode(Widget *parent, const std::string &title) :
     GraphNode(parent, title)
@@ -11,18 +18,15 @@ GenericGraphNode::GenericGraphNode(Widget *parent, const std::string &title) :
     }
 }
 
-/*void GenericGraphNode::performLayout(NVGcontext *ctx)
+void GenericGraphNode::performLayout(NVGcontext *ctx)
 {
     GraphNode::performLayout(ctx);
-    mPos = Vector2i(
-        mParent->size().x() - mSize.x() - 10,
-        mParent->size().y() / 2 - mSize.y() / 2
-    );
 }
-*/
 
 std::string GenericGraphNode::calculateOutput()
 {
     spdlog::get("qde")->debug("Node '{}': Calculating output", mId);
     return mShaderObject->call();
 }
+
+NAMESPACE_END(QCE);

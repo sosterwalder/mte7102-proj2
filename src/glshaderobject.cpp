@@ -1,5 +1,10 @@
-#include "main.hpp"
+#include <src/pugiconfig.hpp>
+#include "common.hpp"
+#include "util.hpp"
+#include "glshaderobject.hpp"
 
+
+NAMESPACE_BEGIN(QCE);
 
 std::map<std::string, BuiltinType> GLShaderObject::BUILTIN_STR_TO_TYPE = {
     { "unknown", BuiltinType::UNKNOWN},
@@ -35,8 +40,10 @@ GLShaderObject::GLShaderObject() :
 std::string GLShaderObject::uniforms()
 {
     fmt::MemoryWriter out;
-    size_t remainingParamters = mParameters.size();
 
+    /*
+    TODO: Fix this
+    size_t remainingParamters = mParameters.size();
     for (auto i = mParameters.begin(); i != mParameters.end(); ++i) {
         auto parameter = *i;
         auto name = parameter.name();
@@ -52,6 +59,7 @@ std::string GLShaderObject::uniforms()
             out << "\n";
         }
     }
+    */
 
     return out.str();
 }
@@ -59,6 +67,8 @@ std::string GLShaderObject::uniforms()
 std::string GLShaderObject::call()
 {
     fmt::MemoryWriter out;
+    /*
+    TODO: Fix this
     size_t remainingParamters = mParameters.size();
 
     out << mFunctionName << "(";
@@ -77,6 +87,7 @@ std::string GLShaderObject::call()
         }
     }
     out << ");";
+    */
 
     spdlog::get("qde")->debug("ShaderObject {}: Calculated output", name());
 
@@ -126,23 +137,11 @@ void GLShaderObject::addParameterFromXmlNode(pugi::xml_node xmlNode)
 
     switch (builtin) {
         case BuiltinType::FLOAT:
-            mParameters.push_back(GLShaderParameter(
-                name,
-                call,
-                0.0f,
-                builtin,
-                parameterType
-            ));
+            addFloatParameter(name, call, builtin, parameterType);
             break;
 
         case BuiltinType::VEC3:
-            mParameters.push_back(GLShaderParameter(
-                name,
-                call,
-                Vector3f(0.0f, 0.0f, 0.0f),
-                builtin,
-                parameterType
-            ));
+            addVector3fParameter(name, call, builtin, parameterType);
             break;
 
         default:
@@ -152,3 +151,32 @@ void GLShaderObject::addParameterFromXmlNode(pugi::xml_node xmlNode)
 
     spdlog::get("qde")->debug("ShaderObject {}: Added parameter: {}", id(), name);
 }
+
+void GLShaderObject::addFloatParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType)
+{
+    
+    GLShaderFloatParameter *floatParam = new GLShaderFloatParameter();
+    floatParam->setName(name);
+    floatParam->setCall(call);
+    floatParam->setBuiltinType(builtinType);
+    floatParam->setParameterType(parameterType);
+    
+    mParameters.push_back(std::unique_ptr<GLShaderFloatParameter>(floatParam));
+    
+    delete floatParam;
+}
+
+void GLShaderObject::addVector3fParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType)
+{
+    GLShaderVector3fParameter *vec3fParam = new GLShaderVector3fParameter();
+    vec3fParam->setName(name);
+    vec3fParam->setCall(call);
+    vec3fParam->setBuiltinType(builtinType);
+    vec3fParam->setParameterType(parameterType);
+    
+    mParameters.push_back(std::unique_ptr<GLShaderVector3fParameter>(vec3fParam));
+    
+    delete vec3fParam;
+}
+
+NAMESPACE_END(QCE);

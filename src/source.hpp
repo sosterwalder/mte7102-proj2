@@ -1,12 +1,20 @@
 #pragma once
 
-#include "main.hpp"
+#include "connector.hpp"
+
+NAMESPACE_BEGIN(QCE);
+
+class Graph;
+
 
 class Source : public Connector
 {
 public:
-    Source(Widget *parent, Graph *parentGraph, const std::string &label);
+    Source(nanogui::Widget *parent, Graph *parentGraph, const std::string &label);
 
 protected:
-    virtual Vector2i relativePosition();
+    virtual Eigen::Vector2i relativePosition();
 };
+
+
+NAMESPACE_END(QCE);

@@ -1,15 +1,30 @@
-#include "main.hpp"
+#include <nanogui/layout.h>
+#include "common.hpp"
+#include "directpopup.hpp"
+#include "clickablelabel.hpp"
+#include "glshaderobject.hpp"
+#include "graphnodelink.hpp"
+#include "connector.hpp"
+#include "graphnode.hpp"
+#include "genericgraphnode.hpp"
+#include "outputgraphnode.hpp"
+#include "qce.hpp"
+#include "graph.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     Window(parent, title),
     mQce(qce),
+    mPopup(nullptr),
     mActiveConnector(nullptr),
     mSelectedNodeIndex(-1)
 {
     mPopup = new DirectPopup(this, this);
     mPopup->setId("addPopup");
-    mPopup->setSize(Vector2i(10, 10));
-    mPopup->setLayout(new GroupLayout());
+    mPopup->setSize(Eigen::Vector2i(10, 10));
+    mPopup->setLayout(new nanogui::GroupLayout());
     mPopup->setVisible(false);
 
     mOutputNode = new OutputGraphNode(this, "Output");
@@ -25,7 +40,7 @@ void Graph::addNodeType(GLShaderObject *shaderObject)
         mPopup,
         fmt::format("Add {} node", shaderObject->name())
     );
-    addNodeButton->setCallback([this, shaderObject](const Vector2i &p) {
+    addNodeButton->setCallback([this, shaderObject](const Eigen::Vector2i &p) {
         this->addNodeButtonEvent(p, shaderObject);
     });
 }
@@ -52,11 +67,11 @@ void Graph::nodeConnectedEvent(GraphNode *node)
 
 void Graph::drawContents()
 {
-    // mOutputNode->drawContents();
+    // TODO: Still needed?: mOutputNode->drawContents();
     mQce->bindShader();
 }
 
-bool Graph::mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers)
+bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
 {
     if (Window::mouseButtonEvent(p, button, down, modifiers)) {
         return true;
@@ -65,7 +80,7 @@ bool Graph::mouseButtonEvent(const Vector2i &p, int button, bool down, int modif
     if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
         int offsetX = p.x() - absolutePosition().x();
         int offsetY = p.y() - absolutePosition().y();
-        Vector2i position(offsetX, offsetY);
+        Eigen::Vector2i position(offsetX, offsetY);
         mPopup->setAnchorPos(position);
         mPopup->setVisible(!mPopup->visible());
 
@@ -81,7 +96,7 @@ void Graph::performLayout(NVGcontext *ctx)
     Window::performLayout(ctx);
 }
 
-void Graph::addNodeButtonEvent(const Vector2i &p, GLShaderObject *shaderObject)
+void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderObject *shaderObject)
 {
     spdlog::get("qde")->debug("Graph: Add node button was pressed at ({}, {})", p.x(), p.y());
 
@@ -97,3 +112,5 @@ void Graph::addNodeButtonEvent(const Vector2i &p, GLShaderObject *shaderObject)
     mPopup->setVisible(false);
     mQce->performLayout();
 }
+
+NAMESPACE_END(QCE);

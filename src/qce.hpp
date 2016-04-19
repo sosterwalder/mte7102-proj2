@@ -1,6 +1,14 @@
 #pragma once
 
-#include "main.hpp"
+#include <nanogui/screen.h>
+#include "glshader.hpp"
+
+NAMESPACE_BEGIN(QCE);
+
+class GraphNode;
+class Graph;
+class GLShaderObject;
+
 
 class Qce : public nanogui::Screen {
 
@@ -20,7 +28,8 @@ public:
 
 private:
     OpenGLShader mShader;
-    ref<Graph> mNodeGraph;
+    nanogui::ref<Graph> mNodeGraph;
+    // TODO: Check if list gets properly deleted. Use ref maybe?
     std::vector<GraphNode *> mNodeTypes;
     float mIntensity;
     double mStartTime;
@@ -30,3 +39,5 @@ private:
     void initializeShaderObjects();
     void initializeShader();
 };
+
+NAMESPACE_END(QCE);

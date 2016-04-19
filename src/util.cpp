@@ -1,6 +1,7 @@
-#include "main.hpp"
-#include <unistd.h>
-#include <sys/dir.h>
+#include "util.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 bool Util::fileExists(const std::string &fileName)
 {
@@ -62,3 +63,4 @@ std::vector<std::pair<std::string, std::string>> Util::findShaderObjects(const s
     return result;
 }
 
+NAMESPACE_END(QCE);

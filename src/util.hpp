@@ -1,6 +1,14 @@
 #pragma once
 
-#include "main.hpp"
+// System imports
+#include <unistd.h>
+#include <sys/dir.h>
+
+// Project imports
+#include "common.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 class Util
 {
@@ -9,3 +17,5 @@ public:
     static const std::string fileToString(const std::string &filename);
     static std::vector<std::pair<std::string, std::string>> findShaderObjects(const std::string &path);
 };
+
+NAMESPACE_END(QCE);

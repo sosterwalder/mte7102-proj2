@@ -1,15 +1,22 @@
-#include "main.hpp"
+#include <spdlog/spdlog.h>
+#include <nanovg.h>
+#include <nanogui/common.h>
+#include "connector.hpp"
+#include "graphnodelink.hpp"
+
+
+NAMESPACE_BEGIN(QCE);
 
 GraphNodeLink::GraphNodeLink(Widget *parent) :
     Widget(parent),
     mSource(nullptr),
     mSink(nullptr),
-    mTargetPosition(Vector2i::Zero())
+    mTargetPosition(Eigen::Vector2i::Zero())
 {
     spdlog::get("qde")->debug("Link: Constructor without connectors");
 }
 
-GraphNodeLink::GraphNodeLink(Widget *parent, Source *source) :
+GraphNodeLink::GraphNodeLink(Widget *parent, Connector *source) :
     Widget(parent),
     mSource(source),
     mSink(nullptr)
@@ -18,7 +25,7 @@ GraphNodeLink::GraphNodeLink(Widget *parent, Source *source) :
     spdlog::get("qde")->debug("Link: Constructor with source");
 }
 
-GraphNodeLink::GraphNodeLink(Widget *parent, Source *source, Sink *sink) :
+GraphNodeLink::GraphNodeLink(Widget *parent, Connector *source, Connector *sink) :
     Widget(parent),
     mSource(source),
     mSink(sink),
@@ -27,7 +34,7 @@ GraphNodeLink::GraphNodeLink(Widget *parent, Source *source, Sink *sink) :
     spdlog::get("qde")->debug("Link: Constructor with both sinks");
 }
 
-void GraphNodeLink::setTargetPosition(const Vector2i &pos)
+void GraphNodeLink::setTargetPosition(const Eigen::Vector2i &pos)
 {
 
     mTargetPosition = pos;
@@ -35,24 +42,28 @@ void GraphNodeLink::setTargetPosition(const Vector2i &pos)
 
 void GraphNodeLink::draw(NVGcontext* ctx)
 {
-    Vector2i inputPosition(
-        mSource->absolutePosition().x() - mParent->absolutePosition().x(),
-        mSource->absolutePosition().y() - mParent->absolutePosition().y()
+    auto sourceSize = mSource->size().cast<float>();
+    
+    Eigen::Vector2i inputPosition(
+        mSource->absolutePosition().x() - mParent->absolutePosition().x() + (sourceSize.x() * 0.5f),
+        mSource->absolutePosition().y() - mParent->absolutePosition().y() + (sourceSize.y() * 0.5f)
     );
-    Vector2i outputPosition(Vector2i::Zero());
+    Eigen::Vector2i outputPosition(Eigen::Vector2i::Zero());
 
     if (hasTarget()) {
         // Get relative position of parent (node) of the target (sink)
-        Vector2i delta = mSink->parent()->absolutePosition() - mSink->parent()->position();
+        Eigen::Vector2i delta = mSink->parent()->absolutePosition() - mSink->parent()->position();
+        delta.x() -= (sourceSize.x() * 0.5f);
+        delta.y() -= (sourceSize.y() * 0.5f);
         outputPosition = mSink->absolutePosition() - delta;
     }
     else {
-        Vector2i offset = mSource->absolutePosition() - mParent->absolutePosition();
-        Vector2i delta = mTargetPosition - mSource->position();
+        Eigen::Vector2i offset = mSource->absolutePosition() - mParent->absolutePosition();
+        Eigen::Vector2i delta = mTargetPosition - mSource->position();
         outputPosition = offset + delta;
     }
 
-    Vector2i positionDiff = outputPosition - inputPosition;
+    Eigen::Vector2i positionDiff = outputPosition - inputPosition;
 
     NVGcontext* vg = ctx;
 
@@ -72,3 +83,5 @@ void GraphNodeLink::draw(NVGcontext* ctx)
 
     Widget::draw(ctx);
 }
+
+NAMESPACE_END(QCE);

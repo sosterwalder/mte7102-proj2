@@ -1,6 +1,15 @@
-#include "main.hpp"
+#include <nanogui/opengl.h>
+#include <nanogui/screen.h>
+#include <nanogui/window.h>
+#include "common.hpp"
+#include "graph.hpp"
+#include "graphnode.hpp"
+#include "glshaderobject.hpp"
+#include "util.hpp"
+#include "qce.hpp"
 
-using namespace nanogui;
+
+NAMESPACE_BEGIN(QCE);
 
 Qce::Qce() :
     Screen(Eigen::Vector2i(1024, 768), "QCE"),
@@ -10,9 +19,9 @@ Qce::Qce() :
     mUpdateTime(glfwGetTime()),
     mNumFrames(0)
 {
-    Window *toolsWindow = new Window(this, "Tools");
+    nanogui::Window *toolsWindow = new nanogui::Window(this, "Tools");
     toolsWindow->setId("toolsWindow");
-    toolsWindow->setPosition(Vector2i(10, 10));
+    toolsWindow->setPosition(Eigen::Vector2i(10, 10));
     toolsWindow->setWidth(200);
     toolsWindow->setHeight(768-10-10);
     spdlog::get("qde")->debug("Created tools window");
@@ -20,7 +29,7 @@ Qce::Qce() :
     mNodeGraph = new Graph(this, this, "Nodes");
     mNodeGraph->setId("nodeGraph");
     mNodeGraph->setParent(this);
-    mNodeGraph->setPosition(Vector2i(220, 50 /*768-210*/));
+    mNodeGraph->setPosition(Eigen::Vector2i(220, 50 /*768-210*/));
     mNodeGraph->setWidth(1024-220-10);
     mNodeGraph->setHeight(200);
     spdlog::get("qde")->debug("Created nodes window");
@@ -48,17 +57,19 @@ void Qce::drawContents()
 
     mNodeGraph->drawContents();
 
-    /* Draw the window contents using OpenGL */
+    // Draw the window contents using OpenGL
     mShader.bind();
 
-    Matrix4f mvp;
+    Eigen::Matrix4f mvp;
     mvp.setIdentity();
-    mvp.topLeftCorner<3,3>() = Matrix3f(
-        Eigen::AngleAxisf((float) glfwGetTime(),  Vector3f::UnitZ())
+    mvp.topLeftCorner<3,3>() = Eigen::Matrix3f(
+        Eigen::AngleAxisf(
+            (float) glfwGetTime(),
+            Eigen::Vector3f::UnitZ()
+        )
     ) * 0.25f;
 
     mvp.row(0) *= (float) mSize.y() / (float) mSize.x();
-
     // mShader.setUniform("modelViewProj", mvp);
 
     /* Draw 2 triangles starting at index 0 */
@@ -76,16 +87,19 @@ void Qce::drawContents()
 
         mNumFrames   = 0;
         mUpdateTime += 1.0;
-     }
+    }
 }
 
 bool Qce::keyboardEvent(int key, int scancode, int action, int modifiers) {
-    if (Screen::keyboardEvent(key, scancode, action, modifiers))
+    if (Screen::keyboardEvent(key, scancode, action, modifiers)) {
         return true;
+    }
+    
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         setVisible(false);
         return true;
     }
+    
     return false;
 }
 
@@ -93,27 +107,22 @@ void Qce::bindShader()
 {
     // spdlog::get("qde")->debug("Binding shader");
 
-    MatrixXu indices(3, 2); /* Draw 2 triangles */
+    nanogui::MatrixXu indices(3, 2); /* Draw 2 triangles */
     indices.col(0) << 0, 1, 2;
     indices.col(1) << 2, 3, 0;
 
-    MatrixXf positions(3, 4);
+    nanogui::MatrixXf positions(3, 4);
     positions.col(0) << -1, -1, 0;
     positions.col(1) <<  1, -1, 0;
     positions.col(2) <<  1,  1, 0;
     positions.col(3) << -1,  1, 0;
 
-
     mShader.bind();
     mShader.uploadIndices(indices);
     mShader.uploadAttrib("position", positions);
-
     mShader.setUniforms();
 
     mShader.setUniform("globalShowDistance", 1);
-    // mShader.setUniform("intensity", mIntensity);
-    // mShader.setUniform("sphere_0_radius", 0.2f);
-    // mShader.setUniform("sphere_0_position", Vector3f(-3.0f, 1.0f, 1.0f));
     // spdlog::get("qde")->debug("QCE: Shader output: {}", mShader.fragmentShaderSource());
 }
 
@@ -175,3 +184,5 @@ void Qce::initializeShader()
     );
     mShader.recompile();
 }
+
+NAMESPACE_END(QCE);

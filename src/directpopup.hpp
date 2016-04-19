@@ -1,10 +1,11 @@
 #pragma once
 
-#include "main.hpp"
+#include <nanogui/popup.h>
 
-using namespace nanogui;
 
-class DirectPopup : public Popup
+NAMESPACE_BEGIN(QCE);
+
+class DirectPopup : public nanogui::Popup
 {
 public:
     DirectPopup(Widget *parent, Window *parentWindow) :
@@ -13,8 +14,8 @@ public:
     {}
 
     void setXOffset(int xOffset) { mXOffset = xOffset; }
-    void setAnchorPos(const Vector2i &anchorPos) { mAnchorPos = anchorPos + Vector2i(mXOffset, 0); }
-    virtual bool mouseButtonEvent(const Vector2i &p, int button, bool down, int modifiers);
+    void setAnchorPos(const Eigen::Vector2i &anchorPos) { mAnchorPos = anchorPos + Eigen::Vector2i(mXOffset, 0); }
+    virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
 
 protected:
     /// Internal helper function to maintain nested window position values
@@ -23,3 +24,5 @@ protected:
 private:
     int mXOffset;
 };
+
+NAMESPACE_END(QCE);

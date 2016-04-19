@@ -1,6 +1,11 @@
 #pragma once
 
-#include "main.hpp"
+#include <nanogui/glutil.h>
+
+NAMESPACE_BEGIN(QCE);
+
+class GLShaderObject;
+
 
 class OpenGLShader : public nanogui::GLShader
 {
@@ -27,8 +32,11 @@ protected:
     std::string mFragmentShaderSource;
     std::string mVertexShaderSource;
     std::string mGeometryShaderSource;
+    // TODO: Check if list is properly cleared. Use ref maybe?
     std::map<std::string, GLShaderObject *> mShaderObjects;
     std::vector<std::string> mShaderObjectsOutput;
 
     void parseFragmentShaderTemplate();
 };
+
+NAMESPACE_END(QCE);
