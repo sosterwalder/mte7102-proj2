@@ -32,9 +32,9 @@ protected:
     nanogui::ref<DirectPopup> mPopup;
     nanogui::ref<Connector> mActiveConnector;
     nanogui::ref<GraphNode> mOutputNode;
+    nanogui::ref<GraphNode> mActiveNode;
     std::vector<GraphNode> mNodes;
     std::vector<GraphNodeLink> mNodeLinks;
-    int mSelectedNodeIndex;
 
     virtual void addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderObject *shaderObject);
 };

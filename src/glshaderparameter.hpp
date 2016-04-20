@@ -49,6 +49,7 @@ public:
     GLShaderFloatParameter();
     
     void setData(float data) { mData = data; }
+    float data() const { return mData; }
     void setUniform(OpenGLShader *shader);
     
 protected:
@@ -61,6 +62,7 @@ public:
     GLShaderVector3fParameter();
     
     void setData(Eigen::Vector3f data) { mData = data; }
+    Eigen::Vector3f data() const { return mData; }
     void setUniform(OpenGLShader *shader);
     
 protected:

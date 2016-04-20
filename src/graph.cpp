@@ -19,7 +19,7 @@ Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     mQce(qce),
     mPopup(nullptr),
     mActiveConnector(nullptr),
-    mSelectedNodeIndex(-1)
+    mActiveNode(nullptr)
 {
     mPopup = new DirectPopup(this, this);
     mPopup->setId("addPopup");
@@ -36,7 +36,7 @@ void Graph::addNodeType(GLShaderObject *shaderObject)
         "Adding nodeType for selection: {}",
         shaderObject->name()
     );
-    ClickableLabel *addNodeButton  = new ClickableLabel(
+    nanogui::ref<ClickableLabel> addNodeButton = new ClickableLabel(
         mPopup,
         fmt::format("Add {} node", shaderObject->name())
     );
@@ -57,6 +57,16 @@ void Graph::calculateOutput()
 void Graph::setNodeAsSelected(GraphNode *node)
 {
     spdlog::get("qde")->debug("Graph: Node '{}' was selected", node->id());
+    
+    if (mActiveNode != nullptr) {
+        mActiveNode->shaderObject()->hideForm();
+    }
+    
+    if (node->shaderObject() != nullptr) {
+        spdlog::get("qde")->debug("Graph: Rendering properties of node '{}'", node->id());
+        node->shaderObject()->showForm();
+        mActiveNode = node;
+    }
 }
 
 void Graph::nodeConnectedEvent(GraphNode *node)
@@ -110,7 +120,7 @@ void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderObject *shaderO
     node->setShaderObject(shaderObject);
 
     mPopup->setVisible(false);
-    mQce->performLayout();
+    // TODO: mQce->performLayout();
 }
 
 NAMESPACE_END(QCE);
