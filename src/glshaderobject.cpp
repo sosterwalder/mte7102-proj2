@@ -52,18 +52,17 @@ GLShaderObject::GLShaderObject(nanogui::Screen *screen) :
     gridLayout->setColAlignment({nanogui::Alignment::Maximum, nanogui::Alignment::Fill});
     gridLayout->setSpacing(0, 10);
     mPanel->setLayout(gridLayout);
-    
 }
 
 std::string GLShaderObject::uniforms()
 {
     fmt::MemoryWriter out;
     size_t remainingParamters = mParameters.size();
-    
+
     for (auto paramItr = mParameters.begin(); paramItr != mParameters.end(); ++paramItr) {
         std::unique_ptr<GLShaderParameter> &parameter = *paramItr;
         auto name = parameter->name();
-        
+
         out << "uniform ";
         out << TYPE_TO_BUILTIN_STR[parameter->builtinType()];
         out << " ";
@@ -137,10 +136,14 @@ void GLShaderObject::addParameterFromXmlNode(pugi::xml_node xmlNode)
 {
     auto nameTemplate = xmlNode.child_value("name");
     auto name = fmt::format("{}_{}_{}", mName, mTimesUsed, nameTemplate);
+
+    // TODO: Abort if no call node is available
     auto callTemplate = xmlNode.child_value("call");
     auto call = fmt::format(callTemplate, name);
+
     auto builtinTemplate = xmlNode.child_value("builtin");
     auto builtin = BUILTIN_STR_TO_TYPE[builtinTemplate];
+
     auto parameterTypeTemplate = xmlNode.child_value("type");
     auto parameterType = PARAM_STR_TO_TYPE[parameterTypeTemplate];
 
@@ -198,10 +201,10 @@ void GLShaderObject::addVector3fParameter(const std::string &name, const std::st
     vec3fParam->setCall(call);
     vec3fParam->setBuiltinType(builtinType);
     vec3fParam->setParameterType(parameterType);
-    
+
     std::unique_ptr<GLShaderVector3fParameter> ptr(vec3fParam);
     mParameters.push_back(std::move(ptr));
-    
+
     new nanogui::Label(mPanel, fmt::format("{}.x", name));
     nanogui::ref<nanogui::TextBox> textBox = new nanogui::TextBox(mPanel);
     textBox->setEditable(true);
@@ -212,13 +215,13 @@ void GLShaderObject::addVector3fParameter(const std::string &name, const std::st
     textBox->setCallback([vec3fParam](const std::string &value) {
         Eigen::Vector3f currentPosition = vec3fParam->data();
         float xPosition = std::stof(value);
-        
+
         vec3fParam->setData(Eigen::Vector3f(
             xPosition,
             currentPosition.y(),
             currentPosition.z()
         ));
-        
+
         return true;
     });
     new nanogui::Label(mPanel, fmt::format("{}.y", name));
@@ -231,13 +234,13 @@ void GLShaderObject::addVector3fParameter(const std::string &name, const std::st
     textBox->setCallback([vec3fParam](const std::string &value) {
         Eigen::Vector3f currentPosition = vec3fParam->data();
         float yPosition = std::stof(value);
-        
+
         vec3fParam->setData(Eigen::Vector3f(
             currentPosition.x(),
             yPosition,
             currentPosition.z()
         ));
-        
+
         return true;
     });
     new nanogui::Label(mPanel, fmt::format("{}.z", name));
@@ -250,16 +253,16 @@ void GLShaderObject::addVector3fParameter(const std::string &name, const std::st
     textBox->setCallback([vec3fParam](const std::string &value) {
         Eigen::Vector3f currentPosition = vec3fParam->data();
         float zPosition = std::stof(value);
-        
+
         vec3fParam->setData(Eigen::Vector3f(
             currentPosition.x(),
             currentPosition.y(),
             zPosition
         ));
-        
+
         return true;
     });
-    
+
     // TODO: OK? delete vec3fParam;
 }
 
