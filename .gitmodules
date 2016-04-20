@@ -10,12 +10,12 @@
 [submodule "ext/spdlog"]
 	path = src/ext/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "ext/jinja2cpplight"]
-	path = src/ext/jinja2cpplight
-	url = https://github.com/hughperkins/Jinja2CppLight.git
 [submodule "ext/pugixml"]
 	path = src/ext/pugixml
 	url = https://github.com/zeux/pugixml.git
 [submodule "ext/glfw"]
 	path = src/ext/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "src/ext/jinja2cpplight"]
+	path = src/ext/jinja2cpplight
+	url = git@github.com:sosterwalder/Jinja2CppLight.git
