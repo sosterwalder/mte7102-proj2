@@ -105,33 +105,15 @@ bool OpenGLShader::recompile()
 
 void OpenGLShader::setUniforms()
 {
-    // TODO: Refactor this! Seriously! SERIOUSLY!
-    // for (const std::string &shaderObjectId : mShaderObjectsOutput) {
-        // const auto &shaderObject = mShaderObjects.at(shaderObjectId);
-        // for (auto parameter: shaderObject->parameters()) {
-        // }
- 
-        // TODO: Fix this
-        // for (auto &parameter: shaderObject->parameters()) {
-        //     parameter.setUniform(this);
-        //         
-        //     // TODO: Put this in a function on shader object
-        //     if (parameter.builtinType() == BuiltinType::FLOAT) {
-        //         setUniform(parameter.name(), boost::get<float>(parameter.data()));
-        //     }
-        //     else if (parameter.builtinType() == BuiltinType::VEC3) {
-        //         setUniform(parameter.name(), boost::get<Vector3f>(parameter.data()));
-        //     }
-        //     else {
-        //         throw new std::runtime_error("Unknown bultin type");
-        //     }
+    for (const std::string &shaderObjectId : mShaderObjectsOutput) {
 
-        //     spdlog::get("qde")->debug(
-        //         "Shader: Set uniform: {}",
-        //         parameter.name()
-        //     );
-        // }
-    // }
+        const auto &shaderObject = mShaderObjects.at(shaderObjectId);
+
+        for (auto paramItr = shaderObject->parameters().begin(); paramItr != shaderObject->parameters().end(); ++paramItr) {
+            std::unique_ptr<GLShaderParameter> &parameter = *paramItr;
+            parameter->setUniform(this);
+        }
+    }
 }
 
 void OpenGLShader::parseFragmentShaderTemplate()
