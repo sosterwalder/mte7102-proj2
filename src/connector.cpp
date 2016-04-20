@@ -21,7 +21,7 @@ Connector::Connector(nanogui::Widget *parent, Graph *parentGraph, const std::str
     mDrag(false),
     mRelativePosition(Eigen::Vector2i::Zero())
 {
-    mFixedSize = Eigen::Vector2i(15, 15);
+    mFixedSize = mSize = Eigen::Vector2i(15, 15);
 }
 
 void Connector::draw(NVGcontext* ctx)
@@ -41,6 +41,7 @@ void Connector::draw(NVGcontext* ctx)
     // Draw body
     nvgBeginPath(ctx);
     nvgCircle(ctx, center.x(), center.y(), radius);
+    // nvgCircle(ctx, mPos.x() + 1.2f * mSize.y(), mPos.y() + mSize.y() * 0.1f, 10);
     // nvgRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y());
     nvgFillColor(ctx, mTheme->mBorderMedium);
     nvgStrokeColor(ctx, mTheme->mBorderLight);
@@ -196,4 +197,4 @@ bool Connector::mouseEnterEvent(const Eigen::Vector2i &p, bool enter)
     return Widget::mouseEnterEvent(p, enter);
 }
 
-NAMESPACE_END(QCE);
+NAMESPACE_END(QCE)
