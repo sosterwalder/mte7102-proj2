@@ -1,5 +1,6 @@
 #include <src/pugiconfig.hpp>
 #include "common.hpp"
+#include "qce.hpp"
 #include "util.hpp"
 #include "glshaderobject.hpp"
 
@@ -28,28 +29,40 @@ std::map<ParameterType, std::string> GLShaderObject::PARAM_TYPE_TO_STR = {
 };
 int GLShaderObject::mTimesUsed = 0;
 
-GLShaderObject::GLShaderObject() :
+GLShaderObject::GLShaderObject(nanogui::Screen *screen) :
     mId(mTimesUsed),
     mName("ShaderObject"),
     mReturnType(""),
     mDefinition("")
 {
     spdlog::get("qde")->debug("ShaderObject {}: Getting constructed", identifier(), (void*)this);
+    mWindow = new nanogui::Window(screen, fmt::format("{} Properties", identifier()));
+    mWindow->setLayout(new nanogui::GroupLayout());
+    mWindow->setVisible(false);
+    mPanel = new nanogui::Widget(mWindow);
+    nanogui::ref<nanogui::GridLayout> gridLayout = new nanogui::GridLayout(
+         nanogui::Orientation::Horizontal,
+                                               2,
+                                               nanogui::Alignment::Middle,
+                                               15, 5
+    );
+    gridLayout->setColAlignment({nanogui::Alignment::Maximum, nanogui::Alignment::Fill});
+    gridLayout->setSpacing(0, 10);
+    mPanel->setLayout(gridLayout);
+    
 }
 
 std::string GLShaderObject::uniforms()
 {
     fmt::MemoryWriter out;
-
-    /*
-    TODO: Fix this
     size_t remainingParamters = mParameters.size();
-    for (auto i = mParameters.begin(); i != mParameters.end(); ++i) {
-        auto parameter = *i;
-        auto name = parameter.name();
-
+    
+    for (auto paramItr = mParameters.begin(); paramItr != mParameters.end(); ++paramItr) {
+        std::unique_ptr<GLShaderParameter> &parameter = *paramItr;
+        auto name = parameter->name();
+        
         out << "uniform ";
-        out << TYPE_TO_BUILTIN_STR[parameter.builtinType()];
+        out << TYPE_TO_BUILTIN_STR[parameter->builtinType()];
         out << " ";
         out << name;
         out << ";";
@@ -59,7 +72,6 @@ std::string GLShaderObject::uniforms()
             out << "\n";
         }
     }
-    */
 
     return out.str();
 }
@@ -67,17 +79,14 @@ std::string GLShaderObject::uniforms()
 std::string GLShaderObject::call()
 {
     fmt::MemoryWriter out;
-    /*
-    TODO: Fix this
     size_t remainingParamters = mParameters.size();
 
     out << mFunctionName << "(";
 
-    for (auto i = mParameters.begin(); i != mParameters.end(); ++i)
-    {
-        auto parameter = *i;
-        auto name = parameter.name();
-        auto call = fmt::format(parameter.call(), name);
+    for (auto paramItr = mParameters.begin(); paramItr != mParameters.end(); ++paramItr) {
+        std::unique_ptr<GLShaderParameter> &parameter = *paramItr;
+        auto name = parameter->name();
+        auto call = fmt::format(parameter->call(), name);
 
         out << call;
 
@@ -87,7 +96,6 @@ std::string GLShaderObject::call()
         }
     }
     out << ");";
-    */
 
     spdlog::get("qde")->debug("ShaderObject {}: Calculated output", name());
 
@@ -161,9 +169,23 @@ void GLShaderObject::addFloatParameter(const std::string &name, const std::strin
     floatParam->setBuiltinType(builtinType);
     floatParam->setParameterType(parameterType);
     
-    mParameters.push_back(std::unique_ptr<GLShaderFloatParameter>(floatParam));
+    std::unique_ptr<GLShaderFloatParameter> ptr(floatParam);
+    mParameters.push_back(std::move(ptr));
     
-    delete floatParam;
+    new nanogui::Label(mPanel, name);
+    nanogui::ref<nanogui::TextBox> textBox = new nanogui::TextBox(mPanel);
+    textBox->setEditable(true);
+    textBox->setFixedSize(Eigen::Vector2i(100, 20));
+    textBox->setValue(std::to_string((float) floatParam->data()));
+    textBox->setDefaultValue("0.0");
+    textBox->setFontSize(16);
+    textBox->setCallback([floatParam](const std::string &value) {
+        floatParam->setData(std::stof(value));
+        return true;
+    });
+
+
+    // TODO: OK? delete floatParam;
 }
 
 void GLShaderObject::addVector3fParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType)
@@ -174,9 +196,68 @@ void GLShaderObject::addVector3fParameter(const std::string &name, const std::st
     vec3fParam->setBuiltinType(builtinType);
     vec3fParam->setParameterType(parameterType);
     
-    mParameters.push_back(std::unique_ptr<GLShaderVector3fParameter>(vec3fParam));
+    std::unique_ptr<GLShaderVector3fParameter> ptr(vec3fParam);
+    mParameters.push_back(std::move(ptr));
     
-    delete vec3fParam;
+    new nanogui::Label(mPanel, fmt::format("{}.x", name));
+    nanogui::ref<nanogui::TextBox> textBox = new nanogui::TextBox(mPanel);
+    textBox->setEditable(true);
+    textBox->setFixedSize(Eigen::Vector2i(100, 20));
+    textBox->setValue(std::to_string((float) vec3fParam->data().x()));
+    textBox->setDefaultValue("0.0");
+    textBox->setFontSize(16);
+    textBox->setCallback([vec3fParam](const std::string &value) {
+        Eigen::Vector3f currentPosition = vec3fParam->data();
+        float xPosition = std::stof(value);
+        
+        vec3fParam->setData(Eigen::Vector3f(
+            xPosition,
+            currentPosition.y(),
+            currentPosition.z()
+        ));
+        
+        return true;
+    });
+    new nanogui::Label(mPanel, fmt::format("{}.y", name));
+    textBox = new nanogui::TextBox(mPanel);
+    textBox->setEditable(true);
+    textBox->setFixedSize(Eigen::Vector2i(100, 20));
+    textBox->setValue(std::to_string((float) vec3fParam->data().y()));
+    textBox->setDefaultValue("0.0");
+    textBox->setFontSize(16);
+    textBox->setCallback([vec3fParam](const std::string &value) {
+        Eigen::Vector3f currentPosition = vec3fParam->data();
+        float yPosition = std::stof(value);
+        
+        vec3fParam->setData(Eigen::Vector3f(
+            currentPosition.x(),
+            yPosition,
+            currentPosition.z()
+        ));
+        
+        return true;
+    });
+    new nanogui::Label(mPanel, fmt::format("{}.z", name));
+    textBox = new nanogui::TextBox(mPanel);
+    textBox->setEditable(true);
+    textBox->setFixedSize(Eigen::Vector2i(100, 20));
+    textBox->setValue(std::to_string((float) vec3fParam->data().z()));
+    textBox->setDefaultValue("0.0");
+    textBox->setFontSize(16);
+    textBox->setCallback([vec3fParam](const std::string &value) {
+        Eigen::Vector3f currentPosition = vec3fParam->data();
+        float zPosition = std::stof(value);
+        
+        vec3fParam->setData(Eigen::Vector3f(
+            currentPosition.x(),
+            currentPosition.y(),
+            zPosition
+        ));
+        
+        return true;
+    });
+    
+    // TODO: OK? delete vec3fParam;
 }
 
 NAMESPACE_END(QCE);

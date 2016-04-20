@@ -2,6 +2,7 @@
 
 // System imports
 #include <nanogui/object.h>
+#include <nanogui/window.h>
 #include <src/pugixml.hpp>
 #include "glshaderparameter.hpp"
 
@@ -11,7 +12,7 @@ NAMESPACE_BEGIN(QCE);
 class GLShaderObject : public nanogui::Object
 {
 public:
-    GLShaderObject();
+    GLShaderObject(nanogui::Screen *screen);
     const int &identifier() { return mId; }
     void setName(const std::string &name) { mName = name; }
     const std::string &name() const { return mName; }
@@ -26,7 +27,9 @@ public:
     void incTimesUsed() { mId = mTimesUsed; mTimesUsed++; }
     void decTimesUsed() { mTimesUsed--; }
     int timesUsed() { return mTimesUsed; }
-    std::vector<std::unique_ptr<GLShaderParameter>> const &parameters() const { return mParameters; }
+    std::vector<std::unique_ptr<GLShaderParameter>> &parameters() { return mParameters; }
+    void showForm() { mWindow->setVisible(true); }
+    void hideForm() { mWindow->setVisible(false); }
 
 protected:
     static std::map<std::string, BuiltinType> BUILTIN_STR_TO_TYPE;
@@ -40,6 +43,8 @@ protected:
     std::string mReturnType;
     std::string mDefinition;
     std::vector<std::unique_ptr<GLShaderParameter>> mParameters;
+    nanogui::ref<nanogui::Window> mWindow;
+    nanogui::ref<nanogui::Widget> mPanel;
 
 private:
     static int mTimesUsed;
