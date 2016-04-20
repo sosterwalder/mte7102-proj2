@@ -19,17 +19,10 @@ Qce::Qce() :
     mUpdateTime(glfwGetTime()),
     mNumFrames(0)
 {
-    nanogui::Window *toolsWindow = new nanogui::Window(this, "Tools");
-    toolsWindow->setId("toolsWindow");
-    toolsWindow->setPosition(Eigen::Vector2i(10, 10));
-    toolsWindow->setWidth(200);
-    toolsWindow->setHeight(768-10-10);
-    spdlog::get("qde")->debug("Created tools window");
-
     mNodeGraph = new Graph(this, this, "Nodes");
     mNodeGraph->setId("nodeGraph");
     mNodeGraph->setParent(this);
-    mNodeGraph->setPosition(Eigen::Vector2i(220, 50 /*768-210*/));
+    mNodeGraph->setPosition(Eigen::Vector2i(220, 768-210));
     mNodeGraph->setWidth(1024-220-10);
     mNodeGraph->setHeight(200);
     spdlog::get("qde")->debug("Created nodes window");
@@ -155,7 +148,7 @@ void Qce::initializeShaderObjects()
             foundObject.first,
             foundObject.second
         );
-        GLShaderObject *shaderObject = new GLShaderObject();
+        GLShaderObject *shaderObject = new GLShaderObject(this);
         shaderObject->setName(foundObject.first);
         shaderObject->parseFromFile(foundObject.second);
         spdlog::get("qde")->debug(

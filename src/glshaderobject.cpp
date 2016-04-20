@@ -1,4 +1,7 @@
 #include <src/pugiconfig.hpp>
+#include <nanogui/label.h>
+#include <nanogui/layout.h>
+#include <nanogui/textbox.h>
 #include "common.hpp"
 #include "qce.hpp"
 #include "util.hpp"

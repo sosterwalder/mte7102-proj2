@@ -25,7 +25,6 @@ public:
     void addShaderToOutput(GLShaderObject *shaderObject);
     void setShaderOutput(const std::string &output);
 
-
 private:
     OpenGLShader mShader;
     nanogui::ref<Graph> mNodeGraph;
