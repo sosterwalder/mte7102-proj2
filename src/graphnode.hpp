@@ -7,6 +7,7 @@ NAMESPACE_BEGIN(QCE);
 class DirectPopup;
 class Sink;
 class Source;
+class GLShaderSource;
 class GLShaderObject;
 
 
@@ -14,6 +15,7 @@ class GraphNode : public nanogui::Window
 {
 public:
     GraphNode(Widget *parent, const std::string &title = "Undefined");
+    // TODO: Maybe implement destructor? And decrease shader source usage?
     void setAnchorPos(const Eigen::Vector2i &anchorPos) { mAnchorPos = anchorPos; }
     const Eigen::Vector2i &anchorPos() const { return mAnchorPos; }
     void setAnchorHeight(int anchorHeight) { mAnchorHeight = anchorHeight; }
@@ -27,8 +29,12 @@ public:
     void addSource(Source *source);
     void removeSource(const int index);
     void removeSource(const Source *source);
+    void setShaderSource(GLShaderSource *shaderSource) { mShaderSource = shaderSource; }
+    nanogui::ref<GLShaderSource> shaderSource() { return mShaderSource; }
     void setShaderObject(GLShaderObject *shaderObject) { mShaderObject = shaderObject; }
     nanogui::ref<GLShaderObject> shaderObject() { return mShaderObject; }
+    int inputCount() { return mInputs.size(); }
+    int outputCount() { return mOutputs.size(); }
     virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
     virtual std::string calculateOutput();
 
@@ -40,6 +46,7 @@ protected:
     std::vector<Source *> mOutputs;
     Eigen::Vector2i mAnchorPos;
     int mAnchorHeight;
+    nanogui::ref<GLShaderSource> mShaderSource;
     nanogui::ref<GLShaderObject> mShaderObject;
 
     virtual void refreshRelativePlacement() {};

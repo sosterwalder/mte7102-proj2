@@ -2,6 +2,7 @@
 #include <src/pugixml.hpp>
 #include <nanogui/layout.h>
 #include <nanogui/opengl.h>
+#include "glshadersource.hpp"
 #include "glshaderobject.hpp"
 #include "clickablelabel.hpp"
 #include "directpopup.hpp"
@@ -35,7 +36,7 @@ GraphNode::GraphNode(Widget *parent, const std::string &title) :
             "GraphNode '{}': Removing",
             mTitle
         );
-        mShaderObject->decTimesUsed();
+        mShaderSource->decTimesUsed();
         // TODO: Check if this really is the proper way to delete an
         // object. What happens with the instance here?
         Graph *parentGraph = dynamic_cast<Graph *>(mParent);
@@ -102,7 +103,7 @@ bool GraphNode::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
 
     if (button == GLFW_MOUSE_BUTTON_1 && mEnabled && down) {
         Graph *parentGraph = dynamic_cast<Graph *>(mParent);
-        parentGraph->setNodeAsSelected(this);
+        parentGraph->nodeSelectedEvent(this);
         
         return true;
     }
