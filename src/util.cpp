@@ -24,7 +24,7 @@ const std::string Util::fileToString(const std::string &filename)
 
 
 
-std::vector<std::pair<std::string, std::string>> Util::findShaderObjects(const std::string &path)
+std::vector<std::pair<std::string, std::string>> Util::findShaderFiles(const std::string &path)
 {
     std::vector<std::pair<std::string, std::string>> result;
     DIR *dp = opendir(path.c_str());
