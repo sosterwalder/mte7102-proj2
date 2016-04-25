@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>opUnion</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>a</name>
+            <builtin>float</builtin>
+            <type>input</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>b</name>
+            <builtin>float</builtin>
+            <type>input</type>
+            <call>{}</call>
+        </parameter>
+    </parameters>
+    <source>
+        // Returns the signed distance for a merge of given signed
+        // distance a and signed distance b.
+        float opUnion(float a, float b)
+        {
+            return min(a, b);
+        }
+    </source>
+</function>
+
