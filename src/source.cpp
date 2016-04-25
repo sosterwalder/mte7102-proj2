@@ -2,22 +2,20 @@
 #include <nanogui/widget.h>
 #include "common.hpp"
 #include "connector.hpp"
+#include "graphnode.hpp"
 #include "graph.hpp"
 #include "source.hpp"
 
 
 NAMESPACE_BEGIN(QCE);
 
-Source::Source(Widget *parent, Graph *parentGraph, const std::string &label) :
-    Connector(parent, parentGraph, label)
-{
-}
-
 Eigen::Vector2i Source::relativePosition()
 {
+    int offset = mSize.y() + 1;
+    
     return Eigen::Vector2i(
         mParent->size().x() - mSize.x(),
-        (mParent->size().y() + mTheme->mWindowHeaderHeight) / 2 - mSize.y() / 2
+        mParent->theme()->mWindowHeaderHeight + offset * mIndex
     );
 }
 

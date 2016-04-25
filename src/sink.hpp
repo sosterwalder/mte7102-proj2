@@ -10,7 +10,8 @@ class Graph;
 class Sink : public Connector
 {
 public:
-    Sink(nanogui::Widget *parent, Graph *parentGraph, const std::string &label);
+    Sink(GraphNode *parent, Graph *parentGraph, const std::string &label) :
+        Connector(parent, parentGraph, label) {}
 
 protected:
     virtual Eigen::Vector2i relativePosition();
