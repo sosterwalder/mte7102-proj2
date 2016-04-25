@@ -4,6 +4,7 @@
 #include "common.hpp"
 #include "graph.hpp"
 #include "graphnode.hpp"
+#include "glshadersource.hpp"
 #include "glshaderobject.hpp"
 #include "util.hpp"
 #include "qce.hpp"
@@ -27,6 +28,7 @@ Qce::Qce() :
     mNodeGraph->setHeight(200);
     spdlog::get("qde")->debug("Created nodes window");
 
+    initializeShaderOperations();
     initializeShaderObjects();
     initializeShader();
 
@@ -48,10 +50,8 @@ void Qce::drawContents()
     double currentTime = glfwGetTime();
     mNumFrames++;
 
-    mNodeGraph->drawContents();
-
     // Draw the window contents using OpenGL
-    mShader.bind();
+    bindShader();
 
     Eigen::Matrix4f mvp;
     mvp.setIdentity();
@@ -126,7 +126,8 @@ void Qce::addShaderToOutput(GLShaderObject *shaderObject)
         "QCE: Adding shader object to output: {}",
         shaderObject->name()
     );
-    mShader.addShaderObjectToOutput(shaderObject->name());
+    // This is needed for binding the uniforms later on
+    mShader.addShaderObject(shaderObject);
     mShader.setUniforms();
     mShader.recompile();
 }
@@ -137,27 +138,36 @@ void Qce::setShaderOutput(const std::string &output)
     mShader.recompile();
 }
 
+void Qce::findAndAddShaderFiles(const std::string &path)
+{
+    for (auto foundObject : Util::findShaderFiles(path)) {
+        spdlog::get("qde")->debug(
+            "Found and added shader file: {} - {}",
+            foundObject.first,
+            foundObject.second
+        );
+        nanogui::ref<GLShaderSource> shaderSource = new GLShaderSource();
+        shaderSource->setName(foundObject.first);
+        shaderSource->parseFromFile(foundObject.second);
+        mShaderSources.push_back(shaderSource);
+        mNodeGraph->addNodeType(shaderSource);
+    }
+}
+
+// Loading files
+void Qce::initializeShaderOperations()
+{
+    std::string path = "data/operations";
+    spdlog::get("qde")->debug("QCE: Searching for shader operations at {}", path);
+    findAndAddShaderFiles(path);
+}
+
 // Loading files
 void Qce::initializeShaderObjects()
 {
     std::string path = "data/objects";
-
-    for (auto foundObject : Util::findShaderObjects(path)) {
-        spdlog::get("qde")->debug(
-            "Found and adding shader object node: {} - {}",
-            foundObject.first,
-            foundObject.second
-        );
-        GLShaderObject *shaderObject = new GLShaderObject(this);
-        shaderObject->setName(foundObject.first);
-        shaderObject->parseFromFile(foundObject.second);
-        spdlog::get("qde")->debug(
-            "ShaderObject: {}",
-            shaderObject->getRefCount()
-        );
-        mNodeGraph->addNodeType(shaderObject);
-        mShader.addShaderObject(shaderObject);
-    }
+    spdlog::get("qde")->debug("QCE: Searching for shader objects at {}", path);
+    findAndAddShaderFiles(path);
 }
 
 void Qce::initializeShader()

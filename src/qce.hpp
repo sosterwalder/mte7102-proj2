@@ -7,6 +7,7 @@ NAMESPACE_BEGIN(QCE);
 
 class GraphNode;
 class Graph;
+class GLShaderSource;
 class GLShaderObject;
 
 
@@ -28,6 +29,7 @@ public:
 private:
     OpenGLShader mShader;
     nanogui::ref<Graph> mNodeGraph;
+    std::vector<nanogui::ref<GLShaderSource>> mShaderSources;
     // TODO: Check if list gets properly deleted. Use ref maybe?
     std::vector<GraphNode *> mNodeTypes;
     float mIntensity;
@@ -35,6 +37,8 @@ private:
     double mUpdateTime;
     int mNumFrames;
 
+    void findAndAddShaderFiles(const std::string &path);
+    void initializeShaderOperations();
     void initializeShaderObjects();
     void initializeShader();
 };
