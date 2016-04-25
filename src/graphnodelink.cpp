@@ -2,6 +2,7 @@
 #include <nanovg.h>
 #include <nanogui/common.h>
 #include "connector.hpp"
+#include "graphnode.hpp"
 #include "graphnodelink.hpp"
 
 
