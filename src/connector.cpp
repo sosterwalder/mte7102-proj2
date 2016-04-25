@@ -12,14 +12,16 @@
 
 NAMESPACE_BEGIN(QCE);
 
-Connector::Connector(nanogui::Widget *parent, Graph *parentGraph, const std::string &label) :
+Connector::Connector(GraphNode *parent, Graph *parentGraph, const std::string &label) :
     nanogui::Widget(parent),
+    mParent(parent),
     mParentGraph(parentGraph),
     mLink(nullptr),
     mLabel(label),
     mTextColor(nanogui::Color(0, 0)),
     mDrag(false),
-    mRelativePosition(Eigen::Vector2i::Zero())
+    mRelativePosition(Eigen::Vector2i::Zero()),
+    mIndex(0)
 {
     mFixedSize = mSize = Eigen::Vector2i(15, 15);
 }
@@ -27,7 +29,7 @@ Connector::Connector(nanogui::Widget *parent, Graph *parentGraph, const std::str
 void Connector::draw(NVGcontext* ctx)
 {
     refreshRelativePlacement();
-    
+
     Eigen::Vector2f center = mPos.cast<float>() + mSize.cast<float>() * 0.5f;
     float radius = (int)(mSize.y() * 0.5f);
 
@@ -36,21 +38,19 @@ void Connector::draw(NVGcontext* ctx)
     nvgFontFace(ctx, "sans");
     nvgFillColor(ctx, mEnabled ? mTheme->mTextColor : mTheme->mDisabledTextColor);
     nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
-    nvgText(ctx, mPos.x() + 1.2f * mSize.y(), mPos.y() + mSize.y() * 0.1f, mLabel.c_str(), nullptr);
+    nvgText(ctx, center.x() + radius + 1.2f, center.y(), mLabel.c_str(), nullptr);
 
     // Draw body
     nvgBeginPath(ctx);
     nvgCircle(ctx, center.x(), center.y(), radius);
-    // nvgCircle(ctx, mPos.x() + 1.2f * mSize.y(), mPos.y() + mSize.y() * 0.1f, 10);
-    // nvgRect(ctx, mPos.x(), mPos.y(), mSize.x(), mSize.y());
     nvgFillColor(ctx, mTheme->mBorderMedium);
     nvgStrokeColor(ctx, mTheme->mBorderLight);
     nvgStroke(ctx);
     nvgFill(ctx);
-    
+
     if (isConnected()) {
         NVGpaint knobReverse = nvgLinearGradient(ctx, mPos.x(), center.y() - radius, mPos.x(), center.y() + radius, mTheme->mBorderMedium, mTheme->mBorderLight);
-        
+
         nvgBeginPath(ctx);
         nvgCircle(ctx, center.x(), center.y(), radius * 0.5f);
         nvgFillColor(ctx, nanogui::Color(150, mEnabled ? 255 : 100));
@@ -105,6 +105,8 @@ bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
         mDrag = down && (p.y() - mPos.y()) < mTheme->mWindowHeaderHeight;
 
         if (!isConnected() && !wasDragged && mDrag) {
+            // Node is not yet connected, create a new
+            // connector (without valid target yet)
             mLink = new GraphNodeLink(mParentGraph, this);
             mLink->setTargetPosition(p);
             spdlog::get("qde")->debug(
@@ -114,6 +116,8 @@ bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
         }
 
         if (mDrag) {
+            // Connector was dragged (independently from its
+            // state), set it as active.
             mParentGraph->setActiveConnector(this);
             spdlog::get("qde")->debug(
                 "Connector '{}': Set as active",
@@ -121,6 +125,8 @@ bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
             );
         }
         else if (activeConnector && activeConnector != this) {
+            // New connection between two nodes:
+            //
             // (this) Connector is the target
             // activeConnector is the source
             spdlog::get("qde")->debug(fmt::format(
