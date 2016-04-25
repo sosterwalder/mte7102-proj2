@@ -2,12 +2,14 @@
 #include "common.hpp"
 #include "directpopup.hpp"
 #include "clickablelabel.hpp"
+#include "glshadersource.hpp"
 #include "glshaderobject.hpp"
 #include "graphnodelink.hpp"
 #include "connector.hpp"
 #include "graphnode.hpp"
 #include "genericgraphnode.hpp"
 #include "outputgraphnode.hpp"
+#include "sink.hpp"
 #include "qce.hpp"
 #include "graph.hpp"
 
@@ -30,31 +32,35 @@ Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     mOutputNode = new OutputGraphNode(this, "Output");
 }
 
-void Graph::addNodeType(GLShaderObject *shaderObject)
+void Graph::addNodeType(GLShaderSource *shaderSource)
 {
     spdlog::get("qde")->debug(
         "Adding nodeType for selection: {}",
-        shaderObject->name()
+        shaderSource->name()
     );
     nanogui::ref<ClickableLabel> addNodeButton = new ClickableLabel(
         mPopup,
-        fmt::format("Add {} node", shaderObject->name())
+        fmt::format("Add {} node", shaderSource->name())
     );
-    addNodeButton->setCallback([this, shaderObject](const Eigen::Vector2i &p) {
-        this->addNodeButtonEvent(p, shaderObject);
+    addNodeButton->setCallback([this, shaderSource](const Eigen::Vector2i &p) {
+        addNodeButtonEvent(p, shaderSource);
     });
 }
 
 void Graph::calculateOutput()
 {
-    std::string output = fmt::format(
-        "result = {}", mOutputNode->calculateOutput()
-    );
-    spdlog::get("qde")->debug("Graph {}: Calculated and set output {}", id(), output);
-    mQce->setShaderOutput(output);
+    std::string nodeOuptut = mOutputNode->calculateOutput();
+   
+    if (!nodeOuptut.empty()) {
+        std::string output = fmt::format(
+            "result = {}", mOutputNode->calculateOutput()
+        );
+        spdlog::get("qde")->debug("Graph {}: Calculated and set output {}", id(), output);
+        mQce->setShaderOutput(output);
+    }
 }
 
-void Graph::setNodeAsSelected(GraphNode *node)
+void Graph::nodeSelectedEvent(GraphNode *node)
 {
     spdlog::get("qde")->debug("Graph: Node '{}' was selected", node->id());
     
@@ -62,23 +68,25 @@ void Graph::setNodeAsSelected(GraphNode *node)
         mActiveNode->shaderObject()->hideForm();
     }
     
-    if (node->shaderObject() != nullptr) {
-        spdlog::get("qde")->debug("Graph: Rendering properties of node '{}'", node->id());
-        node->shaderObject()->showForm();
-        mActiveNode = node;
+    auto shaderObject = node->shaderObject();
+    if (shaderObject != nullptr) {
+        if (shaderObject->hasProperties()) {
+            spdlog::get("qde")->debug("Graph: Rendering properties of node '{}'", node->id());
+            shaderObject->showForm();
+            mActiveNode = node;
+        }
     }
 }
 
-void Graph::nodeConnectedEvent(GraphNode *node)
+void Graph::nodeConnectedEvent(Connector *source, Connector *target)
 {
-    spdlog::get("qde")->debug("Graph: A node {} was connected", node->id());
-    mQce->addShaderToOutput(node->shaderObject());
-}
-
-void Graph::drawContents()
-{
-    // TODO: Still needed?: mOutputNode->drawContents();
-    mQce->bindShader();
+    spdlog::get("qde")->debug("Graph: Source {} was connected to target {}", source->id(), target->id());
+    
+    auto shaderParameter = target->shaderParameter();
+    if (shaderParameter != nullptr) {
+        target->shaderParameter()->setInput(source->parent()->shaderObject());
+    }
+    mQce->addShaderToOutput(source->parent()->shaderObject());
 }
 
 bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
@@ -106,21 +114,36 @@ void Graph::performLayout(NVGcontext *ctx)
     Window::performLayout(ctx);
 }
 
-void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderObject *shaderObject)
+void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderSource)
 {
     spdlog::get("qde")->debug("Graph: Add node button was pressed at ({}, {})", p.x(), p.y());
-
-    GenericGraphNode *node = new GenericGraphNode(this, shaderObject->id());
-    shaderObject->incTimesUsed();
-    node->setId(shaderObject->id());
+    
+    nanogui::ref<GLShaderObject> shaderObject = new GLShaderObject(shaderSource, mQce);
+    
+    nanogui::ref<GenericGraphNode> node = new GenericGraphNode(this, shaderObject->name());
     node->setPosition(p);
-    spdlog::get("qde")->debug("Graph: Set node position to ({}, {})", p.x(), p.y());
     node->setEnabled(true);
     node->setVisible(true);
     node->setShaderObject(shaderObject);
-
+    
+    // Add parameters: Properties and/or inputs
+    int index = 0;
+    for (GLShaderObjectParameter param : shaderSource->parameters()) {
+        GLShaderParameter *shaderParameter = shaderObject->addParameter(param);
+        
+        if (shaderParameter->parameterType() == ParameterType::INPUT) {
+            nanogui::ref<Sink> input = new Sink(node, this, shaderParameter->name());
+            input->setShaderParameter(shaderParameter);
+            input->setIndex(index);
+            index++;
+        }
+    }
+    
+    mQce->performLayout();
+    
+    spdlog::get("qde")->debug("Graph: Set node position to ({}, {})", p.x(), p.y());
     mPopup->setVisible(false);
-    // TODO: mQce->performLayout();
+    shaderSource->incTimesUsed();
 }
 
 NAMESPACE_END(QCE);

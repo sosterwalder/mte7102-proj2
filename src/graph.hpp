@@ -5,6 +5,7 @@
 NAMESPACE_BEGIN(QCE)
 
 class DirectPopup;
+class GLShaderSource;
 class GLShaderObject;
 class Connector;
 class GraphNodeLink;
@@ -19,11 +20,10 @@ public:
     void setActiveConnector(Connector *connector) { mActiveConnector = connector; }
     Connector *activeConnector() { return mActiveConnector; }
     const Connector *activeConnector() const { return mActiveConnector.get(); }
-    void addNodeType(GLShaderObject *shaderObject);
+    void addNodeType(GLShaderSource *shaderSource);
     void calculateOutput();
-    void setNodeAsSelected(GraphNode *node);
-    void nodeConnectedEvent(GraphNode *node);
-    virtual void drawContents();
+    void nodeSelectedEvent(GraphNode *node);
+    void nodeConnectedEvent(Connector *source, Connector *target);
     virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
     virtual void performLayout(NVGcontext *ctx);
 
@@ -36,7 +36,7 @@ protected:
     std::vector<GraphNode> mNodes;
     std::vector<GraphNodeLink> mNodeLinks;
 
-    virtual void addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderObject *shaderObject);
+    virtual void addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderSource);
 };
 
 NAMESPACE_END(QCE);
