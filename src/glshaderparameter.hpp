@@ -1,7 +1,10 @@
 #pragma once
 
+#include <nanogui/object.h>
+
 NAMESPACE_BEGIN(QCE);
 
+class GLShaderObject;
 class OpenGLShader;
 
 
@@ -16,7 +19,7 @@ enum class ParameterType
 {
     UNKNOWN,
     PROPERTY,
-    SINK
+    INPUT
 };
 
 class GLShaderParameter
@@ -27,11 +30,14 @@ public:
     void setName(const std::string &name) { mName = name; }
     const std::string &name() const { return mName; }
     void setCall(const std::string &call) { mCall = call; }
-    const std::string &call() const { return mCall; }
     void setBuiltinType(BuiltinType builtinType) { mBuiltinType = builtinType; }
     BuiltinType builtinType() { return mBuiltinType; }
     void setParameterType(ParameterType parameterType) { mParameterType = parameterType; }
     ParameterType parameterType() { return mParameterType; }
+    void setInput(GLShaderObject *input) { mInput = input; }
+    GLShaderObject *input() { return mInput; }
+    const GLShaderObject *input() const { return mInput.get(); }
+    virtual std::string call() = 0;
     virtual void setUniform(OpenGLShader *shader) = 0;
     // template<typename T> void setData(T data);
     // template <typename T> T data();
@@ -41,6 +47,16 @@ protected:
     std::string mCall;
     BuiltinType mBuiltinType;
     ParameterType mParameterType;
+    nanogui::ref<GLShaderObject> mInput;
+};
+
+class GLShaderInputParameter : public GLShaderParameter
+{
+public:
+    GLShaderInputParameter() :
+        GLShaderParameter() {}
+    std::string call();
+    void setUniform(OpenGLShader *shader) {}
 };
 
 class GLShaderFloatParameter : public GLShaderParameter
@@ -50,6 +66,7 @@ public:
     
     void setData(float data) { mData = data; }
     float data() const { return mData; }
+    std::string call();
     void setUniform(OpenGLShader *shader);
     
 protected:
@@ -63,6 +80,7 @@ public:
     
     void setData(Eigen::Vector3f data) { mData = data; }
     Eigen::Vector3f data() const { return mData; }
+    std::string call();
     void setUniform(OpenGLShader *shader);
     
 protected:
