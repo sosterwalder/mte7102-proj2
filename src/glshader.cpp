@@ -2,6 +2,7 @@
 #include <src/Jinja2CppLight.h>
 #include <nanogui/glutil.h>
 #include "common.hpp"
+#include "glshadersource.hpp"
 #include "glshaderobject.hpp"
 #include "glshader.hpp"
 
@@ -19,69 +20,56 @@ OpenGLShader::OpenGLShader() :
 }
 
 // When loading files
-void OpenGLShader::addShaderObject(GLShaderObject *object)
+void OpenGLShader::addShaderSource(GLShaderSource *shaderSource)
 {
     spdlog::get("qde")->debug(
-        "Shader: Trying to add shader definition: {}",
-        object->name()
+        "Shader: Trying to add shader source: {}",
+        shaderSource->name()
     );
-    auto shaderObject = mShaderObjects.find(object->name());
-    if (shaderObject == mShaderObjects.end()) {
-        mShaderObjects[object->name()] = object;
+    
+    auto source = mShaderSources.find(shaderSource->name());
+    
+    if (source == mShaderSources.end()) {
+        mShaderSources[shaderSource->name()] = shaderSource;
         spdlog::get("qde")->debug(
-            "Shader: Successfully added shader definition: {}",
-            object->name()
+            "Shader: Successfully added shader source: {}",
+            shaderSource->name()
         );
     }
     else {
         spdlog::get("qde")->debug(
-            "Shader: Not added shader definition as already added ({} times): {}",
-            object->name(), object->timesUsed()
+            "Shader: Not added shader source as already added ({} times): {}",
+            shaderSource->name(), shaderSource->timesUsed()
         );
     }
 }
 
 // When connecting node
-void OpenGLShader::addShaderObjectToOutput(const std::string &id)
+void OpenGLShader::addShaderObject(GLShaderObject *shaderObject)
 {
-    auto shaderObject = mShaderObjects.find(id);
+    auto object = mShaderObjects.find(shaderObject->name());
 
-    if (shaderObject != mShaderObjects.end()) {
-        auto id = shaderObject->first;
-        auto object = shaderObject->second;
-
-        // Try to add shader to output
-        auto itr = std::find(mShaderObjectsOutput.begin(), mShaderObjectsOutput.end(), id);
-        if (itr == mShaderObjectsOutput.end()) {
-            // Shader was not added yet, so
-            // add definition to source
-            mFragmentShaderObjects = fmt::format(
-                "{}\n{}",
-                mFragmentShaderObjects,
-                object->definition()
-            );
-            mShaderObjectsOutput.push_back(id);
-            spdlog::get("qde")->debug("Shader: Added ShaderObject {} to output", object->name());
-        }
-        else {
-            spdlog::get("qde")->warn(
-                "Shader: ShaderObject {} is already added, not adding to output",
-                object->name()
-            );
-        }
-
+    if (object == mShaderObjects.end()) {
+        // Add definition to source
+        mFragmentShaderObjects = fmt::format(
+            "{}\n{}",
+            mFragmentShaderObjects,
+            shaderObject->definition()
+        );
         // Add uniform(s) to source
         mFragmentShaderUniforms = fmt::format(
             "{}\n{}",
             mFragmentShaderUniforms,
-            object->uniforms()
+            shaderObject->uniforms()
         );
-        spdlog::get("qde")->debug("Shader: Added uniform defintions of ShaderObject {}", id);
+        // This is needed for binding the uniforms later on
+        mShaderObjects.insert(std::make_pair(shaderObject->name(), shaderObject));
+        spdlog::get("qde")->debug("Shader: Added ShaderObject {} to output", shaderObject->name());
     }
     else {
         spdlog::get("qde")->warn(
-            "Shader: ShaderObject {} was not found!",
-            id
+            "Shader: ShaderObject {} is already added, not adding to output",
+            shaderObject->name()
         );
     }
 
@@ -105,12 +93,10 @@ bool OpenGLShader::recompile()
 
 void OpenGLShader::setUniforms()
 {
-    for (const std::string &shaderObjectId : mShaderObjectsOutput) {
-
-        const auto &shaderObject = mShaderObjects.at(shaderObjectId);
-
+    for (auto shaderObjectsIter = mShaderObjects.begin(); shaderObjectsIter != mShaderObjects.end(); ++shaderObjectsIter) {
+        auto shaderObject = shaderObjectsIter->second;
         for (auto paramItr = shaderObject->parameters().begin(); paramItr != shaderObject->parameters().end(); ++paramItr) {
-            std::unique_ptr<GLShaderParameter> &parameter = *paramItr;
+            const auto &parameter = *paramItr;
             parameter->setUniform(this);
         }
     }

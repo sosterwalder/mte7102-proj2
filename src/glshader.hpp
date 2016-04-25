@@ -4,6 +4,7 @@
 
 NAMESPACE_BEGIN(QCE);
 
+class GLShaderSource;
 class GLShaderObject;
 
 
@@ -14,13 +15,12 @@ public:
     void setName(const std::string &name) { mName = name; }
     void setFragmentShaderTemplate(const std::string &shaderTemplate) { mFragmentShaderTemplate = shaderTemplate; }
     const std::string &fragmentShaderSource() const { return mFragmentShaderSource; }
-    void addShaderObject(GLShaderObject *object);
-    const std::map<std::string, GLShaderObject *> &shaderObjects() const { return mShaderObjects; }
+    void addShaderSource(GLShaderSource *shaderSource);
     void setFragmentShaderCalls(const std::string &calls) { mFragmentShaderCalls = calls; }
     const std::string &fragmentShaderCalls() const { return mFragmentShaderCalls; }
     void setVertexShaderSource(const std::string &vertexSource) { mVertexShaderSource = vertexSource; }
     void setGeometryShaderSource(const std::string &geometrySource) { mGeometryShaderSource = geometrySource; }
-    void addShaderObjectToOutput(const std::string &id);
+    void addShaderObject(GLShaderObject *shaderObject);
     bool recompile();
     void setUniforms();
 
@@ -33,8 +33,8 @@ protected:
     std::string mVertexShaderSource;
     std::string mGeometryShaderSource;
     // TODO: Check if list is properly cleared. Use ref maybe?
+    std::map<std::string, GLShaderSource *> mShaderSources;
     std::map<std::string, GLShaderObject *> mShaderObjects;
-    std::vector<std::string> mShaderObjectsOutput;
 
     void parseFragmentShaderTemplate();
 };
