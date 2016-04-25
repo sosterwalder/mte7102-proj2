@@ -4,55 +4,47 @@
 #include <nanogui/object.h>
 #include <nanogui/window.h>
 #include <src/pugixml.hpp>
+#include "glshadersource.hpp"
 #include "glshaderparameter.hpp"
 
 
 NAMESPACE_BEGIN(QCE);
 
+class Qce;
+class GLShaderSource;
+struct GLShaderObjectParameter;
+
 class GLShaderObject : public nanogui::Object
 {
 public:
-    GLShaderObject(nanogui::Screen *screen);
-    const int &identifier() { return mId; }
+    GLShaderObject(GLShaderSource *shaderSource, Qce *screen);
     void setName(const std::string &name) { mName = name; }
     const std::string &name() const { return mName; }
-    void setFunctionName(const std::string &name) { mFunctionName = name; }
-    const std::string &functionName() const { return mFunctionName; }
-    std::string id() const { return fmt::format("{}-{}", mName, mId); }
-    void setReturnRype(const std::string &returnType) { mReturnType = returnType; }
-    const std::string &definition() const { return mDefinition; }
     std::string uniforms();
-    std::string call();
-    void parseFromFile(const std::string &filename);
-    void incTimesUsed() { mId = mTimesUsed; mTimesUsed++; }
-    void decTimesUsed() { mTimesUsed--; }
-    int timesUsed() { return mTimesUsed; }
-    std::vector<std::unique_ptr<GLShaderParameter>> &parameters() { return mParameters; }
+    const std::vector<std::unique_ptr<GLShaderParameter>> &parameters() { return mParameters; }
+    const nanogui::ref<GLShaderSource> shaderSource() { return mShaderSource; }
+    GLShaderParameter *addParameter(const GLShaderObjectParameter &parameter);
     void showForm() { mWindow->setVisible(true); }
     void hideForm() { mWindow->setVisible(false); }
+    const std::string &definition() { return mShaderSource->definition(); }
+    std::string call();
+    const bool &hasProperties() const { return mHasProperties; }
 
 protected:
-    static std::map<std::string, BuiltinType> BUILTIN_STR_TO_TYPE;
-    static std::map<BuiltinType, std::string> TYPE_TO_BUILTIN_STR;
-    static std::map<std::string, ParameterType> PARAM_STR_TO_TYPE;
-    static std::map<ParameterType, std::string> PARAM_TYPE_TO_STR;
-
-    int mId;
     std::string mName;
-    std::string mFunctionName;
-    std::string mReturnType;
-    std::string mDefinition;
+    bool mHasProperties;
     std::vector<std::unique_ptr<GLShaderParameter>> mParameters;
     nanogui::ref<nanogui::Window> mWindow;
     nanogui::ref<nanogui::Widget> mPanel;
+    nanogui::ref<GLShaderSource> mShaderSource;
 
 private:
-    static int mTimesUsed;
-
-    void parseParameters(pugi::xml_node xmlNode);
-    void addParameterFromXmlNode(pugi::xml_node xmlNode);
-    void addFloatParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType);
-    void addVector3fParameter(const std::string &name, const std::string &call, BuiltinType builtinType, ParameterType parameterType);
+    int mId;
+    
+    GLShaderParameter *addProperty(const GLShaderObjectParameter &parameter);
+    GLShaderParameter *addFloatProperty(const GLShaderObjectParameter &parameter);
+    GLShaderParameter *addVector3fProperty(const GLShaderObjectParameter &parameter);
+    GLShaderParameter *addInput(const GLShaderObjectParameter &parameter);
 };
 
 NAMESPACE_END(QCE);
