@@ -142,6 +142,7 @@ bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
                 "{}-{}",
                 activeConnector->id(), this->id()
             ));
+            mParent->sinkConnectedEvent(this);
             mParentGraph->nodeConnectedEvent(activeConnector, this);
             mParentGraph->calculateOutput();
         }
