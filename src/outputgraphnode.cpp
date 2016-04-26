@@ -7,12 +7,11 @@
 
 NAMESPACE_BEGIN(QCE);
 
-OutputGraphNode::OutputGraphNode(Widget *parent, const std::string &title) :
-    GraphNode(parent, title)
+OutputGraphNode::OutputGraphNode(Widget *parent, Graph *parentGraph, const std::string &title) :
+    GraphNode(parent, parentGraph, title)
 {
     setId(fmt::format("outputGraphNode-{}", 0));
-    Graph *parentGraph = dynamic_cast<Graph *>(parent);
-    Sink *sink = new Sink(this, parentGraph, "Out");
+    Sink *sink = new Sink(this, mParentGraph, "Out");
     sink->setId("outputGraphNodeInputSink");
     addSink(sink);
 }

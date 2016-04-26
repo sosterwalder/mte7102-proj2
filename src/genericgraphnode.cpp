@@ -7,15 +7,12 @@
 
 NAMESPACE_BEGIN(QCE);
 
-GenericGraphNode::GenericGraphNode(Widget *parent, const std::string &title) :
-    GraphNode(parent, title)
+GenericGraphNode::GenericGraphNode(Widget *parent, Graph *parentGraph, const std::string &title) :
+    GraphNode(parent, parentGraph, title)
 {
-    {
-        Graph *parentGraph = dynamic_cast<Graph *>(parent);
-        Source *source = new Source(this, parentGraph, "Output");
-        source->setId(fmt::format("{}GraphNodeSource", title));
-        addSource(source);
-    }
+    Source *source = new Source(this, mParentGraph, "Output");
+    source->setId(fmt::format("{}GraphNodeSource", title));
+    addSource(source);
 }
 
 void GenericGraphNode::performLayout(NVGcontext *ctx)
