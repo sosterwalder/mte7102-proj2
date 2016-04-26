@@ -23,6 +23,7 @@ public:
     GLShaderParameter *shaderParameter() { return mShaderParameter; }
     const GLShaderParameter *shaderParameter() const { return mShaderParameter.get(); }
     void setShaderParameter(GLShaderParameter *shaderParameter) { mShaderParameter = shaderParameter; }
+    bool isConnected() { return mLink != nullptr; }
     virtual void draw(NVGcontext* ctx);
     virtual Eigen::Vector2i preferredSize(NVGcontext *ctx) const;
     virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
@@ -43,7 +44,6 @@ protected:
 
     // Internal helper function to maintain nested window position values
     void refreshRelativePlacement();
-    bool isConnected() { return mLink != nullptr; }
 };
 
 NAMESPACE_END(QCE);
