@@ -83,10 +83,16 @@ void Graph::nodeConnectedEvent(Connector *source, Connector *target)
     spdlog::get("qde")->debug("Graph: Source {} was connected to target {}", source->id(), target->id());
     
     auto shaderParameter = target->shaderParameter();
+    
+    // Set input to source shader object only if we actually have a shader set
     if (shaderParameter != nullptr) {
         target->shaderParameter()->setInput(source->parent()->shaderObject());
     }
-    mQce->addShaderToOutput(source->parent()->shaderObject());
+    
+    // Add shader source only if we actually have a shader set
+    if (source->parent()->shaderObject() != nullptr) {
+        mQce->addShaderToOutput(source->parent()->shaderObject());
+    }
 }
 
 bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
