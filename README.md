@@ -13,8 +13,8 @@ It is written and developed in the spring semester 2016 and is licensed
 under the Creative Commons Attribution-ShareAlike 3.0 respectively 
 unter the conditions of the MIT License (MIT).
 
-Directory Structure
--------------------
+Directory Structure (in near future)
+------------------------------------
 
     bin/   -- Compiled, binary file of the prototype
     build/ -- Temporary directory for build output
@@ -33,3 +33,30 @@ Directory Structure
     lib/   -- External libraries for linking against when building
               the prototype(s)
     src/   -- Source code of the prototype(s)
+
+
+### Build and run
+
+To get the project set up and to run it, checkout this repository, switch to
+its directory and call *make build run*:
+
+```bash
+$ git clone https://github.com/sosterwalder/mte7102-proj2.git
+$ cd mte7102-proj2
+mte7102-proj2 $ make build run
+```
+
+As the project has quite a lot of dependencies the fetching of the submodules
+may take a while (especially if you are on a 3G dial up connection as I am..
+hehe).
+
+This process was tested on Arch linux (kernel 4.5.0-1) as well as Apple Mac OS
+X (10.11.4). It does not work on Microsoft Windows yet.
+
+### Known issues and bugs
+
+A lot.
+
+### TODO
+
+A lot.
