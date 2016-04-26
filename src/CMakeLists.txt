@@ -143,6 +143,9 @@ add_executable(mte7102
 )
 endif()
 
+# Make sure nanogui gets built first
+add_dependencies(mte7102 nanogui)
+
 # Link needed libraries
 if (APPLE)
 target_link_libraries(mte7102
