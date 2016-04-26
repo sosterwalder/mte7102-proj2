@@ -8,6 +8,7 @@
 #include "connector.hpp"
 #include "graphnode.hpp"
 #include "genericgraphnode.hpp"
+#include "mergegraphnode.hpp"
 #include "outputgraphnode.hpp"
 #include "sink.hpp"
 #include "qce.hpp"
@@ -28,6 +29,14 @@ Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     mPopup->setSize(Eigen::Vector2i(10, 10));
     mPopup->setLayout(new nanogui::GroupLayout());
     mPopup->setVisible(false);
+    
+    nanogui::ref<ClickableLabel> addNodeButton = new ClickableLabel(
+        mPopup,
+        fmt::format("Add merge node")
+    );
+    addNodeButton->setCallback([this](const Eigen::Vector2i &p) {
+        addNodeButtonEvent(p, new MergeGraphNode(this, this));
+    });
 
     mOutputNode = new OutputGraphNode(this, this, "Output");
 }
