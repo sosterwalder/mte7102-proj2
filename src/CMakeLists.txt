@@ -59,9 +59,6 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 # Use package PkgConfig
 find_package(PkgConfig REQUIRED)
 
-# Use boost :(
-FIND_PACKAGE(Boost 1.6 REQUIRED)
-
 # Use package OpenGL
 find_package(OpenGL REQUIRED)
 if(OPENGL_FOUND)
@@ -72,7 +69,6 @@ endif(OPENGL_FOUND)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/nanogui)
 
 # Specify additional include directories
-include_directories(${Boost_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/glfw/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/eigen)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/nanovg/src)
