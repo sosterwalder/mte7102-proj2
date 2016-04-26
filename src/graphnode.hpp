@@ -14,8 +14,8 @@ class GLShaderObject;
 class GraphNode : public nanogui::Window
 {
 public:
-    GraphNode(Widget *parent, const std::string &title = "Undefined");
-    // TODO: Maybe implement destructor? And decrease shader source usage?
+    GraphNode(Widget *parent, Graph *parentGraph, const std::string &title = "Undefined");
+    // TODO: Maybe implement destructor? And decrease shader source usage count?
     void setAnchorPos(const Eigen::Vector2i &anchorPos) { mAnchorPos = anchorPos; }
     const Eigen::Vector2i &anchorPos() const { return mAnchorPos; }
     void setAnchorHeight(int anchorHeight) { mAnchorHeight = anchorHeight; }
@@ -36,9 +36,11 @@ public:
     int inputCount() { return mInputs.size(); }
     int outputCount() { return mOutputs.size(); }
     virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
+    virtual bool sinkConnectedEvent(Connector *sink);
     virtual std::string calculateOutput();
 
 protected:
+    nanogui::ref<Graph> mParentGraph;
     nanogui::ref<DirectPopup> mPopup;
     int mNumInputs, mNumOutputs;
     bool mDrag;

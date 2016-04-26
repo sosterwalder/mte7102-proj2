@@ -15,8 +15,9 @@
 
 NAMESPACE_BEGIN(QCE);
 
-GraphNode::GraphNode(Widget *parent, const std::string &title) :
+GraphNode::GraphNode(Widget *parent, Graph *parentGraph, const std::string &title) :
     Window(parent, title),
+    mParentGraph(parentGraph),
     mAnchorPos(Eigen::Vector2i::Zero()),
     mAnchorHeight(30),
     mShaderObject(nullptr)
@@ -119,6 +120,12 @@ bool GraphNode::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
     }
 
     return false;
+}
+
+bool GraphNode::sinkConnectedEvent(Connector *sink)
+{
+    // May be overridden by child classes.
+    return true;
 }
 
 // May be overridden by child classes.
