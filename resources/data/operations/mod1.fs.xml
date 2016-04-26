@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>mod1</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>p</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>size</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+    </parameters>
+    <source>
+        // Repeat space along one axis. Use like this to repeat along the x axis:
+        // float cell = pMod1(p.x,5); - using the return value is optional.
+        float mod1(float p, float size) {
+            float halfsize = size*0.5;
+            float c = floor((p + halfsize)/size);
+            p = mod(p + halfsize, size) - halfsize;
+
+            return c;
+        }
+    </source>
+</function>
+

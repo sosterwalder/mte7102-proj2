@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>opUnionChamfer</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>a</name>
+            <builtin>float</builtin>
+            <type>input</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>b</name>
+            <builtin>float</builtin>
+            <type>input</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>r</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+    </parameters>
+    <source>
+        // The "Chamfer" flavour makes a 45-degree chamfered edge (the diagonal of a square of size "r"):
+        float opUnionChamfer(float a, float b, float r) {
+            return min(min(a, b), (a - r + b)*sqrt(0.5));
+        }
+    </source>
+</function>
