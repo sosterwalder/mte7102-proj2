@@ -122,11 +122,11 @@ void Graph::performLayout(NVGcontext *ctx)
 
 void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderSource)
 {
-    spdlog::get("qde")->debug("Graph: Add node button was pressed at ({}, {})", p.x(), p.y());
+    spdlog::get("qde")->debug("Graph: Add shader node button was pressed at ({}, {})", p.x(), p.y());
     
     nanogui::ref<GLShaderObject> shaderObject = new GLShaderObject(shaderSource, mQce);
     
-    nanogui::ref<GenericGraphNode> node = new GenericGraphNode(this, shaderObject->name());
+    nanogui::ref<GenericGraphNode> node = new GenericGraphNode(this, this, shaderObject->name());
     node->setPosition(p);
     node->setEnabled(true);
     node->setVisible(true);
