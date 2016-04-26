@@ -37,6 +37,7 @@ protected:
     std::vector<GraphNodeLink> mNodeLinks;
 
     virtual void addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderSource);
+    virtual void addNodeButtonEvent(const Eigen::Vector2i &p, GraphNode *graphNode);
 };
 
 NAMESPACE_END(QCE);

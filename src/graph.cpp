@@ -29,7 +29,7 @@ Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     mPopup->setLayout(new nanogui::GroupLayout());
     mPopup->setVisible(false);
 
-    mOutputNode = new OutputGraphNode(this, "Output");
+    mOutputNode = new OutputGraphNode(this, this, "Output");
 }
 
 void Graph::addNodeType(GLShaderSource *shaderSource)
@@ -141,9 +141,24 @@ void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderS
     
     mQce->performLayout();
     
-    spdlog::get("qde")->debug("Graph: Set node position to ({}, {})", p.x(), p.y());
+    spdlog::get("qde")->debug("Graph: Set shader node position to ({}, {})", p.x(), p.y());
     mPopup->setVisible(false);
     shaderSource->incTimesUsed();
+}
+
+void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GraphNode *graphNode)
+{
+    spdlog::get("qde")->debug("Graph: Add graph node button was pressed at ({}, {})", p.x(), p.y());
+    
+    // TODO: Implement this
+    graphNode->setPosition(p);
+    graphNode->setEnabled(true);
+    graphNode->setVisible(true);
+    
+    mQce->performLayout();
+    
+    spdlog::get("qde")->debug("Graph: Set graph node position to ({}, {})", p.x(), p.y());
+    mPopup->setVisible(false);
 }
 
 NAMESPACE_END(QCE);
