@@ -98,6 +98,7 @@ set(SOURCES
   graphnode.hpp graphnode.cpp
   outputgraphnode.hpp outputgraphnode.cpp
   genericgraphnode.hpp genericgraphnode.cpp
+  mergegraphnode.hpp mergegraphnode.cpp
   graph.hpp graph.cpp
   qce.hpp  qce.cpp
   main.hpp main.cpp
@@ -112,6 +113,8 @@ set(EXTRA_SOURCE
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/im.icns"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union.fs.xml"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union_chamfer.fs.xml"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/mod1.fs.xml"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/sphere.fs.xml"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml"
 )
@@ -188,6 +191,8 @@ if (APPLE)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/im.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/operations/)
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union_chamfer.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/operations/)
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/mod1.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/operations/)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/sphere.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/objects/)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/objects/)
 else()
@@ -208,6 +213,8 @@ if (UNIX)
   install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations/)
+  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union_chamfer.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations/)
+  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/mod1.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations/)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/sphere.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects/)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/objects/box.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects/)
 endif()
