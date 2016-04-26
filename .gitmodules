@@ -18,4 +18,4 @@
 	url = https://github.com/glfw/glfw.git
 [submodule "src/ext/jinja2cpplight"]
 	path = src/ext/jinja2cpplight
-	url = git@github.com:sosterwalder/Jinja2CppLight.git
+	url = https://github.com/sosterwalder/Jinja2CppLight.git
