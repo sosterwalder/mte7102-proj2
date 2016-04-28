@@ -100,12 +100,17 @@ void GraphNode::removeSource(const Source *source)
 
 bool GraphNode::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
 {
+    spdlog::get("qde")->debug(
+        "GraphNode '{}': Received mouse button event at ({},{}): {}, {}",
+        mTitle, p.x(), p.y(), button, down
+    );
+
     Window::mouseButtonEvent(p, button, down, modifiers);
 
     if (button == GLFW_MOUSE_BUTTON_1 && mEnabled && down) {
         Graph *parentGraph = dynamic_cast<Graph *>(mParent);
         parentGraph->nodeSelectedEvent(this);
-        
+
         return true;
     }
 
