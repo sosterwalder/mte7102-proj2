@@ -29,7 +29,7 @@ Graph::Graph(Widget *parent, Qce *qce, const std::string &title) :
     mPopup->setSize(Eigen::Vector2i(10, 10));
     mPopup->setLayout(new nanogui::GroupLayout());
     mPopup->setVisible(false);
-    
+
     nanogui::ref<ClickableLabel> addNodeButton = new ClickableLabel(
         mPopup,
         fmt::format("Add merge node")
@@ -59,7 +59,7 @@ void Graph::addNodeType(GLShaderSource *shaderSource)
 void Graph::calculateOutput()
 {
     std::string nodeOuptut = mOutputNode->calculateOutput();
-   
+
     if (!nodeOuptut.empty()) {
         std::string output = fmt::format(
             "result = {}", mOutputNode->calculateOutput()
@@ -72,11 +72,11 @@ void Graph::calculateOutput()
 void Graph::nodeSelectedEvent(GraphNode *node)
 {
     spdlog::get("qde")->debug("Graph: Node '{}' was selected", node->id());
-    
+
     if (mActiveNode != nullptr) {
         mActiveNode->shaderObject()->hideForm();
     }
-    
+
     auto shaderObject = node->shaderObject();
     if (shaderObject != nullptr) {
         if (shaderObject->hasProperties()) {
@@ -90,14 +90,14 @@ void Graph::nodeSelectedEvent(GraphNode *node)
 void Graph::nodeConnectedEvent(Connector *source, Connector *target)
 {
     spdlog::get("qde")->debug("Graph: Source {} was connected to target {}", source->id(), target->id());
-    
+
     auto shaderParameter = target->shaderParameter();
-    
+
     // Set input to source shader object only if we actually have a shader set
     if (shaderParameter != nullptr) {
         target->shaderParameter()->setInput(source->parent()->shaderObject());
     }
-    
+
     // Add shader source only if we actually have a shader set
     if (source->parent()->shaderObject() != nullptr) {
         mQce->addShaderToOutput(source->parent()->shaderObject());
@@ -132,20 +132,20 @@ void Graph::performLayout(NVGcontext *ctx)
 void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderSource)
 {
     spdlog::get("qde")->debug("Graph: Add shader node button was pressed at ({}, {})", p.x(), p.y());
-    
+
     nanogui::ref<GLShaderObject> shaderObject = new GLShaderObject(shaderSource, mQce);
-    
+
     nanogui::ref<GenericGraphNode> node = new GenericGraphNode(this, this, shaderObject->name());
     node->setPosition(p);
     node->setEnabled(true);
     node->setVisible(true);
     node->setShaderObject(shaderObject);
-    
+
     // Add parameters: Properties and/or inputs
     int index = 0;
     for (GLShaderObjectParameter param : shaderSource->parameters()) {
         GLShaderParameter *shaderParameter = shaderObject->addParameter(param);
-        
+
         if (shaderParameter->parameterType() == ParameterType::INPUT) {
             nanogui::ref<Sink> input = new Sink(node, this, shaderParameter->name());
             input->setShaderParameter(shaderParameter);
@@ -153,9 +153,9 @@ void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderS
             index++;
         }
     }
-    
+
     mQce->performLayout();
-    
+
     spdlog::get("qde")->debug("Graph: Set shader node position to ({}, {})", p.x(), p.y());
     mPopup->setVisible(false);
     shaderSource->incTimesUsed();
@@ -164,14 +164,14 @@ void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GLShaderSource *shaderS
 void Graph::addNodeButtonEvent(const Eigen::Vector2i &p, GraphNode *graphNode)
 {
     spdlog::get("qde")->debug("Graph: Add graph node button was pressed at ({}, {})", p.x(), p.y());
-    
+
     // TODO: Implement this
     graphNode->setPosition(p);
     graphNode->setEnabled(true);
     graphNode->setVisible(true);
-    
+
     mQce->performLayout();
-    
+
     spdlog::get("qde")->debug("Graph: Set graph node position to ({}, {})", p.x(), p.y());
     mPopup->setVisible(false);
 }
