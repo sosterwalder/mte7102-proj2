@@ -24,6 +24,7 @@ public:
     void calculateOutput();
     void nodeSelectedEvent(GraphNode *node);
     void nodeConnectedEvent(Connector *source, Connector *target);
+    void connectorDraggedEvent(Connector *source, const Eigen::Vector2i &p, bool isActive);
     virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
     virtual void performLayout(NVGcontext *ctx);
 
@@ -31,6 +32,7 @@ protected:
     nanogui::ref<Qce> mQce;
     nanogui::ref<DirectPopup> mPopup;
     nanogui::ref<Connector> mActiveConnector;
+    nanogui::ref<GraphNodeLink> mActiveLink;
     nanogui::ref<GraphNode> mOutputNode;
     nanogui::ref<GraphNode> mActiveNode;
     std::vector<GraphNode> mNodes;
