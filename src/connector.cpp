@@ -19,11 +19,16 @@ Connector::Connector(GraphNode *parent, Graph *parentGraph, const std::string &l
     mLink(nullptr),
     mLabel(label),
     mTextColor(nanogui::Color(0, 0)),
-    mDrag(false),
+    mIsDragged(false),
     mRelativePosition(Eigen::Vector2i::Zero()),
     mIndex(0)
 {
     mFixedSize = mSize = Eigen::Vector2i(15, 15);
+}
+
+bool Connector::isConnected()
+{
+    return mLink != nullptr && mLink->hasTarget();
 }
 
 void Connector::draw(NVGcontext* ctx)
@@ -48,7 +53,7 @@ void Connector::draw(NVGcontext* ctx)
     nvgStroke(ctx);
     nvgFill(ctx);
 
-    if (isConnected()) {
+    if (hasLink()) {
         NVGpaint knobReverse = nvgLinearGradient(ctx, mPos.x(), center.y() - radius, mPos.x(), center.y() + radius, mTheme->mBorderMedium, mTheme->mBorderLight);
 
         nvgBeginPath(ctx);
@@ -90,108 +95,71 @@ void Connector::refreshRelativePlacement()
 bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers)
 {
     spdlog::get("qde")->debug(
-        "Connector '{}': Received mouse button event at ({},{})",
-        mLabel, p.x(), p.y()
+        "Connector '{}': Received mouse button event at ({},{}): {}, {}",
+        mLabel, p.x(), p.y(), button, down
     );
+    return Widget::mouseButtonEvent(p, button, down, modifiers);
 
+    /*
+    // Check if the event gets handled in parent widget
     if (Widget::mouseButtonEvent(p, button, down, modifiers)) {
         return true;
     }
 
     if (button == GLFW_MOUSE_BUTTON_1) {
-        bool wasDragged = mDrag;
-        Connector *activeConnector = mParentGraph->activeConnector();
+        // We want to handle only the events for state changes.
+        // A state change is as follows:
+        //
+        //  * Active:   Not dragged (0) --> dragged (1)
+        //  * Inactive: Dragged (1)     --> not dragged (0)
+        //
+        //     1----1----1
+        //    /           \
+        //   /             \
+        //  0               0
+        //
+        // The other possible states do not interest us.
 
-        mDrag = down && (p.y() - mPos.y()) < mTheme->mWindowHeaderHeight;
+        bool wasDraggedBefore = mIsDragged;
+        mIsDragged = down && (p.y() - mPos.y()) < mTheme->mWindowHeaderHeight;
+        bool currentState = false;
 
-        if (!isConnected() && !wasDragged && mDrag) {
-            // Node is not yet connected, create a new
-            // connector (without valid target yet)
-            mLink = new GraphNodeLink(mParentGraph, this);
-            mLink->setTargetPosition(p);
-            spdlog::get("qde")->debug(
-                "Connector '{}': Created a new link ({},{})",
-                mLabel, p.x(), p.y()
-            );
+        if (!wasDraggedBefore && mIsDragged) {
+            currentState = true;
         }
-
-        if (mDrag) {
-            // Connector was dragged (independently from its
-            // state), set it as active.
-            mParentGraph->setActiveConnector(this);
-            spdlog::get("qde")->debug(
-                "Connector '{}': Set as active",
-                mLabel
-            );
+        else if (wasDraggedBefore && !mIsDragged) {
+            currentState = false;
         }
-        else if (activeConnector && activeConnector != this) {
-            // New connection between two nodes:
-            //
-            // (this) Connector is the target
-            // activeConnector is the source
-            spdlog::get("qde")->debug(fmt::format(
-                "Connection from {} -> {}",
-                this->label(), activeConnector->label()
-            ));
-            spdlog::get("qde")->debug("Connector '{}': setting active Connector '{}'", mLabel, (void*)activeConnector);
+        mParentGraph->connectorDraggedEvent(this, p, currentState);
 
-            // Get source link
-            mLink = activeConnector->link();
-            mLink->setSink(dynamic_cast<Sink*>(this));
-            mLink->setId(fmt::format(
-                "{}-{}",
-                activeConnector->id(), this->id()
-            ));
-            mParent->sinkConnectedEvent(this);
-            mParentGraph->nodeConnectedEvent(activeConnector, this);
-            mParentGraph->calculateOutput();
-        }
-        // TODO: Fix this
-        /*
-        else if (mLink != nullptr) {
-            spdlog::get("qde")->debug(
-                "Connector '{}': Got no connection, deleting link",
-                mLabel
-            );
-            // TODO: Check if this really is the proper way to delete an
-            // object. What happens with the instance here?
-            mParentGraph->removeChild(mLink.get());
-            mLink = nullptr;
-        }
-        */
-
-        spdlog::get("qde")->debug(
-            "Connector '{}': Was dragged: {} - {} ({},{})",
-            mLabel, wasDragged, mDrag, p.x(), p.y()
-        );
-
-        return true;
+        return false;
     }
 
     return false;
+    */
 }
 
 
 bool Connector::mouseDragEvent(const Eigen::Vector2i &p, const Eigen::Vector2i &rel, int button, int modifiers)
 {
-    /*
     spdlog::get("qde")->debug(
-        "Connector '{}': Getting dragged: ({},{})",
-        mLabel, p.x(), p.y()
+        "Connector '{}': Getting dragged: ({},{}), ({},{}), {}, {}",
+        mLabel, p.x(), p.y(), rel.x(), rel.y(), button, modifiers
     );
-    */
+    return Widget::mouseDragEvent(p, rel, button, modifiers);
 
+    /*
     if (Widget::mouseDragEvent(p, rel, button, modifiers)) {
         return true;
     }
 
     if (mLink) {
         mLink->setTargetPosition(p);
-
         return true;
     }
 
     return false;
+    */
 }
 
 bool Connector::mouseEnterEvent(const Eigen::Vector2i &p, bool enter)

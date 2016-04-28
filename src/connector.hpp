@@ -17,13 +17,15 @@ public:
     GraphNode *parent() { return mParent; }
     const GraphNode *parent() const { return mParent.get(); }
     const std::string &label() const { return mLabel; }
+    void setLink(GraphNodeLink *link) { mLink = link; }
     GraphNodeLink *link() { return mLink; }
     const GraphNodeLink *link() const { return mLink.get(); }
     void setIndex(const int &index) { mIndex = index; }
     GLShaderParameter *shaderParameter() { return mShaderParameter; }
     const GLShaderParameter *shaderParameter() const { return mShaderParameter.get(); }
     void setShaderParameter(GLShaderParameter *shaderParameter) { mShaderParameter = shaderParameter; }
-    bool isConnected() { return mLink != nullptr; }
+    bool hasLink() { return mLink != nullptr; }
+    bool isConnected();
     virtual void draw(NVGcontext* ctx);
     virtual Eigen::Vector2i preferredSize(NVGcontext *ctx) const;
     virtual bool mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, int modifiers);
@@ -38,7 +40,7 @@ protected:
     nanogui::ref<GLShaderParameter> mShaderParameter;
     std::string mLabel;
     nanogui::Color mTextColor;
-    bool mDrag;
+    bool mIsDragged;
     Eigen::Vector2i mRelativePosition;
     int mIndex;
 
