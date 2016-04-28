@@ -20,14 +20,15 @@ public:
     Connector *sink() { return mSink; }
     const Connector *sink() const { return mSink.get(); }
     void setTargetPosition(const Eigen::Vector2i &pos);
+    bool hasSource() { return mSource != nullptr; }
+    bool hasTarget() { return mSink   != nullptr; }
+    bool isConnected();
     virtual void draw(NVGcontext* ctx);
 
 protected:
     nanogui::ref<Connector> mSource;
     nanogui::ref<Connector> mSink;
     Eigen::Vector2i         mTargetPosition;
-
-    bool hasTarget() { return mSink != nullptr; }
 };
 
 NAMESPACE_END(QCE);

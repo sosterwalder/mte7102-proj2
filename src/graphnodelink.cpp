@@ -41,6 +41,11 @@ void GraphNodeLink::setTargetPosition(const Eigen::Vector2i &pos)
     mTargetPosition = pos;
 }
 
+bool GraphNodeLink::isConnected()
+{
+    return (hasSource() && hasTarget());
+}
+
 void GraphNodeLink::draw(NVGcontext* ctx)
 {
     auto sourceSize = mSource->size().cast<float>();
