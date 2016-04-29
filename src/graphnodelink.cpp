@@ -49,7 +49,7 @@ bool GraphNodeLink::isConnected()
 void GraphNodeLink::draw(NVGcontext* ctx)
 {
     auto sourceSize = mSource->size().cast<float>();
-    
+
     Eigen::Vector2i inputPosition(
         mSource->absolutePosition().x() - mParent->absolutePosition().x() + (sourceSize.x() * 0.5f),
         mSource->absolutePosition().y() - mParent->absolutePosition().y() + (sourceSize.y() * 0.5f)
