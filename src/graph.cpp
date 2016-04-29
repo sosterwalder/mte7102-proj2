@@ -132,22 +132,40 @@ void Graph::connectorDraggedEvent(Connector *source, const Eigen::Vector2i &p, b
         spdlog::get("qde")->debug("Graph: Connector '{}' set as active", source->label());
     }
     else {
-        if (mActiveConnector.get() != nullptr && mActiveConnector.get() != source) {
+        if (
+                // Make sure it is not the same connector
+                mActiveConnector.get() != source &&
+                // and also not on the same node
+                mActiveConnector->parent() != source->parent()
+        ) {
             // We seem to have a connection between the currently active connector
             // and the source who triggered the event.
             //
             // mActiveConnector: Source
             // Source:           Target
-            
-            auto link = mActiveConnector->link();
-            source->setLink(link);
+
+            auto link = new GraphNodeLink(this, source);
+            link->setTargetPosition(p);
+            link->setSource(mActiveConnector);
             link->setSink(source);
+
+            mActiveConnector->setLink(link);
+            source->setLink(link);
+
             mActiveConnector->parent()->sinkConnectedEvent(mActiveConnector);
             nodeConnectedEvent(mActiveConnector, source);
             calculateOutput();
             spdlog::get("qde")->debug("Graph: Connector '{}' was released over '{}', connection established", source->label(), mActiveConnector->label());
             mActiveConnector = nullptr;
+            mActiveLink = nullptr;
             spdlog::get("qde")->debug("Graph: Connector '{}' set as inactive", source->label());
+        }
+        else {
+            auto source = mActiveLink->source();
+            source->setLink(nullptr);
+            this->removeChild(mActiveLink.get());
+            spdlog::get("qde")->debug("Graph: Link of connector '{}' deleted", source->label());
+
         }
     }
 }
@@ -158,15 +176,9 @@ bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, in
         "Graph '{}': Received mouse button event at ({},{}): {}, {}",
         mTitle, p.x(), p.y(), button, down
     );
-    return Window::mouseButtonEvent(p, button, down, modifiers);
+    Window::mouseButtonEvent(p, button, down, modifiers);
 
-
-    /*
-    if (Window::mouseButtonEvent(p, button, down, modifiers)) {
-        spdlog::get("qde")->debug("Graph '{}': Window event handled", mTitle);
-        return true;
-    }
-    else if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
+    if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
         int offsetX = p.x() - absolutePosition().x();
         int offsetY = p.y() - absolutePosition().y();
         Eigen::Vector2i position(offsetX, offsetY);
@@ -176,8 +188,8 @@ bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, in
 
         return true;
     }
-    
-    if (button == GLFW_MOUSE_BUTTON_1 && mEnabled) {
+    else if (button == GLFW_MOUSE_BUTTON_1 && mEnabled) {
+        /*
         if (mActiveLink.get() != nullptr && !mActiveLink->isConnected()) {
             // TODO: Check if this really is the proper way to delete an
             // object. What happens with the instance here?
@@ -188,8 +200,14 @@ bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, in
             // TODO: mActiveConnector->setLink(nullptr);
             // TODO: mActiveLink = nullptr
             // TODO: mActiveConnector = nullptr;
-            return false;
         }
+        */
+
+        if (mPopup->visible()) {
+            mPopup->setVisible(false);
+        }
+
+        return true;
     }
     else if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
         int offsetX = p.x() - absolutePosition().x();
@@ -200,16 +218,8 @@ bool Graph::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down, in
 
         return true;
     }
-    else if (Window::mouseButtonEvent(p, button, down, modifiers)) {
-        return true;
-    }
-    
-    spdlog::get("qde")->debug(
-        "Graph '{}': Mouse button event false",
-        mTitle
-    );
+
     return false;
-    */
 }
 
 void Graph::performLayout(NVGcontext *ctx)
