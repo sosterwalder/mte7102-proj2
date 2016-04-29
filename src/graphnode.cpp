@@ -113,8 +113,7 @@ bool GraphNode::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
 
         return true;
     }
-
-    if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
+    else if (button == GLFW_MOUSE_BUTTON_2 && mEnabled && down) {
         int offsetX = p.x() - mPos.x();
         int offsetY = p.y() - mPos.y();
         Eigen::Vector2i position(offsetX, offsetY);
