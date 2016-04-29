@@ -98,13 +98,7 @@ bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
         "Connector '{}': Received mouse button event at ({},{}): {}, {}",
         mLabel, p.x(), p.y(), button, down
     );
-    return Widget::mouseButtonEvent(p, button, down, modifiers);
-
-    /*
-    // Check if the event gets handled in parent widget
-    if (Widget::mouseButtonEvent(p, button, down, modifiers)) {
-        return true;
-    }
+    Widget::mouseButtonEvent(p, button, down, modifiers);
 
     if (button == GLFW_MOUSE_BUTTON_1) {
         // We want to handle only the events for state changes.
@@ -132,11 +126,10 @@ bool Connector::mouseButtonEvent(const Eigen::Vector2i &p, int button, bool down
         }
         mParentGraph->connectorDraggedEvent(this, p, currentState);
 
-        return false;
+        return true;
     }
 
     return false;
-    */
 }
 
 
@@ -146,20 +139,15 @@ bool Connector::mouseDragEvent(const Eigen::Vector2i &p, const Eigen::Vector2i &
         "Connector '{}': Getting dragged: ({},{}), ({},{}), {}, {}",
         mLabel, p.x(), p.y(), rel.x(), rel.y(), button, modifiers
     );
-    return Widget::mouseDragEvent(p, rel, button, modifiers);
-
-    /*
-    if (Widget::mouseDragEvent(p, rel, button, modifiers)) {
-        return true;
-    }
+    Widget::mouseDragEvent(p, rel, button, modifiers);
 
     if (mLink) {
         mLink->setTargetPosition(p);
+
         return true;
     }
 
     return false;
-    */
 }
 
 bool Connector::mouseEnterEvent(const Eigen::Vector2i &p, bool enter)
