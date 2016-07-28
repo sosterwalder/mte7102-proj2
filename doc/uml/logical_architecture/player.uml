@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_DDPzsFQ1Eeaxw6J73r0lMA" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_UtSzkFQ1Eeaxw6J73r0lMA" name="UI">
+    <packagedElement xmi:type="uml:Model" xmi:id="_Vr1fcFQ1Eeaxw6J73r0lMA" name="Player"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_maZugFQ1Eeaxw6J73r0lMA" name="Setup"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_uLK8IFQ1Eeaxw6J73r0lMA" name="Technical services">
+    <packagedElement xmi:type="uml:Model" xmi:id="_vv2a8FQ1Eeaxw6J73r0lMA" name="Engine"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_O8HCoFQ2Eeaxw6J73r0lMA" name="GLFW"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_nEXqYFSqEeayrqQ18izFsA" name="Graphics"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_xrZPQFSxEeayrqQ18izFsA" name="Logging"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_1sbHEFQ1Eeaxw6J73r0lMA" name="Application">
+    <packagedElement xmi:type="uml:Model" xmi:id="_7R5h0FQ1Eeaxw6J73r0lMA" name="Demodata"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_hm95cFSdEeayrqQ18izFsA" name="Demoscript"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_q-K5YFSdEeayrqQ18izFsA" name="Player"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_sPYpoFSdEeayrqQ18izFsA" name="Player"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_SnjjwFSxEeayrqQ18izFsA" name="Domain">
+    <packagedElement xmi:type="uml:Model" xmi:id="_SnjjyFSxEeayrqQ18izFsA" name="DemoNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_Snjjz1SxEeayrqQ18izFsA" name="Demo"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_-FtlcFSyEeayrqQ18izFsA" name="Node"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_z-nnYFS3EeayrqQ18izFsA" name="Foundation">
+    <packagedElement xmi:type="uml:Model" xmi:id="_z-nnZFS3EeayrqQ18izFsA" name="Timer"/>
+  </packagedElement>
+</uml:Model>

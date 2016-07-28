@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_zlBi4FPLEeaxw6J73r0lMA" name="RootElement">
+  <packagedElement xmi:type="uml:Class" xmi:id="_FIPiAFPMEeaxw6J73r0lMA" name="Player"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_YmdOMFPMEeaxw6J73r0lMA" name="DemoScript"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_kU9csFPMEeaxw6J73r0lMA" name="DemoNode"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_zFeqsFPMEeaxw6J73r0lMA" name="DemoData"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_5Qk7AFPMEeaxw6J73r0lMA" name="Timer"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tEWZQFPNEeaxw6J73r0lMA" name="defines-sequence" memberEnd="_tEXnYlPNEeaxw6J73r0lMA _tEaDoFPNEeaxw6J73r0lMA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tEXnYFPNEeaxw6J73r0lMA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tEXnYVPNEeaxw6J73r0lMA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tEaDoFPNEeaxw6J73r0lMA" name="demoscript" type="_YmdOMFPMEeaxw6J73r0lMA" association="_tEWZQFPNEeaxw6J73r0lMA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_tEXnYlPNEeaxw6J73r0lMA" name="player" type="_FIPiAFPMEeaxw6J73r0lMA" association="_tEWZQFPNEeaxw6J73r0lMA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NuMZQFPOEeaxw6J73r0lMA" name="Node">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_RDGfk1POEeaxw6J73r0lMA" name="demodata" type="_zFeqsFPMEeaxw6J73r0lMA" association="_RDGfkFPOEeaxw6J73r0lMA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_RDGfkFPOEeaxw6J73r0lMA" name="belongs-to" memberEnd="_RDGfk1POEeaxw6J73r0lMA _RDIUwFPOEeaxw6J73r0lMA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_RDGfkVPOEeaxw6J73r0lMA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_RDGfklPOEeaxw6J73r0lMA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_RDIUwFPOEeaxw6J73r0lMA" name="node" type="_NuMZQFPOEeaxw6J73r0lMA" association="_RDGfkFPOEeaxw6J73r0lMA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZoKQ4FPOEeaxw6J73r0lMA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZoXFMFPOEeaxw6J73r0lMA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_nroLoFPOEeaxw6J73r0lMA" name="loads/plays" memberEnd="_nrpZwlPOEeaxw6J73r0lMA _nrrO8FPOEeaxw6J73r0lMA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_nrpZwFPOEeaxw6J73r0lMA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_nrpZwVPOEeaxw6J73r0lMA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_nrrO8FPOEeaxw6J73r0lMA" name="demonode" type="_kU9csFPMEeaxw6J73r0lMA" association="_nroLoFPOEeaxw6J73r0lMA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vMvMoFPOEeaxw6J73r0lMA" value="2"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vMwawFPOEeaxw6J73r0lMA" value="2"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_nrpZwlPOEeaxw6J73r0lMA" name="player" type="_FIPiAFPMEeaxw6J73r0lMA" association="_nroLoFPOEeaxw6J73r0lMA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_4nIqgFPOEeaxw6J73r0lMA" name="provides-running-time" memberEnd="_4nJRklPOEeaxw6J73r0lMA _4nLGwFPOEeaxw6J73r0lMA">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_4nJRkFPOEeaxw6J73r0lMA" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_4nJRkVPOEeaxw6J73r0lMA" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_4nLGwFPOEeaxw6J73r0lMA" name="timer" type="_5Qk7AFPMEeaxw6J73r0lMA" association="_4nIqgFPOEeaxw6J73r0lMA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_4nJRklPOEeaxw6J73r0lMA" name="player" type="_FIPiAFPMEeaxw6J73r0lMA" association="_4nIqgFPOEeaxw6J73r0lMA"/>
+  </packagedElement>
+</uml:Model>

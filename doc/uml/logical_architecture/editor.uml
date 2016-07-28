@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_stZhIFQ2Eeaxw6J73r0lMA" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_2RoQcFQ2Eeaxw6J73r0lMA" name="UI">
+    <packagedElement xmi:type="uml:Model" xmi:id="_6Vd5UFQ2Eeaxw6J73r0lMA" name="MainWindow"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_7I6vgFQ2Eeaxw6J73r0lMA" name="QMainWindow"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_df8qEFQ3Eeaxw6J73r0lMA" name="AddNodeWindow"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_gow1IFQ3Eeaxw6J73r0lMA" name="SequenceView"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_kkXIAFQ3Eeaxw6J73r0lMA" name="SceneGraphView"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_moF6UFQ3Eeaxw6J73r0lMA" name="PropertiesView"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_q2FkwFQ3Eeaxw6J73r0lMA" name="RendererView"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_779gkFQ3Eeaxw6J73r0lMA" name="TrackView"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_riru8FSNEeayrqQ18izFsA" name="QGraphicsView"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_3Uw14FSNEeayrqQ18izFsA" name="QGraphicsItem"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_3HceIFQ2Eeaxw6J73r0lMA" name="Application">
+    <packagedElement xmi:type="uml:Model" xmi:id="_4DM7wFQ2Eeaxw6J73r0lMA" name="Editor"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_vrNOsFQ5Eeaxw6J73r0lMA" name="SceneGraph"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_FO9EAFQ6Eeaxw6J73r0lMA" name="Demoscript"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_VnLPoFQ6Eeaxw6J73r0lMA" name="Sequence"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_ekNuAFQ4Eeaxw6J73r0lMA" name="Foundation">
+    <packagedElement xmi:type="uml:Model" xmi:id="_d2vukFQ5Eeaxw6J73r0lMA" name="Array"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_LPGBgFQ6Eeaxw6J73r0lMA" name="DataStream"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_jvhDUFQ6Eeaxw6J73r0lMA" name="GLM"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_hhpoIFQ7Eeaxw6J73r0lMA" name="Timer"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="__GefUFQ4Eeaxw6J73r0lMA" name="Domain">
+    <packagedElement xmi:type="uml:Model" xmi:id="_C9l60FQ5Eeaxw6J73r0lMA" name="LightNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_AkFs0FQ5Eeaxw6J73r0lMA" name="MaterialNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_JBUX0FQ5Eeaxw6J73r0lMA" name="ModelNode">
+      <packagedElement xmi:type="uml:Model" xmi:id="_MQEy0FQ5Eeaxw6J73r0lMA" name="ModelNode"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Model" xmi:id="_M1ZGYFQ5Eeaxw6J73r0lMA" name="OperatorNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_Q5U14FQ5Eeaxw6J73r0lMA" name="BitmapNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_Tijh8FQ5Eeaxw6J73r0lMA" name="EffectNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_WIvhEFQ5Eeaxw6J73r0lMA" name="DemoNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_YupzYFQ5Eeaxw6J73r0lMA" name="RendererNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_anCRUFQ5Eeaxw6J73r0lMA" name="CameraNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_ykizUFQ5Eeaxw6J73r0lMA" name="Scene"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_4ixsUFQ5Eeaxw6J73r0lMA" name="Parameter"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_7JhFEFQ5Eeaxw6J73r0lMA" name="Node"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_Zg3eAFQ6Eeaxw6J73r0lMA" name="SequenceItem"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_wCOj8FSvEeayrqQ18izFsA" name="Demo"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_jrvzEFQ5Eeaxw6J73r0lMA" name="Technical services">
+    <packagedElement xmi:type="uml:Model" xmi:id="_n0z6MFQ5Eeaxw6J73r0lMA" name="Engine"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_xK8RMFQ7Eeaxw6J73r0lMA" name="Logging"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_1pKwkFSqEeayrqQ18izFsA" name="Graphics"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_oqLtcFSxEeayrqQ18izFsA" name="GLFW"/>
+  </packagedElement>
+</uml:Model>
