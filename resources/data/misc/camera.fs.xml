@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>camera</name>
+    <return-type>vec3</return-type>
+    <parameters>
+        <parameter>
+            <name>angle</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>height</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>pane</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>distance</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+    </parameters>
+    <source>
+        vec3 camera(float angle, float height, float pane, float distance)
+        {
+            return vec3(pane * cos(angle), height, distance * sin(angle));
+        }
+    </source>
+</function>
+

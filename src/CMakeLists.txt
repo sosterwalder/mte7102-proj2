@@ -108,6 +108,7 @@ link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build/ext/nanogui)
 set(EXTRA_SOURCE
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/im.icns"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/misc/camera.fs.xml"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union.fs.xml"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union_chamfer.fs.xml"
   "${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/mod1.fs.xml"
@@ -189,6 +190,7 @@ if (APPLE)
   set_target_properties(mte7102 PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/../resources/MacOSXBundleInfo.plist.in)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/im.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/)
+  set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/misc/camera.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/misc)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/operations/)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union_chamfer.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/operations/)
   set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/mod1.fs.xml PROPERTIES MACOSX_PACKAGE_LOCATION Resources/data/operations/)
@@ -208,9 +210,11 @@ if (UNIX)
   # Deploy files
   message(STATUS "Deploying resource files to: ${CMAKE_CURRENT_SOURCE_DIR}/../bin/" )
   install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data)
+  install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/misc)
   install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations)
   install(DIRECTORY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/objects)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/sphere_tracer.fs DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/)
+  file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/misc/camera.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/misc)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations/)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/union_chamfer.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations/)
   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../resources/data/operations/mod1.fs.xml DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/../bin/data/operations/)

@@ -31,6 +31,7 @@ uniform float intensity;
 // Global uniform unsigned int variable defining whether to show the distance
 // field or not.
 uniform int globalShowDistance;
+uniform mat4 modelViewProj;
 
 out vec4 fragColor;
 
@@ -57,7 +58,8 @@ mat3 calcLookAtMatrix(vec3 origin, vec3 target, float roll) {
 //
 // Returns a three-dimensional vector.
 vec3 getRay(mat3 cameraMatrix, vec2 screenPosition, float lensLength) {
-    return normalize(cameraMatrix * vec3(screenPosition, lensLength));
+    vec4 ray = normalize(modelViewProj * vec4(screenPosition, lensLength, 1.0f));
+    return vec3(ray.x, ray.y, ray.z);
 }
 
 // Calculates the direction of a ray, based on the given origin, target,
@@ -502,16 +504,19 @@ vec3 render(in vec3 rayOrigin, in vec3 rayDirection)
 // Main method of the shader.
 void main()
 {
-    float cameraAngle    = 0.1 * 1.0 + 12.0;
-    float cameraHeight   = 2.0;
-    float cameraPane     = 3.5;
-    float cameraDistance = 3.5;
+    // float cameraAngle    = 0.1 * 1.0 + 12.0;
+    // float cameraHeight   = 2.0;
+    // float cameraPane     = 3.5;
+    // float cameraDistance = 3.5;
 
-    vec3 rayOrigin       = vec3(-1.5 + cameraPane * cos(cameraAngle), 1.0 + cameraHeight, 0.5 + cameraDistance * sin(cameraAngle));
-    vec3 rayTarget       = vec3(0.0, 1.0, 0.0);
+    // vec3 rayOrigin       = vec3(-1.5 + cameraPane * cos(cameraAngle), 1.0 + cameraHeight, 0.5 + cameraDistance * sin(cameraAngle));
+    // vec3 rayTarget       = vec3(0.0, 1.0, 0.0);
+    vec3 rayOrigin          = {{cameraOrigin}};
+    vec3 rayTarget          = {{cameraTarget}};
 
+    //vec3 rayDirection    = getRay(rayOrigin, rayTarget, screenPosition, 2.0);
     vec2 screenPosition  = squareFrame(vec2(800, 600));
-    vec3 rayDirection    = getRay(rayOrigin, rayTarget, screenPosition, 2.0);
+    vec3 rayDirection    = getRay(rayOrigin, rayTarget, screenPosition, {{cameraRoll}});
 
     vec3 color           = render(rayOrigin, rayDirection);
     color                = calcPostFx(color, screenPosition);

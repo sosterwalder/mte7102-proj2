@@ -23,13 +23,11 @@ void GenericGraphNode::performLayout(NVGcontext *ctx)
 std::string GenericGraphNode::calculateOutput()
 {
     spdlog::get("qde")->debug("Node '{}': Calculating output", mId);
-    
+
     fmt::MemoryWriter out;
-    
-    // TODO: Get propertie(s) and/or sink(s)
     out << mShaderObject->call();
     out << ";";
-    
+
     return out.str();
 }
 

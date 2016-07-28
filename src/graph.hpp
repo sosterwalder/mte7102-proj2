@@ -10,6 +10,7 @@ class GLShaderObject;
 class Connector;
 class GraphNodeLink;
 class GraphNode;
+class OutputGraphNode;
 class Qce;
 
 
@@ -33,7 +34,7 @@ protected:
     nanogui::ref<DirectPopup> mPopup;
     nanogui::ref<Connector> mActiveConnector;
     nanogui::ref<GraphNodeLink> mActiveLink;
-    nanogui::ref<GraphNode> mOutputNode;
+    nanogui::ref<OutputGraphNode> mOutputNode;
     nanogui::ref<GraphNode> mActiveNode;
     std::vector<GraphNode> mNodes;
     std::vector<GraphNodeLink> mNodeLinks;

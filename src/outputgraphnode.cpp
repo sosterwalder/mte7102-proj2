@@ -11,9 +11,17 @@ OutputGraphNode::OutputGraphNode(Widget *parent, Graph *parentGraph, const std::
     GraphNode(parent, parentGraph, title)
 {
     setId(fmt::format("outputGraphNode-{}", 0));
-    Sink *sink = new Sink(this, mParentGraph, "Out");
-    sink->setId("outputGraphNodeInputSink");
-    addSink(sink);
+
+    mOutputSink = new Sink(this, mParentGraph, "Out");
+    mOutputSink->setId(fmt::format("{}NodeInputSink", mId));
+    mOutputSink->setIndex(mNumInputs);
+    addSink(mOutputSink);
+
+    mCameraSink = new Sink(this, mParentGraph, "Camera");
+    mCameraSink->setId(fmt::format("{}CameraSink", mId));
+    mNumInputs++;
+    mCameraSink->setIndex(mNumInputs);
+    addSink(mCameraSink);
 }
 
 void OutputGraphNode::performLayout(NVGcontext *ctx)

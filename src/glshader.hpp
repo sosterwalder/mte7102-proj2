@@ -18,6 +18,8 @@ public:
     void addShaderSource(GLShaderSource *shaderSource);
     void setFragmentShaderCalls(const std::string &calls) { mFragmentShaderCalls = calls; }
     const std::string &fragmentShaderCalls() const { return mFragmentShaderCalls; }
+    void setFragmentShaderCamera(const std::string &camera) { mFragmentShaderCamera = camera; }
+    const std::string &fragmentShaderCamera() const { return mFragmentShaderCamera; }
     void setVertexShaderSource(const std::string &vertexSource) { mVertexShaderSource = vertexSource; }
     void setGeometryShaderSource(const std::string &geometrySource) { mGeometryShaderSource = geometrySource; }
     void addShaderObject(GLShaderObject *shaderObject);
@@ -29,6 +31,10 @@ protected:
     std::string mFragmentShaderUniforms;
     std::string mFragmentShaderObjects;
     std::string mFragmentShaderCalls;
+    std::string mFragmentShaderCamera;
+    std::string mFragmentShaderCameraOrigin;
+    std::string mFragmentShaderCameraTarget;
+    std::string mFragmentShaderCameraRoll;
     std::string mFragmentShaderSource;
     std::string mVertexShaderSource;
     std::string mGeometryShaderSource;

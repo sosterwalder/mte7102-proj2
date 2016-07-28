@@ -2,6 +2,7 @@
 #include <nanogui/screen.h>
 #include <nanogui/window.h>
 #include "common.hpp"
+#include "camera.hpp"
 #include "graph.hpp"
 #include "graphnode.hpp"
 #include "glshadersource.hpp"
@@ -18,7 +19,8 @@ Qce::Qce() :
     mIntensity(1.0f),
     mStartTime(glfwGetTime()),
     mUpdateTime(glfwGetTime()),
-    mNumFrames(0)
+    mNumFrames(0),
+    mCamZ(0.0f)
 {
     mNodeGraph = new Graph(this, this, "Nodes");
     mNodeGraph->setId("nodeGraph");
@@ -28,8 +30,7 @@ Qce::Qce() :
     mNodeGraph->setHeight(200);
     spdlog::get("qde")->debug("Created nodes window");
 
-    initializeShaderOperations();
-    initializeShaderObjects();
+    initializeShaderFiles();
     initializeShader();
 
     performLayout(mNVGContext);
@@ -53,17 +54,37 @@ void Qce::drawContents()
     // Draw the window contents using OpenGL
     bindShader();
 
-    Eigen::Matrix4f mvp;
-    mvp.setIdentity();
+    Eigen::Matrix4f projectionMatrix = Camera::perspective<Eigen::Matrix4f::Scalar>(50, mSize.x()/mSize.y(), 0.01f, 10.0f);
+    Eigen::Matrix4f viewMatrix       = Eigen::Matrix4f::Identity();
+    Eigen::Matrix4f modelMatrix      = Eigen::Matrix4f::Identity();
+
+    Eigen::Affine3f viewTransform(Eigen::Translation3f(0, 0, mCamZ));
+    viewMatrix = viewTransform.matrix();
+
+    // Eigen::Affine3f modelTransform(Eigen::Translation3f(-.5f, -.5f, -.5f));
+    // modelMatrix = modelTransform.matrix();
+
+    Eigen::Matrix4f mvp(projectionMatrix);
+    Eigen::Matrix4f mv(viewMatrix);
+
+    mv  *= modelMatrix;
+    mvp *= mv;
+
+
+    // Eigen::Matrix4f mvp;
+    // mvp.setIdentity();
+    // mvp.row(0) *= (float) mSize.y() / (float) mSize.x();
+    mShader.setUniform("modelViewProj", mvp);
+
+    /*
     mvp.topLeftCorner<3,3>() = Eigen::Matrix3f(
         Eigen::AngleAxisf(
             (float) glfwGetTime(),
             Eigen::Vector3f::UnitZ()
         )
     ) * 0.25f;
+    */
 
-    mvp.row(0) *= (float) mSize.y() / (float) mSize.x();
-    // mShader.setUniform("modelViewProj", mvp);
 
     /* Draw 2 triangles starting at index 0 */
     mShader.drawIndexed(GL_TRIANGLES, 0, 2);
@@ -74,8 +95,8 @@ void Qce::drawContents()
 
         std::stringstream strOut;
         setCaption(fmt::format(
-            "QCE ({} frames, {} ms/frame)",
-            mNumFrames, msPerFrame
+            "QCE ({} frames, {} ms/frame, {} camera Z)",
+            mNumFrames, msPerFrame, mCamZ
         ));
 
         mNumFrames   = 0;
@@ -87,12 +108,25 @@ bool Qce::keyboardEvent(int key, int scancode, int action, int modifiers) {
     if (Screen::keyboardEvent(key, scancode, action, modifiers)) {
         return true;
     }
-    
+
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         setVisible(false);
+
         return true;
     }
-    
+
+    if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
+        mCamZ += 0.5f;
+
+        return true;
+    }
+
+    if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
+        mCamZ -= 0.5f;
+
+        return true;
+    }
+
     return false;
 }
 
@@ -132,6 +166,12 @@ void Qce::addShaderToOutput(GLShaderObject *shaderObject)
     mShader.recompile();
 }
 
+void Qce::setShaderCamera(const std::string &camera)
+{
+    mShader.setFragmentShaderCamera(camera);
+    mShader.recompile();
+}
+
 void Qce::setShaderOutput(const std::string &output)
 {
     mShader.setFragmentShaderCalls(output);
@@ -155,19 +195,12 @@ void Qce::findAndAddShaderFiles(const std::string &path)
 }
 
 // Loading files
-void Qce::initializeShaderOperations()
+void Qce::initializeShaderFiles()
 {
-    std::string path = "data/operations";
-    spdlog::get("qde")->debug("QCE: Searching for shader operations at {}", path);
-    findAndAddShaderFiles(path);
-}
-
-// Loading files
-void Qce::initializeShaderObjects()
-{
-    std::string path = "data/objects";
-    spdlog::get("qde")->debug("QCE: Searching for shader objects at {}", path);
-    findAndAddShaderFiles(path);
+    spdlog::get("qde")->debug("QCE: Searching for shader files");
+    findAndAddShaderFiles("data/misc/");
+    findAndAddShaderFiles("data/operations/");
+    findAndAddShaderFiles("data/objects/");
 }
 
 void Qce::initializeShader()
@@ -179,7 +212,6 @@ void Qce::initializeShader()
     mShader.setVertexShaderSource(
         /* Vertex shader */
         "#version 330\n"
-        "uniform mat4 modelViewProj;\n"
         "in vec3 position;\n"
         "void main() {\n"
         "    gl_Position = vec4(position, 1.0);\n"

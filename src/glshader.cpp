@@ -13,10 +13,29 @@ OpenGLShader::OpenGLShader() :
     mFragmentShaderTemplate(""),
     mFragmentShaderUniforms(""),
     mFragmentShaderObjects(""),
+    mFragmentShaderCalls(""),
     mFragmentShaderSource(""),
     mVertexShaderSource(""),
     mGeometryShaderSource("")
 {
+    float cameraAngle    = 0.1 * 1.0 + 12.0;
+    float cameraHeight   = 2.0;
+    float cameraPane     = 3.5;
+    float cameraDistance = 3.5;
+    fmt::MemoryWriter out;
+    out << "vec3(";
+    out << "-1.5 + " << cameraPane << " * cos(" << cameraAngle << "),";
+    out << "1.0 + " << cameraHeight << ",";
+    out << "0.5 + " << cameraDistance << " * sin(" << cameraAngle << ")";
+    out << ");";
+    mFragmentShaderCamera = out.str();
+
+    mFragmentShaderCameraOrigin = "vec3(0.0f, 1.0f, -1.0f)";
+    mFragmentShaderCameraTarget = "vec3(0.0f, 0.0f, 0.0f)";
+    mFragmentShaderCameraRoll   = "1.0f";
+
+
+    spdlog::get("qde")->debug("Shader: Using default camera {}", out.str());
 }
 
 // When loading files
@@ -26,9 +45,9 @@ void OpenGLShader::addShaderSource(GLShaderSource *shaderSource)
         "Shader: Trying to add shader source: {}",
         shaderSource->name()
     );
-    
+
     auto source = mShaderSources.find(shaderSource->name());
-    
+
     if (source == mShaderSources.end()) {
         mShaderSources[shaderSource->name()] = shaderSource;
         spdlog::get("qde")->debug(
@@ -108,6 +127,10 @@ void OpenGLShader::parseFragmentShaderTemplate()
     shaderTemplate.setValue("uniform_variables",  mFragmentShaderUniforms);
     shaderTemplate.setValue("object_definitions", mFragmentShaderObjects);
     shaderTemplate.setValue("calls",              mFragmentShaderCalls);
+    // shaderTemplate.setValue("camera",             mFragmentShaderCamera);
+    shaderTemplate.setValue("cameraOrigin", mFragmentShaderCameraOrigin);
+    shaderTemplate.setValue("cameraTarget", mFragmentShaderCameraTarget);
+    shaderTemplate.setValue("cameraRoll",   mFragmentShaderCameraRoll);
     mFragmentShaderSource = shaderTemplate.render();
 }
 

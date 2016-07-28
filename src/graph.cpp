@@ -68,6 +68,14 @@ void Graph::calculateOutput()
         spdlog::get("qde")->debug("Graph {}: Calculated and set output {}", id(), output);
         mQce->setShaderOutput(output);
     }
+
+    auto cameraSink = mOutputNode->cameraSink();
+    if (cameraSink->isConnected()) {
+        auto link = cameraSink->link();
+        auto cameraNode = link->source()->parent();
+        mQce->setShaderCamera(cameraNode->calculateOutput());
+        spdlog::get("qde")->debug("Graph {}: Calculated and set camera {}", id(), cameraNode->calculateOutput());
+    }
 }
 
 void Graph::nodeSelectedEvent(GraphNode *node)

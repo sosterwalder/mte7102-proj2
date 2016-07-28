@@ -23,13 +23,13 @@ MergeGraphNode::MergeGraphNode(Widget *parent, Graph *parentGraph, const std::st
 bool MergeGraphNode::sinkConnectedEvent(Connector *sink)
 {
     GraphNode::sinkConnectedEvent(sink);
-    
+
     mNumInputs++;
     Sink *input = new Sink(this, mParentGraph, fmt::format("Input {}", mNumInputs));
     input->setId(fmt::format("{}GraphNodeInput{}", mTitle, mNumInputs));
     input->setIndex(mNumInputs);
     addSink(input);
-    
+
     return true;
 }
 
@@ -37,21 +37,21 @@ std::string MergeGraphNode::calculateOutput()
 {
     spdlog::get("qde")->debug("Node '{}': Calculating output", mId);
     return GraphNode::calculateOutput();
-    
+
     /*
-    
+
     fmt::MemoryWriter out;
-    
+
     for (auto iter = mInputs.begin(); iter != mInputs.end(); ++iter) {
         auto sink = *iter;
-        
+
         if (sink->isConnected()) {
             auto link = sink->link();
             auto source =
-            
+
         }
     }
-    
+
     return out.str();
      */
 }

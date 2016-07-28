@@ -24,6 +24,7 @@ public:
     void bindShader();
     const std::vector<GraphNode *> &nodeTypes() const { return mNodeTypes; }
     void addShaderToOutput(GLShaderObject *shaderObject);
+    void setShaderCamera(const std::string &camera);
     void setShaderOutput(const std::string &output);
 
 private:
@@ -32,14 +33,14 @@ private:
     std::vector<nanogui::ref<GLShaderSource>> mShaderSources;
     // TODO: Check if list gets properly deleted. Use ref maybe?
     std::vector<GraphNode *> mNodeTypes;
-    float mIntensity;
+    float  mIntensity;
     double mStartTime;
     double mUpdateTime;
-    int mNumFrames;
+    int    mNumFrames;
+    float  mCamZ;
 
     void findAndAddShaderFiles(const std::string &path);
-    void initializeShaderOperations();
-    void initializeShaderObjects();
+    void initializeShaderFiles();
     void initializeShader();
 };
 
