@@ -1,0 +1,47 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=en spell
+
+\documentclass[conference]{IEEEtran}
+\begin{document}
+
+% Do not put math or special symbols in the title.
+\title{QDE --- A visual animation system}
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Sven Osterwalder}
+\IEEEauthorblockA{Bern University of Applied Sciences\\ BFH-TI, CH2502-Biel, Switzerland.\\
+Email: sven.osterwalder@students.bfh.ch}}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract
+\begin{abstract}
+\noindent{}%
+A software architecture for a visual animation system is presented. The system
+allows the creation of visually appealing scenes using a graphical user
+interface. A node-based graph structure and a sequencer allow compositing and
+animating elements such as models or bitmaps. For rendering a highly optimized
+algorithm based on ray tracing is used, which allows the rendering of ray
+traced scenes in real-time on the GPU.\@ The concept of the node-based graph
+structure is demonstrated using a prototype application which allows
+compositing a simple scene using primitives and render it in real-time.
+\end{abstract}
+
+% no keywords
+
+\IEEEpeerreviewmaketitle{}
+
+\end{document}
