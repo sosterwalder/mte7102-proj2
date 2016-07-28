@@ -1,0 +1,93 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\begin{table}[H]
+    \centering
+    \caption{Use Case UC4: Exportieren einer Animation.}\label{table:uc4-export-demo}
+    \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
+        \toprule
+            \textbf{Bereich} &
+            Editor \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Level} &
+            Ziel des Benutzers \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Primärer Aktor} &
+            Anwender \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Stakeholder und Interessen} &
+            Anwender: Möchte eine erstellte Echtzeit-Animation für die
+            Verwendung im Player exportieren. \newline
+            Betrachter: Möchte eine Echtzeit-Animation ansehen. \newline
+            Entwickler: Testen einer Echtzeit-Animation im Player. \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Erfolgsszenario} &
+            \begin{enumerate}
+                \item{Der Anwender startet die Editor-Applikation.}
+                    \item{Der Anwender öffnet eine zuvor gespeicherte
+                            Echtzeit-Animation oder erstellt eine neue
+                            Echtzeit-Animation.}
+                \item{Der Anwender speichert die getätigte Arbeit.}
+                \item{Der Anwender exportiert die erstellte Animation.}
+                \item{Der Editor exportiert die erstellte Animation mit allen
+                        benötigen Abhängigkeiten in ein definiertes (Unter-)
+                        Verzeichnis.}
+                \item{Der Anwender schliesst den Editor.}
+            \end{enumerate} \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Erweiterungen} &
+            \begin{enumerate}[label= (\alph*)]
+                \item{Schliessen des Editors bei gemachten Änderungen ohne zu
+                        speichern
+                    \begin{enumerate}[label= (\roman*)]
+                        \item{Der Anwender schliesst den Editor bei gemachten
+                                Änderungen ohne diese zu speichern.}
+                        \item{Der Editor weist den Anwender auf die
+                                nicht gespeicherten Änderungen hin und bietet
+                                die Möglichkeit diese zu speichern, diese nicht
+                                zu speichern oder das Schliessen abzubrechen.}
+                    \end{enumerate}
+                }
+                \item{Eine zuvor gespeicherte Echtzeit-Animation kann nicht
+                        geladen werden.
+                    \begin{enumerate}[label= (\roman*)]
+                        \item{Der Anwender öffnet eine zuvor gespeicherte
+                                Echtzeit-Animation.}
+                        \item{Der Editor weist den Anwender auf den Umstand
+                                hin, dass die Echtzeit-Animation nicht geöffnet
+                                werden kann.}
+                    \end{enumerate}
+                }
+                \item{Benötigte zusätzliche Dateien können nicht gefunden
+                        werden.
+                    \begin{enumerate}[label= (\roman*)]
+                        \item{Der Anwender öffnet eine zuvor gespeicherte bzw.
+                                erstellt eine neue Echtzeit-Animation bei
+                                welcher benötigte Dateien (wie zum Beispiel
+                                Bitmaps) fehlen.}
+                        \item{Der Editor weist den Anwender auf den Umstand
+                                hin, exportiert die Echtzeit-Animation dennoch. Er
+                                ersetzt die fehlenden Dateien mit
+                                Platzhaltern. Ein fehlerfreier Ablauf der
+                                Echtzeit-Animation ist nicht gewährleistet.}
+                    \end{enumerate}
+                }
+                \item{Absturz/Ausfall des Systems
+                    \begin{enumerate}[label= (\roman*)]
+                            \item{Das System stürzt an einem beliebigen Punkt
+                                    ab.}
+                            \item{Neustart des Editors.}
+                            \item{Der Editor stellt den ihm zuletzt bekannten
+                                    Punkt der Animation wieder her.}
+                    \end{enumerate}
+                }
+            \end{enumerate}
+            \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Zusätzliche Anforderungen} &
+            \todo[inline]{Add add. requirements} \\
+        \bottomrule
+    \end{tabular}
+\end{table}

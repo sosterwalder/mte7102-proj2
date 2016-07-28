@@ -1,0 +1,34 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de
+% chktex-file 27 - disable warning about missing include files
+
+\chapter{Einleitung}
+\label{chap:10_introduction}
+
+In~\cite{osterwalder_sven_volume_2016} wurde mit ``Sphere Tracing'' ein hoch
+effizientes Ray-Tracing-Verfahren vorgestellt, welches Objekte (und somit auch
+Szenen) sowie Operationen mittels impliziten Funktionen darstellt. Dies mag auf
+den ersten Blick praktisch erscheinen, da die Definition der meisten Objekte
+und Operationen nur wenige Zeilen lang ist. Dies hat jedoch zur Folge, dass
+einerseits Programme selbst bei kleinsten Änderungen neu kompiliert werden
+müssen und, dass andererseits bei komplexen Szenen schnell die Übersicht
+verloren geht. Möchte man Szenen bzw.\ Objekte animieren, so erhöht dies die
+Komplexität erneut.
+
+Diese Projektarbeit stellt daher eine Software-Architektur für ein System zur
+einfachen Erstellung und Handhabung visueller Szenen in Echtzeit vor.
+
+Das System erlaubt die Erstellung und Handhabung von Szenen mittels einer
+grafischen Benutzeroberfläche (GUI). Ein Graph erlaubt eine einfache und
+intuitive Komposition von visuellen Szenen. Ein \todo{Add sequencer to
+    glossary} Sequenzer erlaubt die Animation von Elementen, wie z.B. Modellen
+oder Bitmaps.
+
+Als \todo{Add rendering to glossary} Renderingverfahren kommt Sphere Tracing
+zum Einsatz, ein hoch-optimiertes Ray-Tracing-Verfahren, welches die
+Darstellung von Szenen in Echtzeit per \todo{Add GPU to glossary} GPU erlaubt.
+
+Die Machbarkeit des \todo{check if Konzept is the right word} Konzeptes wird
+durch einen Prototypen aufgezeigt, welcher die Komposition sowie Darstellung
+von einfachen Szenen in Echtzeit erlaubt.

@@ -1,0 +1,67 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\begin{table}[H]
+    \centering
+    \caption{Use Case UC2: Erstellen einer Echtzeit-Animation.}\label{table:uc2-create-demo}
+    \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
+        \toprule
+            \textbf{Bereich} &
+            Editor \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Level} &
+            Ziel des Benutzers \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Primärer Aktor} &
+            Anwender \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Stakeholder und Interessen} &
+            Anwender: Möchte eine neue neue Echtzeit-Animation erstellen.\newline
+            Betrachter: Möchte eine erstellte Echtzeit-Animation ansehen. \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Vorbedinungen} &
+            Der Editor sichert eine Animation alle \textit{n}-Minuten in einer
+            temporären Sicherungsdatei. \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Erfolgsszenario} &
+            \begin{enumerate}
+                \item{Der Anwender startet die Editor-Applikation.}
+                \item{Der Anwender fügt Elemente zu einer Szene zusammen.}
+                \item{Der Anwender legt Start und Ende einer Animation fest.}
+                \item{Der Anwender speichert die getätigte Arbeit.}
+                \item{Der Anwender exportiert die erstellte Animation.}
+                \item{Der Anwender schliesst den Editor.}
+            \end{enumerate} \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Erweiterungen} &
+            \begin{enumerate}[label= (\alph*)]
+                \item{Schliessen des Editors bei gemachten Änderungen ohne zu
+                        speichern
+                    \begin{enumerate}[label= (\roman*)]
+                        \item{Der Anwender schliesst den Editor bei gemachten
+                                Änderungen ohne diese zu speichern.}
+                        \item{Der Editor weist den Anwender auf die
+                                nicht gespeicherten Änderungen hin und bietet
+                                die Möglichkeit diese zu speichern, diese nicht
+                                zu speichern oder das Schliessen abzubrechen.}
+                    \end{enumerate}
+                }
+                \item{Absturz/Ausfall des Systems
+                    \begin{enumerate}[label= (\roman*)]
+                            \item{Das System stürzt an einem beliebigen Punkt
+                                    ab.}
+                            \item{Neustart des Editors.}
+                            \item{Der Editor stellt den ihm zuletzt bekannten
+                                    Punkt der Animation wieder her.}
+                    \end{enumerate}
+                }
+            \end{enumerate}
+            \\
+        \cmidrule(r){1-1}\cmidrule(lr){2-2}
+            \textbf{Zusätzliche Anforderungen} &
+            - \\
+        \bottomrule
+    \end{tabular}
+\end{table}

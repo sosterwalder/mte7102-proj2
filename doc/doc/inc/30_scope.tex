@@ -1,0 +1,87 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\chapter{Aufgabenstellung}
+\label{chap:scope}
+
+\section{Motivation}
+\label{sec:motivation}
+
+Das in der vorhergehenden
+Projektarbeit~\cite{osterwalder_sven_volume_2016} vorgestellte
+Renderingverfahren, Sphere Tracing, optimiert das \todo{write ray tracing everywhere
+    the same way} Raytracing-Verfahren so weit, dass eine Darstellung von
+Szenen mit hoher Qualität in Echtzeit möglich ist.
+
+Das Verfahren nutzt implizite Funktionen um Objekte (und somit auch
+Szenen) zu definieren. Selbiges gilt auch für Operationen. Dies mag auf
+den ersten Blick praktisch erscheinen, da die Definitionen der meisten Objekte
+und Operationen nur wenige Zeilen lang sind. Dies hat jedoch zur Folge, dass
+einerseits Programme selbst bei kleinsten Änderungen neu kompiliert werden
+müssen und, dass andererseits bei komplexen Szenen schnell die Übersicht
+verloren geht. Möchte man Szenen bzw.\ Objekte animieren, so erhöht dies die
+Komplexität erneut.
+
+Diese Projektarbeit stellt daher eine Software-Architektur für ein System zur
+einfachen Erstellung und Handhabung visueller Szenen in Echtzeit vor.
+
+Die Machbarkeit des \todo{check if Konzept is the right word} Konzeptes wird
+durch einen Prototypen aufgezeigt, welcher die Komposition sowie Darstellung
+von einfachen Szenen in Echtzeit erlaubt.
+
+\subsection{Demoszene}
+\label{subsec:demoscene}
+
+In den 1980er-Jahren entwickelte sich ``unter Anhängern der
+Computerszene \dots{} während der Blütezeit der
+8-Bit-Systeme''~\parencite{wikipedia_foundation_demoszene_2015} eine Bewegung
+namens Demoszene. ``Ihre Mitglieder, die häufig Demoszener oder einfach
+Szener genannt werden, erzeugen mit Computerprogrammen auf Rechnern so
+genannte Demos – Digitale Kunst, meist in Form von musikalisch
+unterlegten
+Echtzeit-Animationen.''~\parencite{wikipedia_foundation_demoszene_2015}
+
+Es handelt sich bei der Demoszene um ein sehr aktives und kreatives
+Umfeld, in welchem die Technologie ständig an die Grenzen ihrer
+Möglichkeiten gebracht wird. In diesem Umfeld entstehen regelmässig neue
+Ideen zur Erzeugung von noch realistischer wirkenden Bildern. Dabei
+findet eine wechselseitige Beeinflussung zwischen dem akademischen
+Umfeld und der Demoszene statt.
+
+So wurde auch das in~\cite{osterwalder_sven_volume_2016} vorgestellte
+\textit{Sphere Tracing} Verfahren
+relativ früh von in der Demoszene aktiven Personen aufgegriffen und
+behandelt.
+
+\section{Ziele und Abgrenzung}
+\label{sec:objectives}
+
+Diese Projektarbeit besteht aus zwei Teilen. Der Beschreibung der \todo{add
+    ref.\ to sw.\ arch.\ chapter} Software-Architektur sowie der Umsetzung
+eines~\hyperref[chap:prototype]{Prototypen}. \todo{Explain, that prototype was
+    done before}Dieser bildet einen kleinen Teil
+der Software-Architektur ab.
+
+Bei dem entwickelten~\hyperref[chap:prototype]{Prototypen} handelt es sich um
+eine Machbarkeitsstudie. Diese zeigt, dass die Komposition sowie Darstellung
+von einfachen Szenen in Echtzeit mit dem angedachten System möglich ist.
+
+Diese Projektarbeit dient als Vorarbeit und Grundlage für das MSE-Modul
+\textit{MTE7103} --- ``Master Thesis'' (Folgemodul und Abschlussarbeit).
+
+\subsection{Vorgängige Aktivitäten}
+\label{subsec:preliminaries}
+
+Die vorhergehende Projektarbeit~\cite{osterwalder_sven_volume_2016} bildet die
+Grundlage für diese Projektarbeit.
+
+\subsection{Neue Lerninhalte}
+\label{subsec:new_learning_contents}
+
+Zusätzlich zu den formalen Lerninhalten hatte die Arbeit für den Autor
+die folgenden \todo{Provide new learning contents} neuen Lerninhalte:
+\begin{itemize}
+    \item{TODO}
+\end{itemize}
