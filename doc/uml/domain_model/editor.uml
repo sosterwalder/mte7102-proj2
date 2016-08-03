@@ -12,16 +12,12 @@
     <ownedAttribute xmi:type="uml:Property" xmi:id="_gYYwcFQvEeaxw6J73r0lMA" name="wasChanged"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_k_O_wFQvEeaxw6J73r0lMA" name="wasVisited"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_gMJ1cFPmEeaxw6J73r0lMA" name="Sequence">
+  <packagedElement xmi:type="uml:Class" xmi:id="_gMJ1cFPmEeaxw6J73r0lMA" name="Timeline">
     <ownedAttribute xmi:type="uml:Property" xmi:id="__NVWQFQtEeaxw6J73r0lMA" name="starttime"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_A4kJAFQuEeaxw6J73r0lMA" name="endtime"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_iYjbkFPmEeaxw6J73r0lMA" name="Demo">
+  <packagedElement xmi:type="uml:Class" xmi:id="_iYjbkFPmEeaxw6J73r0lMA" name="MainOutput">
     <generalization xmi:type="uml:Generalization" xmi:id="_z9buIFQTEeaxw6J73r0lMA" general="_fDEGcFPmEeaxw6J73r0lMA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_tok-UFPmEeaxw6J73r0lMA" name="Renderer">
-    <generalization xmi:type="uml:Generalization" xmi:id="_5IbMUFQTEeaxw6J73r0lMA" general="_fDEGcFPmEeaxw6J73r0lMA"/>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_KVjycFQvEeaxw6J73r0lMA" name="renderjobs"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_ApRoEFPnEeaxw6J73r0lMA" name="DemoScript"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_GYP9EFPnEeaxw6J73r0lMA" name="exports" memberEnd="_GYRLMlPnEeaxw6J73r0lMA _GYTAYFPnEeaxw6J73r0lMA">
@@ -31,7 +27,8 @@
     <ownedEnd xmi:type="uml:Property" xmi:id="_GYTAYFPnEeaxw6J73r0lMA" name="editor" type="_XB230FPgEeaxw6J73r0lMA" association="_GYP9EFPnEeaxw6J73r0lMA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_GYRLMlPnEeaxw6J73r0lMA" name="demoscript" type="_ApRoEFPnEeaxw6J73r0lMA" association="_GYP9EFPnEeaxw6J73r0lMA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_CKr-MFPsEeaxw6J73r0lMA" name="SequenceItem">
+  <packagedElement xmi:type="uml:Class" xmi:id="_CKr-MFPsEeaxw6J73r0lMA" name="TimelineClip">
+    <generalization xmi:type="uml:Generalization" xmi:id="_b6kDoFaHEeaKiK2TSMwfbw" general="_fDEGcFPmEeaxw6J73r0lMA"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_mV5ioFQtEeaxw6J73r0lMA" name="starttime"/>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_pU8tsFQtEeaxw6J73r0lMA" name="duration"/>
   </packagedElement>
@@ -101,18 +98,11 @@
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_wRNVMFQtEeaxw6J73r0lMA" source="org.eclipse.papyrus">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wRNVMVQtEeaxw6J73r0lMA" key="nature" value="UML_Nature"/>
     </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_wROjUFQtEeaxw6J73r0lMA" name="sequenceitem" type="_CKr-MFPsEeaxw6J73r0lMA" association="_wRMuIFQtEeaxw6J73r0lMA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_wROjUFQtEeaxw6J73r0lMA" name="timelineclip" type="_CKr-MFPsEeaxw6J73r0lMA" association="_wRMuIFQtEeaxw6J73r0lMA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zY3CoFQtEeaxw6J73r0lMA"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zY4QwFQtEeaxw6J73r0lMA" value="*"/>
     </ownedEnd>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_wRNVMlQtEeaxw6J73r0lMA" name="sequence" type="_gMJ1cFPmEeaxw6J73r0lMA" association="_wRMuIFQtEeaxw6J73r0lMA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_wNW6gFQuEeaxw6J73r0lMA" name="is-defined-by/defines" memberEnd="_wNXhklQuEeaxw6J73r0lMA _wNYvsFQuEeaxw6J73r0lMA">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_wNXhkFQuEeaxw6J73r0lMA" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wNXhkVQuEeaxw6J73r0lMA" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_wNYvsFQuEeaxw6J73r0lMA" name="sequence" type="_gMJ1cFPmEeaxw6J73r0lMA" association="_wNW6gFQuEeaxw6J73r0lMA"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_wNXhklQuEeaxw6J73r0lMA" name="demo" type="_iYjbkFPmEeaxw6J73r0lMA" association="_wNW6gFQuEeaxw6J73r0lMA"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_wRNVMlQtEeaxw6J73r0lMA" name="timeline" type="_gMJ1cFPmEeaxw6J73r0lMA" association="_wRMuIFQtEeaxw6J73r0lMA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_whkagFQvEeaxw6J73r0lMA" name="inputs/outputs" memberEnd="_whlBklQvEeaxw6J73r0lMA _whlBk1QvEeaxw6J73r0lMA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_whlBkFQvEeaxw6J73r0lMA" source="org.eclipse.papyrus">
@@ -138,5 +128,22 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_maz7AFQxEeaxw6J73r0lMA" value="*"/>
     </ownedEnd>
     <ownedEnd xmi:type="uml:Property" xmi:id="_jHRtslQxEeaxw6J73r0lMA" name="node" type="_fDEGcFPmEeaxw6J73r0lMA" association="_jHJx4FQxEeaxw6J73r0lMA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jOM9QFjgEeaVsbgkbhYgtg" memberEnd="_jOOLYVjgEeaVsbgkbhYgtg _jOOLYljgEeaVsbgkbhYgtg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jONkUFjgEeaVsbgkbhYgtg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_jOOLYFjgEeaVsbgkbhYgtg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_jOOLYljgEeaVsbgkbhYgtg" name="editor" type="_XB230FPgEeaxw6J73r0lMA" association="_jOM9QFjgEeaVsbgkbhYgtg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_jOOLYVjgEeaVsbgkbhYgtg" name="scenegraph" type="_mlxcMFPhEeaxw6J73r0lMA" association="_jOM9QFjgEeaVsbgkbhYgtg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_IEprIFjiEeaVsbgkbhYgtg" name="Keyframe">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Rez4cFjiEeaVsbgkbhYgtg" name="time"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_XvAEIFjiEeaVsbgkbhYgtg" name="is-animated-by / animates" memberEnd="_XvArMljiEeaVsbgkbhYgtg _XvB5UFjiEeaVsbgkbhYgtg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XvArMFjiEeaVsbgkbhYgtg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XvArMVjiEeaVsbgkbhYgtg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XvB5UFjiEeaVsbgkbhYgtg" name="parameter" type="_YGmOgFQxEeaxw6J73r0lMA" association="_XvAEIFjiEeaVsbgkbhYgtg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XvArMljiEeaVsbgkbhYgtg" name="keyframe" type="_IEprIFjiEeaVsbgkbhYgtg" association="_XvAEIFjiEeaVsbgkbhYgtg"/>
   </packagedElement>
 </uml:Model>

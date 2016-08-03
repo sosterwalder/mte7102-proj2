@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_BH_o4FdfEea2cb2A63GkAg" name="RootElement">
+  <ownedComment xmi:type="uml:Comment" xmi:id="_2YzwsFl_EeaWn7e6POpFPw">
+    <body>Legend</body>
+  </ownedComment>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Xb9aMFdfEea2cb2A63GkAg" name="Timer" visibility="package">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_NZAxwFdjEea2cb2A63GkAg" name="timeInMs">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_wFkQYFdjEea2cb2A63GkAg" name="ms" type="_mJSp8FdiEea2cb2A63GkAg" direction="return">
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_zLDaoFdjEea2cb2A63GkAg"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Xb-oVldfEea2cb2A63GkAg" name="DemoScript">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_cSiSIFdgEea2cb2A63GkAg" name="DemoScript">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_lCvjgFdgEea2cb2A63GkAg" name="demoData" type="_Xb_PaFdfEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Xb_PZVdfEea2cb2A63GkAg" name="MainOutput">
+    <generalization xmi:type="uml:Generalization" xmi:id="_Xb_PZldfEea2cb2A63GkAg" general="_XcAdgFdfEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_MaphgFdiEea2cb2A63GkAg" name="doProcessAll">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_5OSvcFdjEea2cb2A63GkAg" name="processingAll" type="_L7drIFdiEea2cb2A63GkAg" direction="return">
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_5OSvcVdjEea2cb2A63GkAg"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_mpUN0FdiEea2cb2A63GkAg" name="process">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mpUN0VdiEea2cb2A63GkAg" name="time" type="_mJSp8FdiEea2cb2A63GkAg"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_p-YPsFdjEea2cb2A63GkAg" name="processAll">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_p-Y2wFdjEea2cb2A63GkAg" name="processAll" type="_L7drIFdiEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Xb_PZ1dfEea2cb2A63GkAg" name="Player"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Xb_PaFdfEea2cb2A63GkAg" name="DemoData" visibility="package">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_8cliUFdhEea2cb2A63GkAg" name="mNodes" visibility="protected" type="_8SaSoFdhEea2cb2A63GkAg"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_RUfogFdmEea2cb2A63GkAg" name="mSceneGraph" visibility="protected" type="__mXZ4FdlEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_pgJGcFdhEea2cb2A63GkAg" name="importScript">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_pgJGcVdhEea2cb2A63GkAg" name="demoScript" type="_Xb-oVldfEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XcAdgFdfEea2cb2A63GkAg" name="Node" visibility="private">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_vTJqEFdlEea2cb2A63GkAg" name="process">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_vTJqEVdlEea2cb2A63GkAg" name="time" type="_mJSp8FdiEea2cb2A63GkAg"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_xpOwoFdlEea2cb2A63GkAg" name="doProcessAll">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_xpOwoVdlEea2cb2A63GkAg" name="processingAll" type="_L7drIFdiEea2cb2A63GkAg" direction="return">
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_xpOwoldlEea2cb2A63GkAg"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_yLphMFdlEea2cb2A63GkAg" name="processAll">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_yLphMVdlEea2cb2A63GkAg" name="processAll" type="_L7drIFdiEea2cb2A63GkAg"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_2R-dYFdlEea2cb2A63GkAg" name="preProcess"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_3V5YgFdlEea2cb2A63GkAg" name="postProcess"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_dvl7cFdfEea2cb2A63GkAg" name="SetupDialog">
+    <generalization xmi:type="uml:Generalization" xmi:id="_0zEBoFdgEea2cb2A63GkAg" general="_n49isFdgEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_OKL3YFdgEea2cb2A63GkAg" name="show"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_n49isFdgEea2cb2A63GkAg" name="GLFW"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3kau8FdgEea2cb2A63GkAg" name="Engine">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_YvwScFdhEea2cb2A63GkAg" name="mGraphics" visibility="private" type="_JXnq0FdhEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_H4ASMFdhEea2cb2A63GkAg" name="initialize"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_JXnq0FdhEea2cb2A63GkAg" name="Graphics">
+    <generalization xmi:type="uml:Generalization" xmi:id="_SWIogFdiEea2cb2A63GkAg" general="_n49isFdgEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_a1ASQFdiEea2cb2A63GkAg" name="setWindowTitle">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_a1ASQVdiEea2cb2A63GkAg" name="title" type="_aWo7QFdiEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_dXHfIFdhEea2cb2A63GkAg" memberEnd="_dXKicFdhEea2cb2A63GkAg _dXMXoFdhEea2cb2A63GkAg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dXJUUFdhEea2cb2A63GkAg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dXJUUVdhEea2cb2A63GkAg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_dXMXoFdhEea2cb2A63GkAg" name="engine" type="_3kau8FdgEea2cb2A63GkAg" association="_dXHfIFdhEea2cb2A63GkAg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_dXKicFdhEea2cb2A63GkAg" name="graphics" type="_JXnq0FdhEea2cb2A63GkAg" association="_dXHfIFdhEea2cb2A63GkAg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_8SaSoFdhEea2cb2A63GkAg" name="std::array"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_L7drIFdiEea2cb2A63GkAg" name="bool"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_aWo7QFdiEea2cb2A63GkAg" name="std::string"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_mJSp8FdiEea2cb2A63GkAg" name="float"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_s2COwFdiEea2cb2A63GkAg" name="Demo">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_1rLDcFdiEea2cb2A63GkAg" name="render">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_1rLDcVdiEea2cb2A63GkAg" name="time" type="_mJSp8FdiEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_O2-IEFdkEea2cb2A63GkAg" name="Callback">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_2oD3kFdkEea2cb2A63GkAg" name="Callback">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2oD3kVdkEea2cb2A63GkAg" name="wasProcessed" type="_L7drIFdiEea2cb2A63GkAg"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2oD3kldkEea2cb2A63GkAg" name="size" type="_qWk30FdkEea2cb2A63GkAg"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2oD3k1dkEea2cb2A63GkAg" name="parameter" type="_QuQZ0FdkEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_QuQZ0FdkEea2cb2A63GkAg" name="Parameter">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_dJ-eMFdlEea2cb2A63GkAg" name="Parameter">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_dJ-eMVdlEea2cb2A63GkAg" name="type" type="_QKNcIFdlEea2cb2A63GkAg"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_dJ-eMldlEea2cb2A63GkAg" name="min" type="_mJSp8FdiEea2cb2A63GkAg"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_dJ-eM1dlEea2cb2A63GkAg" name="max" type="_mJSp8FdiEea2cb2A63GkAg"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_dJ-eNFdlEea2cb2A63GkAg" name="owner" type="_XcAdgFdfEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_qWk30FdkEea2cb2A63GkAg" name="uint"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_QKNcIFdlEea2cb2A63GkAg" name="ParameterType">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_QKNcIVdlEea2cb2A63GkAg" name="type" type="_qWk30FdkEea2cb2A63GkAg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="__mXZ4FdlEea2cb2A63GkAg" name="SceneGraph">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_f7rUUFdmEea2cb2A63GkAg" name="mScenes" visibility="protected" type="_8SaSoFdhEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_62oe4FdmEea2cb2A63GkAg" name="addScene">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_62oe4VdmEea2cb2A63GkAg" name="scene" type="_ZOEz4FdmEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_YPpcwFdmEea2cb2A63GkAg" memberEnd="_YPqD0ldmEea2cb2A63GkAg _YPqD01dmEea2cb2A63GkAg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YPqD0FdmEea2cb2A63GkAg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YPqD0VdmEea2cb2A63GkAg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_YPqD01dmEea2cb2A63GkAg" name="demodata" type="_Xb_PaFdfEea2cb2A63GkAg" association="_YPpcwFdmEea2cb2A63GkAg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_YPqD0ldmEea2cb2A63GkAg" name="scenegraph" type="__mXZ4FdlEea2cb2A63GkAg" association="_YPpcwFdmEea2cb2A63GkAg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZOEz4FdmEea2cb2A63GkAg" name="Scene">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_SnE1QFdnEea2cb2A63GkAg" name="mNodes" visibility="protected" type="_8SaSoFdhEea2cb2A63GkAg"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Ol_lcFdnEea2cb2A63GkAg" name="addNode">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ol_lcVdnEea2cb2A63GkAg" name="node" type="_XcAdgFdfEea2cb2A63GkAg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bGWkIFdmEea2cb2A63GkAg" memberEnd="_bGWkI1dmEea2cb2A63GkAg _bGXLMFdmEea2cb2A63GkAg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bGWkIVdmEea2cb2A63GkAg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bGWkIldmEea2cb2A63GkAg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_bGXLMFdmEea2cb2A63GkAg" name="scenegraph" type="__mXZ4FdlEea2cb2A63GkAg" association="_bGWkIFdmEea2cb2A63GkAg"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_bGWkI1dmEea2cb2A63GkAg" name="scene" type="_ZOEz4FdmEea2cb2A63GkAg" association="_bGWkIFdmEea2cb2A63GkAg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_UrPFYFdnEea2cb2A63GkAg" memberEnd="_UrPscldnEea2cb2A63GkAg _UrQ6kFdnEea2cb2A63GkAg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_UrPscFdnEea2cb2A63GkAg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_UrPscVdnEea2cb2A63GkAg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_UrQ6kFdnEea2cb2A63GkAg" name="node" type="_XcAdgFdfEea2cb2A63GkAg" association="_UrPFYFdnEea2cb2A63GkAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WoQLsFdnEea2cb2A63GkAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WoQywFdnEea2cb2A63GkAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_UrPscldnEea2cb2A63GkAg" name="scene" type="_ZOEz4FdmEea2cb2A63GkAg" association="_UrPFYFdnEea2cb2A63GkAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Vvrk8FdnEea2cb2A63GkAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VvszEFdnEea2cb2A63GkAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4B4AQFl_EeaWn7e6POpFPw" name="UI"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NHqRwFmBEeaWn7e6POpFPw" name="Application"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_UUrSEFmBEeaWn7e6POpFPw" name="Domain"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_azmdUFmBEeaWn7e6POpFPw" name="Foundation" visibility="package"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_i1RNsFmBEeaWn7e6POpFPw" name="Techn. services"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_2pxS8FmBEeaWn7e6POpFPw" name="External"/>
+</uml:Model>

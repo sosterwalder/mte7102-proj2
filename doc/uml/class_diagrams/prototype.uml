@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_fiIZMFflEea2Me-5lJWslw" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_jOsNsFfpEea2Me-5lJWslw" name="nanogui">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Pn4boFfoEea2Me-5lJWslw" name="Common">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_We9ywFfpEea2Me-5lJWslw" name="init"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Ml5mcFfqEea2Me-5lJWslw" name="mainloop"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Oi9JAFfqEea2Me-5lJWslw" name="shutdown"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_d9ojwFfpEea2Me-5lJWslw" name="Screen" visibility="public">
+      <generalization xmi:type="uml:Generalization" xmi:id="_H0TfsFfqEea2Me-5lJWslw" general="_-wIwgFfpEea2Me-5lJWslw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_6t1YsFfpEea2Me-5lJWslw" name="drawAll"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zDBMoFfqEea2Me-5lJWslw" name="keyboardEvent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDBMoVfqEea2Me-5lJWslw" name="key" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDBMolfqEea2Me-5lJWslw" name="scancode" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDBMo1fqEea2Me-5lJWslw" name="action" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zDBMpFfqEea2Me-5lJWslw" name="modifiers" type="_pBxKIFfqEea2Me-5lJWslw"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_H2i0AFftEea2Me-5lJWslw" name="performLayout">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_H2i0AVftEea2Me-5lJWslw" name="*ctx" type="_bfnMsFfqEea2Me-5lJWslw"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_-jajIFfpEea2Me-5lJWslw" name="CopyOf_Common_1">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_-jajIVfpEea2Me-5lJWslw" name="init"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_-wIwgFfpEea2Me-5lJWslw" name="Widget">
+      <generalization xmi:type="uml:Generalization" xmi:id="_GnWkYFfqEea2Me-5lJWslw" general="_CL4eoFfqEea2Me-5lJWslw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_-wIwgVfpEea2Me-5lJWslw" name="init"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_CL4eoFfqEea2Me-5lJWslw" name="Object"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_LSPJsFfrEea2Me-5lJWslw" name="GLShader"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Zp7A8FfrEea2Me-5lJWslw" name="Window">
+      <generalization xmi:type="uml:Generalization" xmi:id="_dnGoMFfrEea2Me-5lJWslw" general="_-wIwgFfpEea2Me-5lJWslw"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_lnHdoFfpEea2Me-5lJWslw" name="spdlog">
+    <packagedElement xmi:type="uml:Class" xmi:id="_LmaKQFfoEea2Me-5lJWslw" name="spdlog_impl">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Tx36YFfpEea2Me-5lJWslw" name="get"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_rxbq0FfpEea2Me-5lJWslw" name="QCE">
+    <packagedElement xmi:type="uml:Class" xmi:id="_a3vw4FfpEea2Me-5lJWslw" name="Qce">
+      <generalization xmi:type="uml:Generalization" xmi:id="_1Tyx4FfpEea2Me-5lJWslw" general="_d9ojwFfpEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_7KLhAFfqEea2Me-5lJWslw" name="mIntensity" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_mJSp8FdiEea2cb2A63GkAg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_4GkJkFfrEea2Me-5lJWslw" name="mShader" visibility="private" type="_PJS60FfrEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_7XDC4FfrEea2Me-5lJWslw" name="mNodeGraph" visibility="private" type="_W26t0FfrEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_UxCJ8FfsEea2Me-5lJWslw" name="mShaderSources" visibility="private" type="_UZtPEFfsEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_fixOMFfsEea2Me-5lJWslw" name="mNodeTypes" visibility="private" type="_fYFBIFfsEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_inXnoFfsEea2Me-5lJWslw" name="mStartTime" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_mJSp8FdiEea2cb2A63GkAg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_mCm_cFfsEea2Me-5lJWslw" name="mUpdateTime" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_mJSp8FdiEea2cb2A63GkAg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_qLeSQFfsEea2Me-5lJWslw" name="mNumFrames" visibility="private" type="_pBxKIFfqEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_u5aBAFfsEea2Me-5lJWslw" name="mCamZ" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_mJSp8FdiEea2cb2A63GkAg"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_TSDVYFfqEea2Me-5lJWslw" name="Qce"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_UFXosFfqEea2Me-5lJWslw" name="~Qce"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_X-3CwFfqEea2Me-5lJWslw" name="draw">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_f-J0kFfqEea2Me-5lJWslw" name="*ctx" type="_bfnMsFfqEea2Me-5lJWslw"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iTpFQFfqEea2Me-5lJWslw" name="drawContents"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_xsT4YFfqEea2Me-5lJWslw" name="keyboardEvent">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_xsT4YVfqEea2Me-5lJWslw" name="key" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_xsT4YlfqEea2Me-5lJWslw" name="scancode" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_xsT4Y1fqEea2Me-5lJWslw" name="action" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_xsT4ZFfqEea2Me-5lJWslw" name="modifiers" type="_pBxKIFfqEea2Me-5lJWslw"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8shyoFfsEea2Me-5lJWslw" name="initializeShaderFiles" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="__BVG0FfsEea2Me-5lJWslw" name="initializeShader" visibility="private"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_TpjvEFftEea2Me-5lJWslw" name="findAndAddShaderFiles" visibility="private">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_TpjvEVftEea2Me-5lJWslw" name="&amp;path">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PJS60FfrEea2Me-5lJWslw" name="OpenGLShader">
+      <generalization xmi:type="uml:Generalization" xmi:id="_TBbqAFfrEea2Me-5lJWslw" general="_LSPJsFfrEea2Me-5lJWslw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GaASoFfvEea2Me-5lJWslw" name="setName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_GaASoVfvEea2Me-5lJWslw" name="&amp;name">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QEez4FfvEea2Me-5lJWslw" name="setFragmentShaderTemplate">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_QEez4VfvEea2Me-5lJWslw" name="&amp;shaderTemplate">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_aLe5EFfvEea2Me-5lJWslw" name="setVertexShaderSource">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_aLe5EVfvEea2Me-5lJWslw" name="&amp;vertexSource">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ehP_cFfvEea2Me-5lJWslw" name="recompile"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_1xcIcFfvEea2Me-5lJWslw" name="free"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3EQbMFfvEea2Me-5lJWslw" name="setUniform">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_8cRBsFfvEea2Me-5lJWslw" name="&amp;name">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_HWTtYFfwEea2Me-5lJWslw" name="&amp;mat" type="_COgtIFfwEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OyRvsFfwEea2Me-5lJWslw" name="warn">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_L7drIFdiEea2cb2A63GkAg"/>
+          <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_OyRvsVfwEea2Me-5lJWslw" name="warn" value="true"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_YowsoFfwEea2Me-5lJWslw" name="drawIndexed">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_YowsoVfwEea2Me-5lJWslw" name="type" type="_pBxKIFfqEea2Me-5lJWslw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_YowsolfwEea2Me-5lJWslw" name="offset">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_qWk30FdkEea2cb2A63GkAg"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_Yowso1fwEea2Me-5lJWslw" name="count">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_qWk30FdkEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_W26t0FfrEea2Me-5lJWslw" name="Graph">
+      <generalization xmi:type="uml:Generalization" xmi:id="_W26t0VfrEea2Me-5lJWslw" general="_Zp7A8FfrEea2Me-5lJWslw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_5FyqkFfuEea2Me-5lJWslw" name="addNodeType">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_5FyqkVfuEea2Me-5lJWslw" name="*shaderSource" type="_muxXUFfrEea2Me-5lJWslw"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_muxXUFfrEea2Me-5lJWslw" name="GLShaderSource">
+      <generalization xmi:type="uml:Generalization" xmi:id="_muxXUVfrEea2Me-5lJWslw" general="_CL4eoFfqEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_AlFjIFfuEea2Me-5lJWslw" name="mName">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        <qualifier xmi:type="uml:Property" xmi:id="_D1uNcFfuEea2Me-5lJWslw" name="mName">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </qualifier>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_FNOy8FfuEea2Me-5lJWslw" name="mFunctionName">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        <qualifier xmi:type="uml:Property" xmi:id="_FNOy8VfuEea2Me-5lJWslw" name="mName">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </qualifier>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_HOHFkFfuEea2Me-5lJWslw" name="mReturnType">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        <qualifier xmi:type="uml:Property" xmi:id="_HOHFkVfuEea2Me-5lJWslw" name="mName">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </qualifier>
+        <qualifier xmi:type="uml:Property" xmi:id="_JVwukFfuEea2Me-5lJWslw" name="mReturnType">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+          <qualifier xmi:type="uml:Property" xmi:id="_JVwukVfuEea2Me-5lJWslw" name="mName">
+            <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+          </qualifier>
+        </qualifier>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Jr1FMFfuEea2Me-5lJWslw" name="mDefinition">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        <qualifier xmi:type="uml:Property" xmi:id="_Jr1FMVfuEea2Me-5lJWslw" name="mName">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </qualifier>
+        <qualifier xmi:type="uml:Property" xmi:id="_Jr1FMlfuEea2Me-5lJWslw" name="mReturnType">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+          <qualifier xmi:type="uml:Property" xmi:id="_Jr1FM1fuEea2Me-5lJWslw" name="mName">
+            <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+          </qualifier>
+        </qualifier>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_QQsgYFfuEea2Me-5lJWslw" name="mParameters" type="_htaEUFftEea2Me-5lJWslw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_vk48EFfuEea2Me-5lJWslw" name="setName">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_vk48EVfuEea2Me-5lJWslw" name="&amp;name">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_zoZ00FfuEea2Me-5lJWslw" name="parseFromFile">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_zoZ00VfuEea2Me-5lJWslw" name="&amp;filename">
+          <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_v1fEMFfrEea2Me-5lJWslw" name="GraphNode">
+      <generalization xmi:type="uml:Generalization" xmi:id="_v1fEMVfrEea2Me-5lJWslw" general="_Zp7A8FfrEea2Me-5lJWslw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_lmZvIFftEea2Me-5lJWslw" name="ParameterType"/>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_m35MMFftEea2Me-5lJWslw" name="BuiltinType"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_htaEUFftEea2Me-5lJWslw" name="GLShaderObjectParameter">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_sUDS4FftEea2Me-5lJWslw" name="name">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_yBfW0FftEea2Me-5lJWslw" name="parameterType" type="_lmZvIFftEea2Me-5lJWslw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_11cJkFftEea2Me-5lJWslw" name="call">
+        <type xmi:type="uml:PrimitiveType" href="player.uml#_aWo7QFdiEea2cb2A63GkAg"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_4OXIwFftEea2Me-5lJWslw" name="builtinType" type="_m35MMFftEea2Me-5lJWslw"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_aGL7oFfqEea2Me-5lJWslw" name="nanovg">
+    <packagedElement xmi:type="uml:Class" xmi:id="_bfnMsFfqEea2Me-5lJWslw" name="NVGContext"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_pBxKIFfqEea2Me-5lJWslw" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Bk-kwFfsEea2Me-5lJWslw" name="std::vector"/>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_UZtPEFfsEea2Me-5lJWslw" name="std::vector">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_UZtPEVfsEea2Me-5lJWslw" name="T" type="_muxXUFfrEea2Me-5lJWslw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_fYFBIFfsEea2Me-5lJWslw" name="std::vector">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_fYFBIVfsEea2Me-5lJWslw" name="T" type="_v1fEMFfrEea2Me-5lJWslw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_AmUnUFfwEea2Me-5lJWslw" name="Eigen">
+    <packagedElement xmi:type="uml:Class" xmi:id="_COgtIFfwEea2Me-5lJWslw" name="Matrix4f"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_cJxVQFfwEea2Me-5lJWslw" memberEnd="_cJyjYFfwEea2Me-5lJWslw _cJzxgFfwEea2Me-5lJWslw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_cJx8UFfwEea2Me-5lJWslw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_cJx8UVfwEea2Me-5lJWslw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_cJzxgFfwEea2Me-5lJWslw" name="glshadersource" type="_muxXUFfrEea2Me-5lJWslw" association="_cJxVQFfwEea2Me-5lJWslw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_cJyjYFfwEea2Me-5lJWslw" name="glshaderobjectparameter" type="_htaEUFftEea2Me-5lJWslw" association="_cJxVQFfwEea2Me-5lJWslw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dBLeYFfwEea2Me-5lJWslw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dBMFcFfwEea2Me-5lJWslw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_gxjYsFfwEea2Me-5lJWslw" memberEnd="_gxjYs1fwEea2Me-5lJWslw _gxj_wFfwEea2Me-5lJWslw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_gxjYsVfwEea2Me-5lJWslw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_gxjYslfwEea2Me-5lJWslw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_gxj_wFfwEea2Me-5lJWslw" name="parametertype" type="_lmZvIFftEea2Me-5lJWslw" association="_gxjYsFfwEea2Me-5lJWslw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_gxjYs1fwEea2Me-5lJWslw" name="glshaderobjectparameter" type="_htaEUFftEea2Me-5lJWslw" association="_gxjYsFfwEea2Me-5lJWslw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iqJ5EFfwEea2Me-5lJWslw" memberEnd="_iqJ5E1fwEea2Me-5lJWslw _iqKgIFfwEea2Me-5lJWslw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iqJ5EVfwEea2Me-5lJWslw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_iqJ5ElfwEea2Me-5lJWslw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iqKgIFfwEea2Me-5lJWslw" name="builtintype" type="_m35MMFftEea2Me-5lJWslw" association="_iqJ5EFfwEea2Me-5lJWslw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iqJ5E1fwEea2Me-5lJWslw" name="glshaderobjectparameter" type="_htaEUFftEea2Me-5lJWslw" association="_iqJ5EFfwEea2Me-5lJWslw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_MeQCIFfxEea2Me-5lJWslw" memberEnd="_MeQpMlfxEea2Me-5lJWslw _MeQpM1fxEea2Me-5lJWslw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_MeQpMFfxEea2Me-5lJWslw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_MeQpMVfxEea2Me-5lJWslw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_MeQpM1fxEea2Me-5lJWslw" name="qce" type="_a3vw4FfpEea2Me-5lJWslw" association="_MeQCIFfxEea2Me-5lJWslw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_MeQpMlfxEea2Me-5lJWslw" name="openglshader" type="_PJS60FfrEea2Me-5lJWslw" association="_MeQCIFfxEea2Me-5lJWslw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PkZTsFfxEea2Me-5lJWslw" memberEnd="_Pkah0VfxEea2Me-5lJWslw _Pkah0lfxEea2Me-5lJWslw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PkZ6wFfxEea2Me-5lJWslw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Pkah0FfxEea2Me-5lJWslw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Pkah0lfxEea2Me-5lJWslw" name="qce" type="_a3vw4FfpEea2Me-5lJWslw" association="_PkZTsFfxEea2Me-5lJWslw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Pkah0VfxEea2Me-5lJWslw" name="graph" type="_W26t0FfrEea2Me-5lJWslw" association="_PkZTsFfxEea2Me-5lJWslw"/>
+  </packagedElement>
+</uml:Model>

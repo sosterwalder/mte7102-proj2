@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_DDPzsFQ1Eeaxw6J73r0lMA" name="RootElement">
+  <ownedComment xmi:type="uml:Comment" xmi:id="_8Kd1YFnDEeabDsvNSCxfjw">
+    <body>Legend</body>
+  </ownedComment>
   <packagedElement xmi:type="uml:Package" xmi:id="_UtSzkFQ1Eeaxw6J73r0lMA" name="UI">
     <packagedElement xmi:type="uml:Model" xmi:id="_Vr1fcFQ1Eeaxw6J73r0lMA" name="Player"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_maZugFQ1Eeaxw6J73r0lMA" name="Setup"/>
@@ -15,13 +18,17 @@
     <packagedElement xmi:type="uml:Model" xmi:id="_hm95cFSdEeayrqQ18izFsA" name="Demoscript"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_q-K5YFSdEeayrqQ18izFsA" name="Player"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_sPYpoFSdEeayrqQ18izFsA" name="Player"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_IoapMFdmEea2cb2A63GkAg" name="SceneGraph"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_SnjjwFSxEeayrqQ18izFsA" name="Domain">
-    <packagedElement xmi:type="uml:Model" xmi:id="_SnjjyFSxEeayrqQ18izFsA" name="DemoNode"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_SnjjyFSxEeayrqQ18izFsA" name="MainOutputNode"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_Snjjz1SxEeayrqQ18izFsA" name="Demo"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_-FtlcFSyEeayrqQ18izFsA" name="Node"/>
+    <packagedElement xmi:type="uml:Model" xmi:id="_F4A-IFdmEea2cb2A63GkAg" name="Scene"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_z-nnYFS3EeayrqQ18izFsA" name="Foundation">
     <packagedElement xmi:type="uml:Model" xmi:id="_z-nnZFS3EeayrqQ18izFsA" name="Timer"/>
   </packagedElement>
+  <packagedElement xmi:type="uml:Model" xmi:id="_Du8TcFnEEeabDsvNSCxfjw" name="Internal"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_Du9hkFnEEeabDsvNSCxfjw" name="External"/>
 </uml:Model>
