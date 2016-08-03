@@ -37,7 +37,17 @@
 \renewcommand{\vhhistoryname}{Versionen} % Rename version history to german name "Versionen"
 \usepackage{csquotes}                    % Quotes
 \usepackage{nameref}                     % Allows referencing of names
+\usepackage{tabu}                        % Long table is long
+%---------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------
 \usepackage{enumitem}                    % Allows multiple types of enumerations
+\newlist{longenum}{enumerate}{5}
+\setlist[longenum,1]{label=\roman*)}
+\setlist[longenum,2]{label=\alph*)}
+\setlist[longenum,3]{label=\arabic*)}
+\setlist[longenum,4]{label=(\roman*)}
+\setlist[longenum,5]{label=(\alph*)}
 %---------------------------------------------------------------------------
 
 % Bibliography
@@ -101,6 +111,21 @@
 % Background colors
 \definecolor{syntaxBackground}{rgb}{0.95, 0.95, 0.95}
 %---------------------------------------------------------------------------
+
+% Embed graphics
+%---------------------------------------------------------------------------
+\usepackage{graphicx}                    % Allows embedding of images
+\newcommand*{\img}[2][\baselineskip]{%
+    \raisebox{-.3\baselineskip}{%
+        \includegraphics[
+        height={#1},
+        width={#1},
+        keepaspectratio,
+        ]{#2}%
+    }%
+}
+%---------------------------------------------------------------------------
+
 % Load listing package
 % which produces formatted program listings
 %---------------------------------------------------------------------------
@@ -285,7 +310,7 @@
 \include{inc/30_scope}
 \include{inc/40_procedure}
 \include{inc/50_software_architecture}
-\include{inc/70_prototype}
+\include{inc/60_prototype}
 \include{inc/80_conclusion}
 %---------------------------------------------------------------------------
 
