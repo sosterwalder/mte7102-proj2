@@ -69,67 +69,67 @@ vec2 castRay(in vec3 rayOrigin, in vec3 rayDirection, in float maxDistance, in f
 \end{lstlisting}
 \end{minipage}
 
-\begin{table}[H]
-    \centering
-    \caption{Vergleich des Distanz-Parameters anhand einer Beispielszene.}\label{table:sphere_tracing_distance}
-    \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
-        \toprule
-            \textbf{Distanz: \textit{100.0}} &
-            \textbf{Distanz: \textit{9.0}}   &
-            \textbf{Distanz: \textit{6.3}}   \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_distance_full.pdf}
-            \newline
-            Alle in der Szene definierten Objekte sind sichtbar. &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_distance_less.pdf} \newline
-            Es ist nur noch das zum Betrachter näher liegende Objekt sichtbar. &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_distance_min.pdf} \newline
-            Es ist nur noch das zum Betrachter näher liegende Objekt
-            sichtbar, jedoch nicht mehr vollständig. \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \caption{Vergleich des Präzisions-Parameters anhand einer Beispielszene.}\label{table:sphere_tracing_precision}
-    \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
-        \toprule
-            \textbf{Präzision: \textit{0.00001}} &
-            \textbf{Präzision: \textit{0.1}}     &
-            \textbf{Präzision: \textit{1.0}}     \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_precision_full.pdf} \newline
-            Die Kugel weist keinerlei sichtbare Abstufungen auf. &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_precision_min.pdf} \newline
-            Die Kugel weist am unteren linken Rand sichtbare Farbabstufungen auf. &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_precision_pos.pdf} \newline
-            Die Kugel wird nicht mehr korrekt dargestellt. \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \caption{Vergleich des Parameters zur Bestimmung der Anzahl der
-        Durchgänge anhand einer Beispielszene.}\label{table:sphere_tracing_steps}
-    \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
-        \toprule
-            \textbf{Anzahl Schritte: \textit{100}} &
-            \textbf{Anzahl Schritte: \textit{10}}  &
-            \textbf{Anzahl Schritte: \textit{5}}   \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_steps_full.pdf} \newline
-            Alle in der Szene definierten Objekte sind korrekt sichtbar. &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_steps_less.pdf} \newline
-            Die Grenze zwischen den in der Szene definierten Objekten
-            ist bereits nicht mehr eindeutig. &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_steps_min.pdf} \newline
-            Die Szene ist als solche nicht mehr erkennbar, es erfolgt
-            keine klare Trennung zwischen den einzelnen Objekten.  \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+% \begin{table}[H]
+%     \centering
+%     \caption{Vergleich des Distanz-Parameters anhand einer Beispielszene.}\label{table:sphere_tracing_distance}
+%     \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+%         \toprule
+%             \textbf{Distanz: \textit{100.0}} &
+%             \textbf{Distanz: \textit{9.0}}   &
+%             \textbf{Distanz: \textit{6.3}}   \\
+%         \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_distance_full.pdf}
+%             \newline
+%             Alle in der Szene definierten Objekte sind sichtbar. &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_distance_less.pdf} \newline
+%             Es ist nur noch das zum Betrachter näher liegende Objekt sichtbar. &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_distance_min.pdf} \newline
+%             Es ist nur noch das zum Betrachter näher liegende Objekt
+%             sichtbar, jedoch nicht mehr vollständig. \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+% 
+% \begin{table}[H]
+%     \centering
+%     \caption{Vergleich des Präzisions-Parameters anhand einer Beispielszene.}\label{table:sphere_tracing_precision}
+%     \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+%         \toprule
+%             \textbf{Präzision: \textit{0.00001}} &
+%             \textbf{Präzision: \textit{0.1}}     &
+%             \textbf{Präzision: \textit{1.0}}     \\
+%         \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_precision_full.pdf} \newline
+%             Die Kugel weist keinerlei sichtbare Abstufungen auf. &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_precision_min.pdf} \newline
+%             Die Kugel weist am unteren linken Rand sichtbare Farbabstufungen auf. &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_precision_pos.pdf} \newline
+%             Die Kugel wird nicht mehr korrekt dargestellt. \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+% 
+% \begin{table}[H]
+%     \centering
+%     \caption{Vergleich des Parameters zur Bestimmung der Anzahl der
+%         Durchgänge anhand einer Beispielszene.}\label{table:sphere_tracing_steps}
+%     \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+%         \toprule
+%             \textbf{Anzahl Schritte: \textit{100}} &
+%             \textbf{Anzahl Schritte: \textit{10}}  &
+%             \textbf{Anzahl Schritte: \textit{5}}   \\
+%         \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_steps_full.pdf} \newline
+%             Alle in der Szene definierten Objekte sind korrekt sichtbar. &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_steps_less.pdf} \newline
+%             Die Grenze zwischen den in der Szene definierten Objekten
+%             ist bereits nicht mehr eindeutig. &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_steps_min.pdf} \newline
+%             Die Szene ist als solche nicht mehr erkennbar, es erfolgt
+%             keine klare Trennung zwischen den einzelnen Objekten.  \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
 
 Von den unter~\autoref{subsec:implicit_surfaces_ops} beschriebenen
 Operationen wurden die Operationen \textit{Vereinigung}, \textit{Subtraktion} sowie
@@ -347,34 +347,34 @@ float calcShadows(in vec3 rayOrigin, in vec3 rayDirection)
 Verwendete Parameter sind der Ursprung (\textit{vec3 rayOrigin}) sowie
 die Richtung (\textit{vec3 rayDirection}) eines Strahles.
 
-\begin{table}[H]
-    \centering
-    \caption{Vergleich des Skalierungsfaktors \textit{kShadow} für
-        weiche Schatten anhand einer
-        Beispielszene.}\label{table:sphere_tracing_shadows}
-    \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
-        \toprule
-            \textbf{kShadow: \textit{8.0}} &
-            \textbf{kShadow: \textit{16.0}}   &
-            \textbf{kShadow: \textit{32.0}}   \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_8.pdf} \newline &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_16.pdf} \newline &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_32.pdf} \newline \\
-        \bottomrule
-    \end{tabular}
-    \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
-        \toprule
-            \textbf{kShadow: \textit{64.0}} &
-            \textbf{kShadow: \textit{128.0}}   &
-            \textbf{kShadow: \textit{256.0}}   \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_64.pdf} \newline &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_128.pdf} \newline &
-            \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_256.pdf} \newline \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+% \begin{table}[H]
+%     \centering
+%     \caption{Vergleich des Skalierungsfaktors \textit{kShadow} für
+%         weiche Schatten anhand einer
+%         Beispielszene.}\label{table:sphere_tracing_shadows}
+%     \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+%         \toprule
+%             \textbf{kShadow: \textit{8.0}} &
+%             \textbf{kShadow: \textit{16.0}}   &
+%             \textbf{kShadow: \textit{32.0}}   \\
+%         \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_8.pdf} \newline &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_16.pdf} \newline &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_32.pdf} \newline \\
+%         \bottomrule
+%     \end{tabular}
+%     \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.3\textwidth}}
+%         \toprule
+%             \textbf{kShadow: \textit{64.0}} &
+%             \textbf{kShadow: \textit{128.0}}   &
+%             \textbf{kShadow: \textit{256.0}}   \\
+%         \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_64.pdf} \newline &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_128.pdf} \newline &
+%             \includegraphics[width=0.3\textwidth]{img/sphere_tracing_shadows_256.pdf} \newline \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
 
 Das eigentliche Rendering, also die Darstellung der Szene, geschieht in
 der Funktion \textit{render}.
