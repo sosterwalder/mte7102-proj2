@@ -13,6 +13,8 @@ OS           := $(shell uname)
 
 .set-build-fast:
 	$(eval BUILD_COMMAND = build-fast)
+.set-build-fast-verbose:
+	$(eval BUILD_COMMAND = build-fast-verbose)
 
 .set-build:
 	$(eval BUILD_COMMAND = build)
@@ -42,6 +44,8 @@ build: clean
 
 build-fast:
 	$(PDFLATEX) -jobname $(JOB) -shell-escape -interaction=nonstopmode $(BUILD) 1> /dev/null
+build-fast-verbose:
+	$(PDFLATEX) -jobname $(JOB) -shell-escape -interaction=nonstopmode $(BUILD)
 
 build-debug:
 	$(DEBUGLATEX) -jobname $(JOB) $(BUILD)
