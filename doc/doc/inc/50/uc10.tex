@@ -1,0 +1,93 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\subsubsection{Use Case UC10: Auswerten und Darstellen eines Knotens}
+\label{ssubsec:requirements:use-cases:uc10}
+
+\begin{longtabu}{p{0.5\textwidth}p{0.5\textwidth}}
+    \centering\\
+    \caption{Use Case UC10: Auswerten und Darstellen eines
+        Knotens.}\label{table:uc10-render-node}\\
+    \toprule
+        \textbf{Bereich} &
+        Editor und Player \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stufe (level)} &
+        Ziel des Benutzers und Unterfunktion\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Primärer Aktor} &
+        Anwender \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stakeholder und Interessen} &
+        Anwender: Möchte das (visuelle) Ergebnis eines Knotens
+        sehen.\newline
+        Betrachter: Möchte animierten Inhalt sehen.\newline
+        Entwickler: Testen von Knoten und Unterknoten. \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Vorbedingungen Editor} &
+        \begin{itemize}
+            \item{Die Editor-Applikation ist gestartet.}
+            \item{Es sind Knoten-Typen zum Hinzufügen vorhanden.}
+            \item{Eine beliebige Szene ist angewählt.}
+            \item{Die Szene verfügt bereits über Knoten.}
+        \end{itemize} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Vorbedingungen Player} &
+        \begin{itemize}
+            \item{Die Player-Applikation ist gestartet.}
+            \item{Es ist ein Demo-Skript mitsamt Inhalt zum Ausführen
+                    vorhanden.}
+            \item{Das Demo-Skript verfügt über mindestens eine Szene.}
+            \item{Die Szene verfügt über Knoten.}
+            \item{Die Szene ist mit dem Haupt-Ausgabeknoten verbunden.}
+        \end{itemize} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+    \textbf{Erfolgsszenario Editor} &
+        \begin{enumerate}
+            \item{Der Anwender klickt mit der linken Maustaste auf den
+                    Knoten, dessen Ausgabe er sehen möchte.}
+            \item{Der Knoten wird im Graphen als markiert dargestellt.}
+            \item{Die Parameter des Knoten werden im Parameter-Fenster
+                    dargestellt.}
+            \item{Der Editor evaluiert den Graphen des Knoten rekursiv zum
+                    aktuellen Zeitpunkt der Zeitachse.}
+            \item{Der Editor stellt die berechnete Ausgabe im
+                    Rendering-Ansichtsfenster dar.}
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+    \textbf{Erfolgsszenario Player} &
+        \begin{enumerate}
+            \item{Der Player lädt das Demoskript mitsamt all seinen
+                    Ressourcen und evaluiert. Dabei wird zuerst der
+                    Haupt-Ausgabeknoten evaluiert und dann rekursiv
+                    traversiert.}
+            \item{Ist eine Animation vorhanden, so wird diese nun
+                    gestartet und der Graph des Haupt-Ausgabeknotens rekursiv zum
+                    aktuellen Zeitpunkt der Animation evaluiert.}
+            \item{Ist keine Animation vorhanden, so wird immer der
+                    Zeitpunkt 0 evaluiert.}
+            \item{Der Player stellt die berechnete Ausgabe im
+                    Rendering-Ansichtsfenster dar.}
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erweiterungen} &
+        \begin{enumerate}[label= (\alph*)]
+            \item{Absturz/Ausfall des Systems
+                \begin{enumerate}[label= (\roman*)]
+                        \item{Das System stürzt an einem beliebigen Punkt
+                                ab.}
+                        \item{Neustart des Editors/Players.}
+                        \item{Der Editor stellt den ihm zuletzt bekannten
+                                Punkt der Animation wieder her. Der Player
+                            beginnt die Animation von vorne --- sofern eine
+                        solche vorhanden ist.}
+                \end{enumerate}
+            } \end{enumerate}
+        \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Zusätzliche Anforderungen} &
+        --- \\
+    \bottomrule
+\end{longtabu}

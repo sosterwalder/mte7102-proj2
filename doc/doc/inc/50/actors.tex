@@ -1,0 +1,44 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\subsection{Akteure (actors)}
+\label{subsec:requirements:actors}
+
+Ein Akteur ist ein Objekt mit einem Verhalten (informal gesprochen), wie zum
+Beispiel eine Person (definiert durch eine Rolle), ein Computersystem oder eine
+Organisation~\cite[S.63]{larman_applying_2004}.
+
+Nachfolgend finden sich alle Akteure der hier spezifizierten
+Software-Architektur. Dabei wird zwischen primären und sekundären Akteuren
+unterschieden.
+
+\subsubsection{Primäre Akteure}
+\label{ssubsec:requirements:actors:primary}
+
+\begin{itemize}
+    \item{%
+            \textbf{Anwender}\\
+            Ein \textit{Anwender} erstellt Echtzeit-Animationen mit der
+            Software. Er hat also eine aktive Rolle.
+        }
+    \item{%
+            \textbf{Betrachter}\\
+            Ein \textit{Betrachter} nutzt die Software um eine durch den
+            \textit{Anwender} erstellte Echtzeit-Animation anzusehen. Er nimmt
+            also eine passive Rolle ein.
+        }
+\end{itemize}
+
+\subsubsection{Sekundäre Akteure}
+\label{ssubsec:requirements:actors:secondary}
+
+\begin{itemize}
+    \item{%
+            \textbf{Entwickler}\\
+            Ein \textit{Entwickler} erweitert die Software um neue Elemente
+            (wie z.B.\ neue Shader).
+        }
+\end{itemize}
+

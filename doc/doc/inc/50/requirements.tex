@@ -6,53 +6,7 @@
 \section{Anforderungen}
 \label{sec:requirements}
 
-\subsection{Vision}
-\label{subsec::requirements:vision}
-
-Der Autor dieser Projektarbeit stellt sich eine Software zur Verwaltung und
-Darstellung von Echtzeit-Animationen vor. Die Software soll es Anwendern erlauben
-Echtzeit-Animationen in intuitiver Weise zu erstellen. Sie soll zudem modular
-gehalten sein, so dass spätere Änderungen, wie z.B.\ zusätzliche Arten von
-Rendering, ohne Weiteres adaptierbar sind.
-
-\todo[inline]{Insert GUI mock-up here}
-
-\subsection{Hauptkomponenten}
-\label{subsec::requirements:main-components}
-
-Die Applikation besteht aus zwei Applikationen: Einem \textit{Player},
-welcher dem Abspielen von Echtzeit-Animationen dient, sowie einem \textit{Editor},
-welcher der Erstellung und Verwaltung von Echtzeit-Animationen dient.
-
-Der \textit{Editor} erlaubt den Export von erstellten Animationen inklusive den
-dazugehörigen Dateien, wie zum Beispiel Bitmaps oder Modellen. Der
-\textit{Player} kann die exportierten Animationen dann lesen und wiedergeben.
-
-\subsection{Akteure (actors)}
-\label{subsec::requirements:actors}
-
-\textit{Primäre Akteure}
-\begin{itemize}
-    \item{%
-            \textbf{Anwender}\\
-            Ein \textit{Anwender} erstellt Echtzeit-Animationen mit der
-            Software. Er hat also eine aktive Rolle.
-        }
-    \item{%
-            \textbf{Betrachter}\\
-            Ein \textit{Betrachter} nutzt die Software um eine durch den
-            \textit{Anwender} erstellte Echtzeit-Animation anzusehen. Er nimmt
-            also eine passive Rolle ein.
-        }
-\end{itemize}
-\textit{Sekundäre Akteure}
-\begin{itemize}
-    \item{%
-            \textbf{Entwickler}\\
-            Ein \textit{Entwickler} erweitert die Software um neue Elemente
-            (wie z.B.\ neue Shader).
-        }
-\end{itemize}
-
+\input{inc/50/vision}
+\input{inc/50/actors}
 \input{inc/50/use-cases}
 \input{inc/50/additional-requirements}

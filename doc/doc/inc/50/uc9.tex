@@ -3,13 +3,13 @@
 % vim: spelllang=de spell
 % chktex-file 27 - disable warning about missing include files
 
-\subsubsection{Use Case UC2: Erstellen einer Echtzeit-Animation}
-\label{ssubsec:requirements:use-cases:uc2}
+\subsubsection{Use Case UC9: Hinzufügen eines Schlüsselbildes eines Parameters}
+\label{ssubsec:requirements:use-cases:uc9}
 
 \begin{longtabu}{p{0.5\textwidth}p{0.5\textwidth}}
     \centering\\
-    \caption{Use Case UC2: Erstellen einer
-        Echtzeit-Animation.}\label{table:uc2-create-demo}\\
+    \caption{Use Case UC9: Hinzufügen eines Schlüsselsbildes eines Parameters
+        eines Knotens.}\label{table:uc9-add-animation}\\
     \toprule
         \textbf{Bereich} &
         Editor \\
@@ -21,21 +21,40 @@
         Anwender \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Stakeholder und Interessen} &
-        Anwender: Möchte eine neue Echtzeit-Animation erstellen.\newline
-        Betrachter: Möchte eine erstellte Echtzeit-Animation ansehen. \\
+        Anwender: Möchte einen Parameter eines Knotens einer Szene
+        animieren.\newline
+        Betrachter: Möchte animierten Inhalt sehen.\\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Vorbedingungen} &
-        Der Editor sichert eine Animation alle \textit{n}-Minuten in einer
-        temporären Sicherungsdatei. \\
+        \begin{itemize}
+            \item{Die Editor-Applikation ist gestartet.}
+            \item{Es sind Knoten-Typen zum Hinzufügen vorhanden.}
+            \item{Eine beliebige Szene ist angewählt.}
+            \item{Die Szene verfügt bereits über Knoten.}
+        \end{itemize} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Erfolgsszenario} &
         \begin{enumerate}
-            \item{Der Anwender startet die Editor-Applikation.}
-            \item{Der Anwender fügt Elemente zu einer Szene zusammen.}
-            \item{Der Anwender legt Start und Ende einer Animation fest.}
-            \item{Der Anwender speichert die getätigte Arbeit.}
-            \item{Der Anwender exportiert die erstellte Animation.}
-            \item{Der Anwender schliesst den Editor.}
+            \item{Der Anwender klickt mit der linken Maustaste auf den
+                    Knoten, wessen Parameter er animieren möchte.}
+            \item{Der Knoten wird im Graphen als markiert dargestellt.}
+            \item{Die Parameter des Knoten werden im Parameter-Fenster
+                    dargestellt.}
+            \item{Der Anwender verschiebt den Marker der Zeitachse auf
+                    die gewünschte Position.}
+            \item{Der Anwender klickt im Parameter-Fenster bei dem
+                    gewünschten Parameter auf die Schaltfläche zur
+                    Erstellung eines Schlüsselsbildes.}
+            \item{Der Editor erstellt ein neues Schlüsselbild an der
+                    gewählten Stelle für den gewählten Parameter.
+                    Existieren frühere oder spätere Schlüsselbilder, wird
+                    zwischen diesen linear interpoliert.}
+            \item{Der Editor fügt die neu erstellte Animation zur Ausgabe des
+                    der Szene hinzu.}
+            \item{Der Editor sendet via Szenegraph das Signal, dass eine
+                    neues Schlüsselbild hinzugefügt wurde.}
+            \item{Der Editor merkt sich, dass sein Fenster verändert
+                    wurde.}
         \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Erweiterungen} &
@@ -59,11 +78,10 @@
                         \item{Der Editor stellt den ihm zuletzt bekannten
                                 Punkt der Animation wieder her.}
                 \end{enumerate}
-            }
-        \end{enumerate}
+            } \end{enumerate}
         \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
-        ---\\
+        --- \\
     \bottomrule
 \end{longtabu}

@@ -3,80 +3,82 @@
 % vim: spelllang=de spell
 % chktex-file 27 - disable warning about missing include files
 
-\begin{table}[H]
-    \centering
-    \caption{Use Case UC5: Bereitstellen neuer Editor-Elemente.}\label{table:uc1-user}
-    \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
-        \toprule
-            \textbf{Bereich} &
-            Player\\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Level} &
-            Ziel des Benutzers \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Primärer Aktor} &
-            Entwickler \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Stakeholder und Interessen} &
-            Entwickler: Möchte dem Anwender neue Möglichkeiten zur visuellen
-            Gestaltung bieten. Möchte dem Betrachter neue, visuell ansprechende
-            Elemente bieten. \newline
-            Anwender: Möchte neue Funktionen zur Erstellung von
-            Echtzeit-Animation nutzen können. \newline
-            Betrachter: Möchte visuell ansprechende Echtzeit-Animationen mit
-            neuen Effekten ansehen. \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Erfolgsszenario} &
-            \begin{enumerate}
-                \item{Der Entwickler entwickelt neuen Inhalt in Form eines
-                        Knotens für den Graphen (dies kann zum Beispiel ein
-                        prozedurales Mesh oder ein dedizierter Shader sein).}
-                \item{Der Entwickler startet den Editor.}
-                \item{Der neue Knoten steht im Editor automatisch zur Verfügung
-                        und kann genutzt werden.}
-                \item{Der Entwickler schliesst den Editor.}
-            \end{enumerate} \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Erweiterungen} &
-            \begin{enumerate}[label= (\alph*)]
-                \item{Erfassen neuer Knoten direkt im Editor
-                    \begin{enumerate}[label= (\roman*)]
-                        \item{Der Entwickler startet den Editor.}
-                        \item{Der Entwickler öffnet die Bibliothek mit allen
-                                Knoten-Typen.}
-                        \item{Der Entwickler fügt der Bibliothek einen neuen
-                                Knoten hinzu.}
-                        \item{Der Entwickler füllt den Knoten mit den
-                                entsprechenden Details und speichert diesen.}
-                        \item{Der neu erstellte Knoten wird persistiert.}
-                        \item{Der neu erstellte Knoten erscheint in der
-                                Bibliothek und ist per sofort auswählbar.}
-                        \item{Der Entwickler schliesst den Editor.}
-                    \end{enumerate}
-                }
-                \item{Fehlerhafter Inhalt des Knotens
-                    \begin{enumerate}[label= (\roman*)]
-                        \item{Der Entwickler fügt dem Knoten keinen oder
-                                fehlerhaften Inhalt hinzu.}
-                        \item{Der Editor weist den Entwickler auf den Umstand
-                                hin. Der Knoten kann nicht verwendet werden.}
-                    \end{enumerate}
-                }
-                \item{Absturz/Ausfall des Systems
-                    \begin{enumerate}[label= (\roman*)]
-                            \item{Das System stürzt an einem beliebigen Punkt
-                                    ab.}
-                            \item{Neustart des Editors.}
-                            \item{Der Editor stellt den ihm zuletzt bekannten
-                                    Punkt der Animation wieder her.}
-                    \end{enumerate}
-                }
-            \end{enumerate}
-            \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Zusätzliche Anforderungen} &
-            \todo[inline]{Add add. requirements} \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+\subsubsection{Use Case UC5: Bereitstellen neuer Editor-Elemente}
+\label{ssubsec:requirements:use-cases:uc5}
+
+\begin{longtabu}{p{0.5\textwidth}p{0.5\textwidth}}
+    \centering\\
+    \caption{Use Case UC5: Bereitstellen neuer
+        Editor-Elemente.}\label{table:uc5-add-new-elements}\\
+    \toprule
+        \textbf{Bereich} &
+        Player\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stufe (level)} &
+        Ziel des Benutzers \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Primärer Aktor} &
+        Entwickler \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stakeholder und Interessen} &
+        Entwickler: Möchte dem Anwender neue Möglichkeiten zur visuellen
+        Gestaltung bieten. Möchte dem Betrachter neue, visuell ansprechende
+        Elemente bieten. \newline
+        Anwender: Möchte neue Funktionen zur Erstellung von
+        Echtzeit-Animation nutzen können. \newline
+        Betrachter: Möchte visuell ansprechende Echtzeit-Animationen mit
+        neuen Effekten ansehen. \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erfolgsszenario} &
+        \begin{enumerate}
+            \item{Der Entwickler entwickelt neuen Inhalt in Form eines
+                    Knotens für den Graphen (dies kann zum Beispiel ein
+                    prozedurales Mesh oder ein dedizierter Shader sein).}
+            \item{Der Entwickler startet den Editor.}
+            \item{Der neue Knoten steht im Editor automatisch zur Verfügung
+                    und kann genutzt werden.}
+            \item{Der Entwickler schliesst den Editor.}
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erweiterungen} &
+        \begin{enumerate}[label= (\alph*)]
+            \item{Erfassen neuer Knoten direkt im Editor
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Entwickler startet den Editor.}
+                    \item{Der Entwickler öffnet die Bibliothek mit allen
+                            Knoten-Typen.}
+                    \item{Der Entwickler fügt der Bibliothek einen neuen
+                            Knoten hinzu.}
+                    \item{Der Entwickler füllt den Knoten mit den
+                            entsprechenden Details und speichert diesen.}
+                    \item{Der neu erstellte Knoten wird persistiert.}
+                    \item{Der neu erstellte Knoten erscheint in der
+                            Bibliothek und ist per sofort auswählbar.}
+                    \item{Der Entwickler schliesst den Editor.}
+                \end{enumerate}
+            }
+            \item{Fehlerhafter Inhalt des Knotens
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Entwickler fügt dem Knoten keinen oder
+                            fehlerhaften Inhalt hinzu.}
+                    \item{Der Editor weist den Entwickler auf den Umstand
+                            hin. Der Knoten kann nicht verwendet werden.}
+                \end{enumerate}
+            }
+            \item{Absturz/Ausfall des Systems
+                \begin{enumerate}[label= (\roman*)]
+                        \item{Das System stürzt an einem beliebigen Punkt
+                                ab.}
+                        \item{Neustart des Editors.}
+                        \item{Der Editor stellt den ihm zuletzt bekannten
+                                Punkt der Animation wieder her.}
+                \end{enumerate}
+            }
+        \end{enumerate}
+        \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Zusätzliche Anforderungen} &
+        ---\\
+    \bottomrule
+\end{longtabu}
 

@@ -4,69 +4,89 @@
 % chktex-file 27 - disable warning about missing include files
 
 \subsection{Zusätzliche Anforderungen}
-\label{subsec::requirements:additional-requirements}
+\label{subsec:requirements:additional-requirements}
 
 \subsubsection{Software}
-\label{subsec::requirements:additional-requirements:software}
+\label{subsec:requirements:additional-requirements:software}
 
 Durch die vorhergehende Projektarbeit --- MTE7101
 (siehe~\cite{osterwalder_sven_volume_2016}) --- sowie persönlicher Erfahrungen
-bei diversen Projekten, sieht der Autor die Software in der
-nachfolgenden Tabelle zur Umsetzung vor. Alle genannten Komponenten --- ausser
-Qt --- beziehen sich auf den \textit{Player}, als auch auf den \textit{Editor}.
-Der Player benötigt kein Qt, da er kein Frontend hat und möglichst schlank
-gehalten werden soll.
+bei diversen Projekten, sieht der Autor die Software gemäss
+Tabelle~\ref{table:requirements:additional-requirements:software} zur Umsetzung
+vor. Alle genannten Komponenten --- ausser Qt --- beziehen sich auf den
+\textit{Player}, als auch auf den \textit{Editor}.  Der Player benötigt kein
+Qt, da er kein Frontend hat und möglichst schlank gehalten werden soll.
 
-\begin{tabular}{llp{10cm}l}
+\begin{longtabu}{p{0.2\textwidth}p{0.1\textwidth}p{0.6\textwidth}p{0.1\textwidth}}
+    \caption{Mögliche
+        Software/Technologien}\label{table:requirements:additional-requirements:software}\\
     \toprule
     \textbf{Komponente} & \textbf{Version} & \textbf{Beschreibung} & \textbf{Verweise} \\
     \midrule
     C++        & 11      & Objektorientierte Programmiersprache
-                           &\protect\footnotemark\\
+                           & \protect\footnotemark\footnotetext{
+                               \url{http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=50372}
+                           }\\
 
     OpenGL     & 4.5     & Plattformunabhängige Programmierschnittstelle zur
                            Entwicklung von 2D- und 3D-Computergrafikanwendungen
-                           \parencite{wikipedia_the_free_encyclopedia_opengl_2015}.
-                           &\protect\footnotemark\\
+                           \parencite{wikipedia_the_free_encyclopedia_opengl_2015}
+                           &\protect\footnotemark\footnotetext{
+                               \url{https://www.opengl.org/registry/doc/glspec45.core.pdf}
+                           }\\
 
-    Qt        & 5.7      & ```Qt ist eine C++-Klassenbibliothek für die
+    Qt        & 5.7      & ``Qt ist eine C++-Klassenbibliothek für die
                            plattformübergreifende Programmierung grafischer
-                           Benutzeroberflächen.  Außerdem bietet Qt
+                           Benutzeroberflächen. Außerdem bietet Qt
                            umfangreiche Funktionen zur Internationalisierung
                            sowie Datenbankfunktionen und XML-Unterstützung an
                            und ist für eine große Zahl an Betriebssystemen bzw.
                            Grafikplattformen, wie X11 (Unix-Derivate), OS X,
                            Windows, iOS und Android
-                           erhältlich.'''~\parencite{wikipedia_foundation_qt_2016}.
-                           &\protect\footnotemark\\
+                           erhältlich.''~\parencite{wikipedia_foundation_qt_2016}.
+                           &\protect\footnotemark\footnotetext{
+                               \url{https://www.qt.io}
+                           }\\
 
     GLFW       & 3.1.2   & OpenGL-Bibliothek, welche die Erstellung und
                            Verwaltung von Fenstern sowie OpenGL-Kontexte
                            vereinfacht
                            \parencite{wikipedia_the_free_encyclopedia_glfw_2015}.
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{http://www.glfw.org}
+                           }\\
 
     GLEW       & 1.13    & OpenGL Extension Wrangler. Bibliothek zum Abfragen
                            und Laden von OpenGL-Erweiterungen (Extensions)
                            \parencite{wikipedia_the_free_encyclopedia_opengl_2015-1}.
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{http://glew.sourceforge.net}
+                           }\\
 
     GLM        & 0.9.7.6 & Header-only C++ Mathematik-Bibliothek, basierend auf
                            der Spezifikation der OpenGL Shader-Sprache GLSL.
                            Sie bietet eine Vielzahl an Datentypen wie etwa
                            Vektoren, Matrizen oder Quaternionen.
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{https://glm.g-truc.net}
+                           }\\
 
     CMake      & 3.3.2   & Software zur Verwaltung von Build-Prozessen von 
                            Software
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{https://www.cmake.org}
+                           }\\
 
     LLVM       & 3.8.1   & Ansammlung von modularen und wiederverwendbaren
                            Compilern und Toolchains.
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{http://llvm.org}
+                           }\\
 
     Clang      & 3.8.1   & Compiler-Frontend für LLVM.\@
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{http://clang.llvm.org}
+                           }\\
 
     Boost      & 1.59.0  & Freie Bibliothek bestehend aus einer Vielzahl von
                            Bibliotheken, die den unterschiedlichsten
@@ -74,18 +94,8 @@ gehalten werden soll.
                            Metaprogrammierung bis hin zu Speicherverwaltung
                            dienen
                            \parencite{wikipedia_the_free_encyclopedia_boost_2015}.
-                           &\protect\footnotemark\\
+                           &\protect\footnotemark\footnotetext{
+                               \url{http://www.boost.org}
+                           }\\
     \bottomrule
-\end{tabular}
-\footnotetext{\url{http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=50372}}
-\footnotetext{\url{https://www.opengl.org/registry/doc/glspec45.core.pdf}}
-\footnotetext{\url{https://www.qt.io}}
-\footnotetext{\url{http://www.glfw.org}}
-\footnotetext{\url{http://glew.sourceforge.net}}
-\footnotetext{\url{https://glm.g-truc.net}}
-\footnotetext{\url{https://www.cmake.org}}
-\footnotetext{\url{http://llvm.org}}
-\footnotetext{\url{http://clang.llvm.org}}
-\footnotetext{\url{http://www.boost.org}}
-
-
+\end{longtabu}

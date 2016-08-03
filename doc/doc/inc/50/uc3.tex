@@ -3,87 +3,88 @@
 % vim: spelllang=de spell
 % chktex-file 27 - disable warning about missing include files
 
-\begin{table}[H]
-    \centering
-    \caption{Use Case UC3: Bearbeiten einer bestehenden Animation}\label{table:uc3-edit-demo}
-    \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
-        \toprule
-            \textbf{Bereich} &
-            Editor \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Level} &
-            Ziel des Benutzers \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Primärer Aktor} &
-            Anwender \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Stakeholder und Interessen} &
-            Anwender: Möchte eine zuvor erstellte Echtzeit-Animation verändern. \newline
-            Betrachter: Möchte eine geänderte Echtzeit-Animation ansehen. \newline
-            Entwickler: Testen einer geänderten Echtzeit-Animation. \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Erfolgsszenario} &
-            \begin{enumerate}
-                \item{Der Anwender startet die Editor-Applikation.}
+\subsubsection{Use Case UC3: Bearbeiten einer bestehenden Animation}
+\label{ssubsec:requirements:use-cases:uc3}
+
+\begin{longtabu}{p{0.5\textwidth}p{0.5\textwidth}}
+    \centering\\
+    \caption{Use Case UC3: Bearbeiten einer bestehenden
+        Animation}\label{table:uc3-edit-demo}\\
+    \toprule
+        \textbf{Bereich} &
+        Editor \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stufe (level)} &
+        Ziel des Benutzers \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Primärer Aktor} &
+        Anwender \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stakeholder und Interessen} &
+        Anwender: Möchte eine zuvor erstellte Echtzeit-Animation verändern. \newline
+        Betrachter: Möchte eine geänderte Echtzeit-Animation ansehen. \newline
+        Entwickler: Testen einer geänderten Echtzeit-Animation. \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erfolgsszenario} &
+        \begin{enumerate}
+            \item{Der Anwender startet die Editor-Applikation.}
+            \item{Der Anwender öffnet eine zuvor gespeicherte
+                    Echtzeit-Animation.}
+            \item{Der Editor lädt die gewählte Echtzeit-Animation.}
+            \item{Der Anwender nimmt eine oder mehrere Änderungen vor.}
+            \item{Der Anwender speichert die getätigte Arbeit.}
+            \item{Der Anwender exportiert die erstellte Animation.}
+            \item{Der Anwender schliesst den Editor.}
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erweiterungen} &
+        \begin{enumerate}[label= (\alph*)]
+            \item{Schliessen des Editors bei gemachten Änderungen ohne zu
+                    speichern
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Anwender schliesst den Editor bei gemachten
+                            Änderungen ohne diese zu speichern.}
+                    \item{Der Editor weist den Anwender auf die
+                            nicht gespeicherten Änderungen hin und bietet
+                            die Möglichkeit diese zu speichern, diese nicht
+                            zu speichern oder das Schliessen abzubrechen.}
+                \end{enumerate}
+            }
+            \item{Eine zuvor gespeicherte Echtzeit-Animation kann nicht
+                    geladen werden.
+                \begin{enumerate}[label= (\roman*)]
                     \item{Der Anwender öffnet eine zuvor gespeicherte
                             Echtzeit-Animation.}
-                \item{Der Editor lädt die gewählte Echtzeit-Animation.}
-                \item{Der Anwender nimmt eine oder mehrere Änderungen vor.}
-                \item{Der Anwender speichert die getätigte Arbeit.}
-                \item{Der Anwender exportiert die erstellte Animation.}
-                \item{Der Anwender schliesst den Editor.}
-            \end{enumerate} \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Erweiterungen} &
-            \begin{enumerate}[label= (\alph*)]
-                \item{Schliessen des Editors bei gemachten Änderungen ohne zu
-                        speichern
-                    \begin{enumerate}[label= (\roman*)]
-                        \item{Der Anwender schliesst den Editor bei gemachten
-                                Änderungen ohne diese zu speichern.}
-                        \item{Der Editor weist den Anwender auf die
-                                nicht gespeicherten Änderungen hin und bietet
-                                die Möglichkeit diese zu speichern, diese nicht
-                                zu speichern oder das Schliessen abzubrechen.}
-                    \end{enumerate}
-                }
-                \item{Eine zuvor gespeicherte Echtzeit-Animation kann nicht
-                        geladen werden.
-                    \begin{enumerate}[label= (\roman*)]
-                        \item{Der Anwender öffnet eine zuvor gespeicherte
-                                Echtzeit-Animation.}
-                        \item{Der Editor weist den Anwender auf den Umstand
-                                hin, dass die Echtzeit-Animation nicht geöffnet
-                                werden kann.}
-                    \end{enumerate}
-                }
-                \item{Benötigte zusätzliche Dateien können nicht gefunden
-                        werden.
-                    \begin{enumerate}[label= (\roman*)]
-                        \item{Der Anwender öffnet eine zuvor gespeicherte
-                                Echtzeit-Animation bei welcher benötigte
-                                Dateien (wie zum Beispiel Bitmaps) fehlen.}
-                        \item{Der Editor weist den Anwender auf den Umstand
-                                hin, öffnet die Echtzeit-Animation dennoch. Er
-                                ersetzt die fehlenden Dateien mit
-                                Platzhaltern. Ein fehlerfreier Ablauf der
-                                Echtzeit-Animation ist nicht gewährleistet.}
-                    \end{enumerate}
-                }
-                \item{Absturz/Ausfall des Systems
-                    \begin{enumerate}[label= (\roman*)]
-                            \item{Das System stürzt an einem beliebigen Punkt
-                                    ab.}
-                            \item{Neustart des Editors.}
-                            \item{Der Editor stellt den ihm zuletzt bekannten
-                                    Punkt der Animation wieder her.}
-                    \end{enumerate}
-                }
-            \end{enumerate}
-            \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Zusätzliche Anforderungen} &
-            \todo[inline]{Add add. requirements} \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+                    \item{Der Editor weist den Anwender auf den Umstand
+                            hin, dass die Echtzeit-Animation nicht geöffnet
+                            werden kann.}
+                \end{enumerate}
+            }
+            \item{Benötigte zusätzliche Dateien können nicht gefunden
+                    werden.
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Anwender öffnet eine zuvor gespeicherte
+                            Echtzeit-Animation bei welcher benötigte
+                            Dateien (wie zum Beispiel Bitmaps) fehlen.}
+                    \item{Der Editor weist den Anwender auf den Umstand
+                            hin, öffnet die Echtzeit-Animation dennoch. Er
+                            ersetzt die fehlenden Dateien mit
+                            Platzhaltern. Ein fehlerfreier Ablauf der
+                            Echtzeit-Animation ist nicht gewährleistet.}
+                \end{enumerate}
+            }
+            \item{Absturz/Ausfall des Systems
+                \begin{enumerate}[label= (\roman*)]
+                        \item{Das System stürzt an einem beliebigen Punkt
+                                ab.}
+                        \item{Neustart des Editors.}
+                        \item{Der Editor stellt den ihm zuletzt bekannten
+                                Punkt der Animation wieder her.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Zusätzliche Anforderungen} &
+        ---\\
+    \bottomrule
+\end{longtabu}

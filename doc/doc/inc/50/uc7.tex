@@ -3,13 +3,14 @@
 % vim: spelllang=de spell
 % chktex-file 27 - disable warning about missing include files
 
-\subsubsection{Use Case UC2: Erstellen einer Echtzeit-Animation}
-\label{ssubsec:requirements:use-cases:uc2}
+\subsubsection{Use Case UC7: Hinzufügen eines neuen Knotens im Graphen einer
+    Szene}
+\label{ssubsec:requirements:use-cases:uc7}
 
 \begin{longtabu}{p{0.5\textwidth}p{0.5\textwidth}}
     \centering\\
-    \caption{Use Case UC2: Erstellen einer
-        Echtzeit-Animation.}\label{table:uc2-create-demo}\\
+    \caption{Use Case UC7: Hinzufügen eines neuen Knotens im Graphen einer
+        Szene.}\label{table:uc7-add-new-node}\\
     \toprule
         \textbf{Bereich} &
         Editor \\
@@ -21,21 +22,37 @@
         Anwender \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Stakeholder und Interessen} &
-        Anwender: Möchte eine neue Echtzeit-Animation erstellen.\newline
-        Betrachter: Möchte eine erstellte Echtzeit-Animation ansehen. \\
+        Anwender: Möchte neuen Inhalt zu einer Szene einer
+        Echtzeit-Animation hinzufügen.\newline
+        Betrachter: Möchte neu erstellten Inhalt ansehen.\newline
+        Entwickler: Möchte, dass seine erstellten Knoten-Typen produktiv
+        eingesetzt werden können. \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Vorbedingungen} &
-        Der Editor sichert eine Animation alle \textit{n}-Minuten in einer
-        temporären Sicherungsdatei. \\
+        \begin{itemize}
+            \item{Die Editor-Applikation ist gestartet.}
+            \item{Es sind Knoten-Typen zum Hinzufügen vorhanden.}
+            \item{Eine beliebige Szene ist angewählt.}
+        \end{itemize} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Erfolgsszenario} &
         \begin{enumerate}
-            \item{Der Anwender startet die Editor-Applikation.}
-            \item{Der Anwender fügt Elemente zu einer Szene zusammen.}
-            \item{Der Anwender legt Start und Ende einer Animation fest.}
-            \item{Der Anwender speichert die getätigte Arbeit.}
-            \item{Der Anwender exportiert die erstellte Animation.}
-            \item{Der Anwender schliesst den Editor.}
+            \item{Der Anwender klickt mit der rechten Maustaste auf eine
+                    leere Fläche der Szene.}
+            \item{Das Kontext-Menü zum Hinzufügen neuer Knoten öffnet
+                    sich.}
+            \item{Der Anwender wählt im Kontext-Menü den gewünschten
+                    Knoten-Typen aus.}
+            \item{Der Editor erstellt anhand der aktuellen Szene einen
+                    neuen Knoten im Szenegraphen.}
+            \item{Der Editor fügt den neu erstellten Knoten zur Ausgabe des
+                    Szenegraphen hinzu.}
+            \item{Der Editor sendet via Szenegraph das Signal, dass ein
+                    neuer Knoten hinzugefügt wurde.}
+            \item{Der Editor merkt sich, dass sein Fenster verändert
+                    wurde.}
+            \item{Der Editor aktualisiert die Anzahl der Knoten in den
+                    einzelnen Szenen.}
         \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Erweiterungen} &
@@ -64,6 +81,6 @@
         \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
-        ---\\
+        --- \\
     \bottomrule
 \end{longtabu}

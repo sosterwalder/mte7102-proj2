@@ -3,57 +3,58 @@
 % vim: spelllang=de spell
 % chktex-file 27 - disable warning about missing include files
 
-\begin{table}[H]
-    \centering
-    \caption{Use Case UC1: Betrachten einer Echtzeit-Animation.}\label{table:uc1-watch-demo}
-    \begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
-        \toprule
-            \textbf{Bereich} &
-            Player\\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Level} &
-            Ziel des Benutzers \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Primärer Aktor} &
-            Betrachter \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Stakeholder und Interessen} &
-            Betrachter: Möchte eine zuvor erstellte Echtzeit-Animation ansehen.  \newline
-            Anwender: Testen einer erstellen Echtzeit-Animation. \newline
-            Entwickler: Testen einer erstellen Echtzeit-Animation. \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Erfolgsszenario} &
-            \begin{enumerate}
-                \item{Der Betrachter startet die Player-Applikation und wählt
-                        die gewünschten Optionen, wie Auflösung und Bit-Tiefe.}
-                \item{Der Betrachter startet die Animation.}
-                \item{Der Player spielt die Animation bis zum Ende.}
-                \item{Der Player wird automatisch geschlossen.}
-            \end{enumerate} \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Erweiterungen} &
-            \begin{enumerate}[label= (\alph*)]
-                \item{Vorzeitiger Abbruch durch den Betrachter
-                    \begin{enumerate}[label= (\roman*)]
-                            \item{Der Betrachter bricht eine laufende Animation
-                                    ab.}
-                            \item{Der Player wird sofort geschlossen.}
-                    \end{enumerate}
-                }
-                \item{Absturz/Ausfall des Systems
-                    \begin{enumerate}[label= (\roman*)]
-                            \item{Das System stürzt an einem beliebigen Punkt
-                                    ab.}
-                            \item{Neustart des Players.}
-                            \item{Der Player beginnt die Animation von vorne.}
-                    \end{enumerate}
-                }
-            \end{enumerate}
-            \\
-        \cmidrule(r){1-1}\cmidrule(lr){2-2}
-            \textbf{Zusätzliche Anforderungen} &
-            \todo[inline]{Add add. requirements} \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+\subsubsection{Use Case UC1: Betrachten einer Echtzeit-Animation}
+\label{ssubsec:requirements:use-cases:uc1}
 
+\begin{longtabu}{p{0.3\textwidth}p{0.7\textwidth}}
+    \centering\\
+    \caption{Use Case UC1: Betrachten einer
+        Echtzeit-Animation.}\label{table:uc1-watch-demo}\\
+    \toprule
+        \textbf{Bereich} &
+        Player\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stufe (level)} &
+        Ziel des Benutzers \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Primärer Aktor} &
+        Betrachter \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Stakeholder und Interessen} &
+        Betrachter: Möchte eine zuvor erstellte Echtzeit-Animation ansehen.  \newline
+        Anwender: Testen einer erstellen Echtzeit-Animation. \newline
+        Entwickler: Testen einer erstellten Echtzeit-Animation. \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erfolgsszenario} &
+        \begin{enumerate}
+            \item{Der Betrachter startet die Player-Applikation und wählt
+                    die gewünschten Optionen, wie Auflösung und Bit-Tiefe.}
+            \item{Der Betrachter startet die Animation.}
+            \item{Der Player spielt die Animation bis zum Ende.}
+            \item{Der Player wird automatisch geschlossen.}
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Erweiterungen} &
+        \begin{enumerate}[label= (\alph*)]
+            \item{Vorzeitiger Abbruch durch den Betrachter
+                \begin{enumerate}[label= (\roman*)]
+                        \item{Der Betrachter bricht eine laufende Animation
+                                ab.}
+                        \item{Der Player wird sofort geschlossen.}
+                \end{enumerate}
+            }
+            \item{Absturz/Ausfall des Systems
+                \begin{enumerate}[label= (\roman*)]
+                        \item{Das System stürzt an einem beliebigen Punkt
+                                ab.}
+                        \item{Neustart des Players.}
+                        \item{Der Player beginnt die Animation von vorne.}
+                \end{enumerate}
+            }
+        \end{enumerate}
+        \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Zusätzliche Anforderungen} &
+        ---\\
+    \bottomrule
+\end{longtabu}
