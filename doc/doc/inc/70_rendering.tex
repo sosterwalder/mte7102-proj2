@@ -1,0 +1,159 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\chapter{Rendering}
+\label{chap:rendering}
+
+
+Um schliesslich die erstellte Echtzeit-Animationen auch darstellen zu können
+--- im Editor und im Player --- wird ein Rendering-Verfahren benötigt.
+
+Als Rendering-Verfahren soll primär das Ray-Tracing-Verfahren Sphere-Tracing
+zum Einsatz kommen. Auf dieses wird hier nicht eingegangen, da dieses
+bereits ausführlich in der vorhergehenden Projektarbeit behandelt wurde
+(siehe~\ref{osterwalder_sven_volume_2016}).
+
+Da bei der vorhergehenden Projektarbeit die~\textit{Berechnung von
+    Normalen-Vektoren}, die \textit{Repetitions-Operation} und deren
+\textit{Komplexität} nicht ausreichend geklärt wurden beziehungsweise bei der
+Projektarbeit Fragen dazu aufkamen, werden die Punkte an dieser Stelle genauer
+erläutert. Weiter wird ein möglicher Ansatz gezeigt, um \textit{herkömmliche
+    3D-Modelle (Meshes)} mittels Sphere-Tracing darstellen zu können.
+
+Als Grundlage für das Rendering wird OpenGL gewählt, da diese Bibliothek
+plattformübergreifend und quelloffen ist. Mit der Einführung der Version 3 von
+OpenGL, beziehungsweise Version 2 von OpenGL ES, wurde die Rendering-Pipeline
+dahingehend geändert, dass diese nun nicht mehr fix vorgegeben sondern frei
+programmierbar
+ist\cite{opengl_foundation_fixed_2015}~\cite{opengl_foundation_rendering_2015}.
+So gesehen findet das Rendering spätestens seit OpenGL Version 3
+beziehungsweise OpenGL ES Version 2 immer per Shader statt. Ist der Aufwand der 
+Programmierung der Rendering-Pipeline initial grösser, so ist eine frei
+programmierbare Pipeline jedoch viel flexibler.
+
+Genau dieser Ansatz soll auch in der hier vorgestellten Software-Architektur
+für das Rendering verwendet werden: Ein modulares Rendering, welches jederzeit
+ersetzt werden kann. Da alles via Shader gerendert wird, ist dies so gesehen
+bereits gegeben. Szenen können --- im Falle von Sphere-Tracing --- rein aus
+internen Funktionen und Daten bestehen oder aber --- im Falle der Verwendung
+von herkömmlichen Modellen (Meshes) --- externe Daten beinhalten. So wäre
+beispielsweise zusätzlich zu Sphere-Tracing
+Deferred-Rendering~\footnotetext{https://sites.google.com/site/richgel99/home}~\parencite{saito_comprehensible_1990}
+denkbar. Die Schnittstelle zwischen der Applikation und Shader, in Form von
+Uniform-Variablen, wird aber so oder benötigt um auf der CPU berechnete
+Matrizen an den Shader respektive die GPU weiterzureichen.
+
+\section{Berechnung von Normalen-Vektoren}
+\label{sec:rendering:normals}
+
+Folgender Abschnitt basiert auf~\cite[S. 42 bis
+43]{osterwalder_sven_volume_2016}.
+
+Die Oberflächen-Normale kann gemäss~\citeauthor{hart_ray_1989} mittels dem
+Gradienten des Distanzfeldes für einen bestimmten Punkt auf einer impliziten
+Oberfläche berechnet werden~\parencite[S. 292 bis 293]{hart_ray_1989}.
+
+Verwendet man dies nun zusammen mit den entsprechenden Distanzfunktionen, so
+ergeben sich folgende Gleichungen:
+
+\begin{gather}
+    \bm{n}_{x} = f(x + \varepsilon, y, z) - f(x - \varepsilon, y, z) \\
+    \bm{n}_{y} = f(x, y + \varepsilon,  z) - f(x, y - \varepsilon,  z) \\
+    \bm{n}_{z} = f(x, y, z + \varepsilon) - f(x, y, z - \varepsilon) \\
+\end{gather}
+
+Dabei ist $\bm{n} = \begin{bmatrix} x_{n} \\ y_{n} \\ z_{n} \end{bmatrix}$ die
+Normale der Oberfläche in Form eines Vektors mit drei Komponenten und $f$ eine
+Distanzfunktion~\parencites[S. 292 bis 293]{hart_ray_1989}[S.
+13]{hart_ray_1993}.
+
+Es werden also insgesamt sechs Punkte abgetastet. $\varepsilon$ ist dabei ein
+Wert um alle benachbarten Punkte eines gegebenen Punktes der impliziten
+Oberfläche entlang der Koordinatenachsen zu erhalten. Da die Berechnung der
+Normalen somit direkt von $\varepsilon$ abhängt, wird für $\varepsilon$
+üblicherweise ein möglichst kleiner Wert verwendet.  \citeauthor{hart_ray_1989}
+geben $\varepsilon$ als die minimale Inkrementation eines (Licht-) Strahles an.
+Die Normale der Oberfläche sollte schliesslich noch normalisiert werden.
+
+``Liefert die oben genannte Gradiente, bestehend aus 6 Punkten, eine zu
+geringe Genauigkeit, so kann diese gemäss \citeauthor{hart_ray_1989}
+erweitert werden~\parencite[S. 293]{hart_ray_1989}.\\
+Die Erweiterung erfolgt durch Hinzunahme von Punkten, welche eine
+gemeinsame Kante haben. Dies erzeugt eine Gradiente bestehend aus 18
+Punkten. Werden noch die Punkte hinzugenommen, welche gemeinsame
+Eckpunkte haben, so ergibt sich eine Gradiente bestehend aus 26
+Punkten~\parencite[S. 293]{hart_ray_1989}.''~\cite[S.
+43]{osterwalder_sven_volume_2016}
+
+\section{Repetitions-Operation}
+\label{sec:rendering:modulo}
+
+Wie unter~\cite[S. 37ff]{osterwalder_sven_volume_2016} aufgeführt, existieren
+für implizite Oberflächen diverse Operationen, wie Distanz- und
+Domänen-Operationen sowie -Deformationen.
+
+Möchte man nun aber dasselbe Objekt mehrmals darstellen, so repetiert man
+dieses anhand einer oder mehrerer Achsen. Dies geschieht durch Anpassung der
+Domäne, also der Anpassung des Raumes, in dem sich eine implizite Oberfläche
+befindet. Es handelt sich dabei also um eine Domänen-Operation.
+
+Die Anpassung der Domäne kann mittels der Modulo-Operation (mod, \%)
+vorgenommen werden. Die Modulo-Operation gibt den (vorzeichenbehafteten) Rest
+einer Division zurück~\cite{maignan_integer_2008}.
+
+\begin{gather}
+    d(\bm{x}, \bm{c}) = \bm{x} \mod \bm{c} - {\bm{c} \over 2}\\
+    \text{repeat}(\bm{x}, \bm{c}) = f(d(\bm{x}, \bm{c}))
+\end{gather}
+
+Dabei ist $\bm{x}$ der Punkt einer impliziten Oberfläche $f$ und $\bm{c}$ der
+gewünschte Abstand zwischen den Objekten.
+
+Das Objekt wird erst mit der Hälfte des Abstandes $c$, also $c \over 2$, anhand
+der Koordinatenachsen verschoben, um es im Rahmen des gewünschten Abstandes
+$c$ zu zentrieren.  Danach wird die Repetition der Domäne angewendet. Danach
+wird das Objekt zum Ursprung seines Koordinatensystemes zurück verschoben.
+
+\subsection{Komplexität}
+\label{subsec:rendering:modulo:complexity}
+
+Es stellt sich nun die Frage, wie hoch die zusätzliche Komplexität bei
+Anwendung der Modulo-Operation ist. Der Autor geht davon aus, dass der Aufwand
+zur Darstellung von sich wiederholenden Objekten linear~\todo{is this correct?}
+ist. Die Methode zum Abtasten der Distanz, \textit{castRay}, ändert sich in
+diesem Sinne linear mit der Anzahl Objekte, die dargestellt werden sollen. Je
+mehr Objekte, desto höher der Aufwand. Nimmt man nun an, dass ein Objekt,
+welches wiederum eine Komposition von mehreren Objekten sein kann, wiederholt
+wird, so wird dennoch nach Erreichen der maximalen Anzahl Schritte oder der
+maximalen Distanz abgebrochen, was linear ist. Vereinfacht gesagt wird
+schliesslich pro Iteration nur zurückgegeben, ob auf ein Objekt getroffen wurde
+oder nicht. Die Berechnung der Beleuchtung respektiv der Farbe einer Oberfläche
+erhöht die Komplexität natürlich nochmals.
+Die Thematik soll an dieser Stelle jedoch nicht weiter vertieft werden, da dies
+den Rahmen dieser Projektarbeit deutlich sprengen würde.
+
+\section{Meshes}
+\label{sec:rendering:meshes}
+
+Während der Präsentation der vorhergehenden Projektarbeit, MTE7101, kam die
+Frage auf, ob es auch möglich ist ``konventionelle'' 3D-Modelle (Meshes) mittels
+Sphere-Tracing darzustellen. Die Modellierung bei der Anwendung von Sphere-Tracing findet 
+üblicherweise mittels Distanzfunktionen statt und ist daher rein Mathematisch.
+Sphere-Tracing nutzt Distanzfunktionen und Distanzfelder zur Darstellung von
+impliziten Oberflächen~\cite[S. 31]{osterwalder_sven_volume_2016}.
+
+Betrachtet man nun aber Meshes genauer, so handelt es sich prinzipiell auch um
+Tiefeninformationen --- wie bei einem Distanzfeld. Somit müsste es möglich sein
+ein Distanzfeld aus einem Mesh zu erzeugen und in einer dreidimensionalen
+Textur abzuspeichern. Dazu könnte ein dreidimensionales Raster erzeugt und das
+Mesh darin abgelegt werden. Danach müsste man die Distanzwerte von jedem Punkt
+des Rasters zur Oberfläche des Meshes in der dreidimensionalen Textur ablegen.
+Das Distanzfeld wäre dann zwar initial nicht $\in \R^{3}$, wie für das
+Sphere-Tracing benötigt, das Speichern in eine dreidimensionale Textur würde
+die Werte jedoch dann wieder auf [0, 1] beschränken.
+
+Dem Autor dieser Arbeit ist bisher kein solches Verfahren bekannt. Ob die oben
+beschriebene Methode wirklich funktioniert und wie gut die Resultate wären
+müsste ausprobiert werden.
