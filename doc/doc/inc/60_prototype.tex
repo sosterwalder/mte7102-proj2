@@ -12,6 +12,14 @@ sowie der Identifikation der wichtigsten Komponenten
 Software umgesetzt. Dies diente auch der Identifikation der zusätzlichen
 Anforderungen (\ref{subsec:requirements:additional-requirements}).
 
+Der Prototyp erlaubt die Modellierung einer einfachen Szene, bestehend aus
+Primitiven, anhand der Graph-Komponente. Die Primitiven befinden sich in
+externen (Shader-) Dateien, welche zur Laufzeit zusammen mit einem Haupt-Shader
+geladen und zur Verfügung gestellt werden. Durch die Modellierung wird der
+Haupt-Shader um Teile ergänzt und neu kompiliert, dies geschieht alles zur
+Laufzeit in Echtzeit. Die Darstellung findet schliesslich mittels dem als
+Sphere-Tracing bekannten Ray-Tracing-Verfahren statt.
+
 \input{inc/60/procedure}
 \input{inc/60/models}
 \input{inc/60/sequence}
