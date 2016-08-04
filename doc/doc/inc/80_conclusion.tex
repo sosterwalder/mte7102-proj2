@@ -6,47 +6,88 @@
 \chapter{Schlusswort}
 \label{chap:discussion_and_conclusion}
 
-In dieser Projektarbeit wurde Sphere Tracing vorgestellt. Es ist eine
-optimierte Variante des als Ray Tracing bekannten Verfahrens.  Sphere
-Tracing erlaubt die Darstellung von Szenen in der Qualität von Ray
-Tracing, aber in Echtzeit.
+In dieser Projektarbeit wurde eine Software-Architektur für ein System zur
+einfachen Erstellung und Handhabung visueller Szenen in Echtzeit vorgestellt.
+Die Projektarbeit dient als Vorarbeit zur darauffolgenden Projektarbeit,
+MTE7103.
 
-Zuerst wurden \textit{lokale}, dann \textit{globale Beleuchtungsmodelle} inklusive der
-\textit{Renderinggleichung} vorgestellt. Weiter wurde das \textit{Ray Tracing}
-Verfahren ausgehend von der ursprünglichen Idee des Ray Tracings, ein
-als \textit{Ray Casting} bekanntes Verfahren, vorgestellt. Dabei wurde auch die
-zugrundeliegende Physik vereinfacht aufgezeigt.
+Zuerst wurde die \textit{Vision} erarbeitet und festgehalten. Die vorgestellte
+Software-Architektur soll schliesslich zu einer Software zur Verwaltung und
+Darstellung von Echtzeit-Animationen führen. Dabei soll sie es Anwendern
+erlauben Echtzeit-Animationen in intuitiver Weise zu erstellen.
 
-Für die praktische Anwendung der Beleuchtungsmodelle wurden die
-klassischen Modelle zur Schattierung \textit{Flat-Shading},
-\textit{Gouraud-Shading} sowie \textit{Phong-Shading} vorgestellt.
+Ausgehend von der Vision wurden die \textit{Akteure} bestimmt sowie \textit{Use
+    Cases} definiert.  Die Use Cases 1 bis und mit 5 wurden bewusst eher grob
+granular gehalten um einen Überblick über die gesamte Software zu geben.
+Details finden sich in den Uses Cases 6 bis 10.
 
-Um die eigentliche Szene darstellen zu können,
-wurden~\textit{Oberflächen} im Allgemeinen eingeführt. Dabei wurde
-gezeigt, dass zur Modellierung von Oberflächen hauptsächlich zwei
-Techniken verwendet werden: Die parametrische und die implizite
-Modellierung bzw.\ Darstellung. Es wurden dann \textit{implizite
-    Oberflächen} im Speziellen behandelt. Mittels
-\textit{Distanzfunktionen} wurde eine Grundlage zur Berechnung von
-Distanzen gezeigt, welche der späteren Modellierung und Darstellung
-dient. Ausgehend von den Distanzfunktionen wurden schliesslich
-\textit{Distanzfelder} beschrieben, eine Art Datenstruktur basierend auf
-den Distanzfunktionen.
+Aufgrund der Anforderungen und Erfahrungen des Autors wurde mögliche Software
+zur späteren Umsetzung der Software als \textit{zusätzliche Anforderung}
+festgehalten.  Ursprünglich sollte NanoGUI für die grafische Umsetzung genutzt
+werden. Bei der Implementation des Prototypen zeigte sich jedoch, dass die
+Bibliothek nur bedingt für die Anforderungen aus der Software-Architektur
+geeignet ist.  Stattdessen wird nun Qt in Betracht gezogen, da dies den
+Grossteil aller Anforderungen bereits abdeckt.
 
-Mit \textit{Ray Marching} und \textit{Sphere Tracing} wurden zwei
-Methoden zur Darstellung von impliziten Oberflächen aufgezeigt. Weiter
-wurden \textit{Operationen für implizite Oberflächen}, wie
-beispielsweise die Vereinigung oder Subtraktion, sowie Funktionen zur
-Modellierung von \textit{geometrischen Primitiven} vorgestellt.
+Ausgehend von den Anforderungen wurden einzelne \textit{Komponenten der
+    Applikation} abgeleitet und bildlich dargestellt. Die Applikation besteht
+aus zwei Applikationen: Einem Player, welcher dem Abspielen von
+Echtzeit-Animationen dient, sowie einem Editor, welcher der Erstellung und
+Verwaltung von Echtzeit-Animationen dient.
 
-Schliesslich wurde gezeigt, wie die vorgestellten Grundlagen für das
-Rendering von impliziten Oberflächen genutzt werden können.
+Durch das Festhalten der Anforderungen und dem Identifizieren der einzelnen
+Komponenten wurde schliesslich das \textit{Domänenmodell} erstellt, welches die Domäne
+mit ihren essentiellen Konzepten oder Objekten zeigt.
 
-Im letzten Abschnitt wurde der
-umgesetzte~\hyperref[chap:prototype]{\textit{Prototyp}} vorgestellt,
-wobei einzelne Parameter des~\hyperref[chap:prototype]{Prototyps}
-(\textit{Distanz}, \textit{Präzision}, die \textit{Anzahl Schritte} und
-der \textit{Skalierungsfaktor für Schatten}) anhand einer Beispielszene
-verglichen wurden.
+Um eine Vorstellung vom Ablauf der Applikationen zu erhalten, wurde der erste
+Use Case, ``UC1: Betrachten einer Echtzeit-Animation'', als
+\textit{Sequenz-Diagramm} dargestellt. Das Sequenz-Diagramm ist in diesem Sinne
+nicht vollständig, da dies ansonsten zu komplex und unübersichtlich würde. Es
+geht nur darum ein grundlegendes Verständnis der Applikationen zu entwickeln.
 
-\input{inc/80/further_work.tex}
+Die Architektur wurde dann weiter ausgearbeitet und schliesslich folgte daraus
+eine locker abgestufte Architektur (relaxed layered architecture). Diese wurde
+mittels \textit{Paket-Diagrammen} grafisch dargestellt.
+
+Um nun noch einen Schritt weiter zu gehen und der eigentlichen Umsetzung näher
+zu kommen, wurden \textit{Klassendiagramme} der Applikation erstellt.
+
+Zu dem Domänenmodell, dem Sequenz-Diagramm, den Paket-Diagrammen und den
+Klassendiagrammen ist zu sagen, dass bei diesen einige essentielle
+Konzepte beziehungsweise Objekte bewusst fehlen. Aufgrund der Vorgehensweise
+anhand des Unified Processes (UP) ist ein iteratives Arbeiten vorgesehen, da
+der UP auf agilen Ansätzen basiert. Das Ziel dieser Arbeit war nicht eine
+komplette und ``korrekte'' Architektur zu erstellen, welche sich direkt
+umsetzen lässt. Vielmehr dient diese als Grundlage für die darauffolgende
+Arbeit, MTE7013 --- ``Master Thesis''. Bei dieser sollen dann die Details in
+einzelnen Iterationsschritten erarbeitet und festgehalten werden.
+
+Um Erfahrungen hinsichtlich der Umsetzung sammeln zu können sowie Erkenntnisse
+betreffend Software zu erhalten, wurde ein \textit{Prototyp} umgesetzt. Der
+Prototyp deckt nicht die gesamte Architektur ab sondern demonstriert die
+Konzepte einzelner Teile der Software-Architektur. Der Prototyp erlaubt die
+Modellierung einer einfachen Szene, bestehend aus Primitiven, anhand der
+Graph-Komponente. Die Primitiven befinden sich in externen (Shader-) Dateien,
+welche zur Laufzeit zusammen mit einem Haupt-Shader geladen und zur Verfügung
+gestellt werden. Durch die Modellierung wird der Haupt-Shader um Teile ergänzt
+und neu kompiliert, dies geschieht alles zur Laufzeit in Echtzeit. Die
+Darstellung findet schliesslich mittels dem als Sphere-Tracing bekannten
+Ray-Tracing-Verfahren statt. Dieses wurde in der vorhergehenden Projektarbeit
+vorgestellt (siehe~\cite{osterwalder_sven_volume_2016}).
+
+Im letzen Abschnitt wurde näher auf das Rendering-Verfahren eingegangen. Zudem
+wurde mit der Repetition eine weitere Operation für implizite Oberflächen
+vorgestellt und deren Komplexität betrachtet. Schliesslich wurde eine
+Möglichkeit in Betracht gezogen, wie herkömmliche 3D-Modelle (Meshes) via
+Sphere-Tracing dargestellt werden können. Dass diese Möglichkeit funktioniert ist
+nicht gegeben, es handelt sich lediglich um eine Idee.
+
+Im Nachhinein betrachtet wurde in der ersten Hälfte der Projektarbeit viel Zeit
+in den Prototypen investiert. Der Fokus lag anfangs primär darin einen
+lauffähigen Prototypen zu erhalten, anstatt zuerst ein (Software-) Design zu
+erstellen. Dies hatte schliesslich zur Folge, dass keine saubere Trennung (zum
+Beispiel in Schichten) stattfand und der Code weniger erweiterbar und wartbar
+wurde. Als Schlussfolgerung kann man sagen, dass auch bei iterativem Vorgehen
+und der Erstellung von Prototypen zuerst zumindest eine minimale Dokumentation
+zum Beispiel in Form von Domänenmodellen, Klassendiagrammen und
+Sequenz-Diagrammen erstellt werden sollte.
