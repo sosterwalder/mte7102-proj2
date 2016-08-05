@@ -1,0 +1,22 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\subsection{Komplexität}
+\label{subsec:rendering:modulo:complexity}
+
+Es stellt sich nun die Frage, wie hoch die zusätzliche Komplexität bei
+Anwendung der Modulo-Operation ist. Der Autor geht davon aus, dass der Aufwand
+zur Darstellung von sich wiederholenden Objekten linear ist. Die Methode zum
+Abtasten der Distanz, \textit{castRay}, ändert sich in diesem Sinne linear mit
+der Anzahl Objekte, die dargestellt werden sollen. Je mehr Objekte, desto höher
+der Aufwand. Nimmt man nun an, dass ein Objekt, welches wiederum eine
+Komposition von mehreren Objekten sein kann, wiederholt wird, so wird dennoch
+nach Erreichen der maximalen Anzahl Schritte oder der maximalen Distanz
+abgebrochen, was linear ist. Vereinfacht gesagt wird schliesslich pro Iteration
+nur zurückgegeben, ob auf ein Objekt getroffen wurde oder nicht. Die Berechnung
+der Beleuchtung respektiv der Farbe einer Oberfläche erhöht die Komplexität
+natürlich nochmals.  Die Thematik soll an dieser Stelle jedoch nicht weiter
+vertieft werden, da dies den Rahmen dieser Projektarbeit deutlich sprengen
+würde.

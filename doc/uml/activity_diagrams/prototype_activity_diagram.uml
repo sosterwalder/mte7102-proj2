@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_oEmeQFoOEeaBVeXBfEZcSQ" name="RootElement">
-  <packagedElement xmi:type="uml:Activity" xmi:id="_yCNW4FoOEeaBVeXBfEZcSQ" name="Activity1" node="_0tFowFoOEeaBVeXBfEZcSQ">
-    <node xmi:type="uml:InitialNode" xmi:id="_0tFowFoOEeaBVeXBfEZcSQ" name="InitialNode1"/>
+  <packagedElement xmi:type="uml:Activity" xmi:id="_yCNW4FoOEeaBVeXBfEZcSQ" name="Prototype Main Activity" node="_6NXTAFrVEeahEqxLQqZY4g _jZJ7YFrVEeahEqxLQqZY4g _Uqw0UFrVEeahEqxLQqZY4g _Rn4SIFrVEeahEqxLQqZY4g _NlCHwFrVEeahEqxLQqZY4g _GMPVQFrVEeahEqxLQqZY4g _DlR6EFrVEeahEqxLQqZY4g _CG7FsFrVEeahEqxLQqZY4g _5YJ-wFrUEeahEqxLQqZY4g _0tFowFoOEeaBVeXBfEZcSQ _OPT-YFrWEeahEqxLQqZY4g _X-RXAFrWEeahEqxLQqZY4g">
+    <edge xmi:type="uml:ControlFlow" xmi:id="_MKKPwFrWEeahEqxLQqZY4g" target="_6NXTAFrVEeahEqxLQqZY4g" source="_0tFowFoOEeaBVeXBfEZcSQ"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_hFh2cFrWEeahEqxLQqZY4g" target="_jZJ7YFrVEeahEqxLQqZY4g" source="_Rn4SIFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_h-eQoFrWEeahEqxLQqZY4g" name="Active" target="_Uqw0UFrVEeahEqxLQqZY4g" source="_jZJ7YFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_kjbgsFrWEeahEqxLQqZY4g" name="Not active" target="_OPT-YFrWEeahEqxLQqZY4g" source="_jZJ7YFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_nofNIFrWEeahEqxLQqZY4g" target="_X-RXAFrWEeahEqxLQqZY4g" source="_OPT-YFrWEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_sLSp8FrWEeahEqxLQqZY4g" target="_jZJ7YFrVEeahEqxLQqZY4g" source="_Uqw0UFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_wxNFIFrWEeahEqxLQqZY4g" target="_5YJ-wFrUEeahEqxLQqZY4g" source="_6NXTAFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_xYP3AFrWEeahEqxLQqZY4g" target="_CG7FsFrVEeahEqxLQqZY4g" source="_5YJ-wFrUEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_yHgwwFrWEeahEqxLQqZY4g" target="_DlR6EFrVEeahEqxLQqZY4g" source="_CG7FsFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_yvyRsFrWEeahEqxLQqZY4g" target="_GMPVQFrVEeahEqxLQqZY4g" source="_DlR6EFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_zd3fsFrWEeahEqxLQqZY4g" target="_NlCHwFrVEeahEqxLQqZY4g" source="_GMPVQFrVEeahEqxLQqZY4g"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_0OoOQFrWEeahEqxLQqZY4g" target="_Rn4SIFrVEeahEqxLQqZY4g" source="_NlCHwFrVEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:InitialNode" xmi:id="_0tFowFoOEeaBVeXBfEZcSQ" name="Start of application" outgoing="_MKKPwFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_5YJ-wFrUEeahEqxLQqZY4g" name="Init. GUI" incoming="_wxNFIFrWEeahEqxLQqZY4g" outgoing="_xYP3AFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_CG7FsFrVEeahEqxLQqZY4g" name="Set up Graph" incoming="_xYP3AFrWEeahEqxLQqZY4g" outgoing="_yHgwwFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_DlR6EFrVEeahEqxLQqZY4g" name="Init. shader files" incoming="_yHgwwFrWEeahEqxLQqZY4g" outgoing="_yvyRsFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_GMPVQFrVEeahEqxLQqZY4g" name="Init. main shader" incoming="_yvyRsFrWEeahEqxLQqZY4g" outgoing="_zd3fsFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_NlCHwFrVEeahEqxLQqZY4g" name="Bind shader" incoming="_zd3fsFrWEeahEqxLQqZY4g" outgoing="_0OoOQFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_Rn4SIFrVEeahEqxLQqZY4g" name="Calculate inputs" incoming="_0OoOQFrWEeahEqxLQqZY4g" outgoing="_hFh2cFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_Uqw0UFrVEeahEqxLQqZY4g" name="Render" incoming="_h-eQoFrWEeahEqxLQqZY4g" outgoing="_sLSp8FrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:DecisionNode" xmi:id="_jZJ7YFrVEeahEqxLQqZY4g" name="Mainloop" incoming="_hFh2cFrWEeahEqxLQqZY4g _sLSp8FrWEeahEqxLQqZY4g" outgoing="_h-eQoFrWEeahEqxLQqZY4g _kjbgsFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_6NXTAFrVEeahEqxLQqZY4g" name="Set up logging" incoming="_MKKPwFrWEeahEqxLQqZY4g" outgoing="_wxNFIFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:CreateObjectAction" xmi:id="_OPT-YFrWEeahEqxLQqZY4g" name="Shut down" incoming="_kjbgsFrWEeahEqxLQqZY4g" outgoing="_nofNIFrWEeahEqxLQqZY4g"/>
+    <node xmi:type="uml:ActivityFinalNode" xmi:id="_X-RXAFrWEeahEqxLQqZY4g" name="Termination of application" incoming="_nofNIFrWEeahEqxLQqZY4g"/>
   </packagedElement>
 </uml:Model>

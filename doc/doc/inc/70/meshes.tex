@@ -1,0 +1,29 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\section{Meshes}
+\label{sec:rendering:meshes}
+
+Während der Präsentation der vorhergehenden Projektarbeit, MTE7101, kam die
+Frage auf, ob es auch möglich ist ``konventionelle'' 3D-Modelle (Meshes) mittels
+Sphere-Tracing darzustellen. Die Modellierung bei der Anwendung von Sphere-Tracing findet 
+üblicherweise mittels Distanzfunktionen statt und ist daher rein Mathematisch.
+Sphere-Tracing nutzt Distanzfunktionen und Distanzfelder zur Darstellung von
+impliziten Oberflächen~\cite[S. 31]{osterwalder_sven_volume_2016}.
+
+Betrachtet man nun aber Meshes genauer, so handelt es sich prinzipiell auch um
+Tiefeninformationen --- wie bei einem Distanzfeld. Somit müsste es möglich sein
+ein Distanzfeld aus einem Mesh zu erzeugen und in einer dreidimensionalen
+Textur abzuspeichern. Dazu könnte ein dreidimensionales Raster erzeugt und das
+Mesh darin abgelegt werden. Danach müsste man die Distanzwerte von jedem Punkt
+des Rasters zur Oberfläche des Meshes in der dreidimensionalen Textur ablegen.
+Das Distanzfeld wäre dann zwar initial nicht $\in \R^{3}$, wie für das
+Sphere-Tracing benötigt, das Speichern in eine dreidimensionale Textur würde
+die Werte jedoch dann wieder auf [0, 1] beschränken.
+
+Dem Autor dieser Arbeit ist bisher kein solches Verfahren bekannt. Ob die oben
+beschriebene Methode wirklich funktioniert und wie gut die Resultate wären
+müsste ausprobiert werden.
+

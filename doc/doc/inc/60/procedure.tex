@@ -16,10 +16,10 @@ werden können.
 Als zweites Teil-Ziel wurde dynamisches Laden von Shader-Dateien ausgehend vom
 Verzeichnis des Prototypen implementiert.
 
-Als drittes Teil-Ziel wurden Shader in Form von Templates umgesetzt.  Mit
-``Jinja2CppLight'' (TODO~\todo{add reference to Jinja2CppLight here}) wurde
-schliesslich ein Template-System eingeführt, welches es erlaubt Shader als
-Templates zu parsen und Sektionen entsprechend mit Sub-Templates respektive
+Als drittes Teil-Ziel wurden Shader in Form von Templates umgesetzt. Mit
+``Jinja2CppLight''~\footnote{\href{https://github.com/hughperkins/Jinja2CppLight}{https://github.com/hughperkins/Jinja2CppLight}}
+wurde schliesslich ein Template-System eingeführt, welches es erlaubt Shader
+als Templates zu parsen und Sektionen entsprechend mit Sub-Templates respektive
 Teil-Shadern zu ersetzen.  Dies ermöglicht es Teile von Shadern während der
 Laufzeit anzupassen. Durch die Erkenntnisse des ersten Teil-Zieles konnte der
 aus dem Template zusammen mit den Sub-Templates generierte Shader zur Laufzeit
@@ -50,7 +50,5 @@ Prototypen.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{img/prototype.png}
-    \caption{Der Prototyp in Aktion
-        \protect\footnotemark}\label{fig:prototype:procedure}
+    \caption{Der Prototyp in Aktion}\label{fig:prototype:procedure}
 \end{figure}
-\footnotetext{Eigene Darstellung.}

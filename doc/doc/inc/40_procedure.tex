@@ -14,7 +14,7 @@
 
 Besprechungen mit dem Betreuer der Arbeit halfen, die gesteckten Ziele zu
 erreichen und Fehlentwicklungen zu vermeiden. Der Betreuer unterstützte den
-Autor dabei mit Vorschlägen. Insgesamt fanden drei Treffen statt. Sie wurden in
+Autor dabei mit Vorschlägen. Insgesamt fanden vier Treffen statt. Sie wurden in
 Form eines Protokolles festgehalten. Das Protokoll findet sich
 unter~\autoref{chap:10_meeting_minutes}.
 
@@ -24,22 +24,20 @@ unter~\autoref{chap:10_meeting_minutes}.
 \subsection{Meilensteine}
 \label{subsec:milestones}
 
-\todo{Use realistic milestones. Explain, that prototype was built before
-    (sadly)}.
 Um bei der Arbeit ein möglichst strukturiertes Vorgehen einzuhalten,
 wurden folgende Projektphasen gewählt:
+
 \begin{itemize}
     \item Start der Projektarbeit
     \item Erarbeitung und Festhalten der Anforderungen
-    \item Erarbeitung der theoretischen Grundlagen
-    \item Erstellung der abschliessenden Dokumentation
     \item Erstellung eines~\hyperref[chap:prototype]{Prototypen}
+    \item Erstellung der abschliessenden Dokumentation aufgrund der gewonnen
+        Erkenntnisse
 \end{itemize}
 
-Die Phasen \textit{Erarbeitung der theoretischen Grundlagen}, \textit{Erstellung
-der abschliessenden Dokumentation} sowie \textit{Erstellung eines
-Prototypen} liefen parallel ab. Erkenntnisse einer Phase flossen jeweils in die
-anderen Phasen ein.
+Die Phasen \textit{Erstellung eines Prototypen} sowie\textit{Erstellung der
+    abschliessenden Dokumentation}liefen parallel ab. Erkenntnisse einer Phase
+flossen jeweils in die andere Phase ein.
 
 \subsection{Zeitplan / Projektphasen}
 \label{subsec:timeschedule}
@@ -47,24 +45,20 @@ anderen Phasen ein.
 \begin{figure}[H]
     \begin{ganttchart}[
         vgrid,
-        x unit=0.5cm,
+        x unit=0.43cm,
         bar/.append style={fill=bfhgrey!50},
-    ]{1}{22}
-        \gantttitle{2015}{15}
-        \gantttitle{2016}{7} \ganttnewline{}
-        \gantttitlelist{38,...,52,1,2,3,4,5,6,7}{1} \ganttnewline{} % chktex 11: Disable "you should use \ldots to achieve.."
-        % \gantttitlelist{1,...,21}{1} \\ % chktex 11: Disable "you should use \ldots to achieve.."
+    ]{1}{25}
+        \gantttitle{2016}{25} \ganttnewline{}
+        \gantttitlelist{8,...,32}{1} \ganttnewline{} % chktex 11: Disable "you should use \ldots to achieve.."
         \ganttbar{Projektstart}{1}{1} \ganttnewline{}
         \ganttlinkedbar{Anforderungen}{2}{3} \ganttnewline{}
-        \ganttbar{Erarbeitung Theorie}{2}{10} \ganttnewline{}
-        \ganttbar{Erstellung Prototyp}{6}{7} \ganttnewline{}
-        \ganttbar{Dokumentation}{1}{10} \ganttnewline{}
-        \ganttlinkedbar{Korrekturen}{9}{13} \ganttnewline{}
-        \ganttmilestone{Rohfassung Dokumentation}{13} \ganttnewline{}
-        \ganttbar{Korrekturen}{14}{21} \ganttnewline{}
-        \ganttbar{Vorbereitung Präsentation/Verteidigung}{20}{21} \ganttnewline{}
-        \ganttlinkedbar{Präsentation/Verteidigung}{22}{22} \ganttnewline{}
-        \ganttmilestone{Abgabe Dokumentation}{22}
+        \ganttlinkedbar{Erstellung Prototyp}{4}{10} \ganttnewline{}
+        \ganttlinkedbar{Dokumentation}{14}{23} \ganttnewline{}
+        \ganttlinkedbar{Korrekturen}{23}{24} \ganttnewline{}
+        \ganttlinkedmilestone{Abgabe Dokumentation}{24} \ganttnewline{}
+        \ganttbar{Erstellung Prototyp}{23}{23} \ganttnewline{}
+        \ganttbar{Vorbereitung Präsentation/Verteidigung}{24}{25} \ganttnewline{}
+        \ganttmilestone{Präsentation/Verteidigung}{25}
     \end{ganttchart}
     \caption{Zeitplan; Der Titel stellt Jahreszahlen, der Untertitel
     Kalenderwochen dar}\label{fig:timeschedule}
@@ -74,9 +68,7 @@ anderen Phasen ein.
 \label{subsubsec:kick_off}
 
 In der ersten Phase wurden die Zwischenziele der Arbeit identifiziert
-und skizziert. Um Einzelheiten der Aufgabe zu verstehen, wurde das notwendige
-Vorwissen über Algorithmen für globalen Beleuchtung erarbeitet. Weiter
-wurde die Grundlage dieser Dokumentation erstellt.
+und skizziert.
 
 \subsubsection{Anforderungen}
 \label{ssubsec:requirements}
@@ -85,20 +77,19 @@ In dieser Phase wurde das Ziel dieser Projektarbeit festgelegt.
 Ausgehend vom Ziel wurden die dazu erforderlichen Projektphasen
 festgelegt.
 
-\subsubsection{Erarbeitung theoretische Grundlagen}
-\label{ssubsec:theoretical_background}
+\subsubsection{Erstellung Prototyp}
+\label{ssubsec:prototype}
 
-Diese Phase bedeutete Publikationen zu lesen und durch zuarbeiten, was 
-immer zu vielen neuen Denkanstössen weiteren Recherchen führte. Die
-Erkenntnisse dieser Phase flossen stetig in die Dokumentation ein,
-ergänzten und beeinflussten diese.
+Ausgehend von den Anforderungen und vor allem der Vision, wurde ein Prototyp
+erstellt um die Machbarkeit aufzuzeigen und um Erkenntnisse zu gewinnen.
 
 \subsubsection{Dokumentation}
 \label{ssubsec:documentation}
 
-Die vorliegende Arbeit entspricht der Dokumentation. Sie wurde während
-der gesamten Projektarbeit stetig erweitert und diente zur Reflexion von
-fertiggestellten Teilen.
+Die vorliegende Arbeit entspricht der Dokumentation. Sie sollte während der
+gesamten Projektarbeit stetig erweitert werden. Allerdings wurde zu viel Fokus
+auf den Prototypen gelegt und somit wurde die Dokumentation eher erst spät
+richtig angegangen. Sie diente zur Reflexion von fertiggestellten Teilen.
 
 \section{Technologien}
 \label{sec:technologies}
@@ -128,7 +119,7 @@ fertiggestellten Teilen.
     \item[clang] Ein C-Sprachen-Frontend für LLVM.\ Wurde zur Kompilation
         des~\hyperref[chap:prototype]{Prototypen} eingesetzt.
     \item[Papyrus] Ein quelloffenes Werkzeug zur Erstellung von UML- und
-        SysML-Modellen~\parencite{the_ecllipse_foundation_papyris_2015}.
+        SysML-Modellen~\parencite{the_eclipse_foundation_papyrus_2015}.
     \item[Pencil] Ein quelloffenes Werkzeug zur Erstellung von Prototypen von
         grafischen Benutzeroberflächen~\parencite{evolus_pencil_2015}.
 \end{description}
@@ -161,14 +152,11 @@ den offiziellen Richtlinien für C++ von Google~\footnote{
     }
 }.
 
-\subsubsection{Pseudocode}
-\label{ssubsec:standards_guidelines:psuedocode}
+\subsubsection{Diagramme}
+\label{ssubsec:standards_guidelines:diagrams}
 
-Da der Autor, bedingt durch seine früheren, beruflichen Tätigkeiten, in der
-Programmiersprache \textit{Python} relativ bewandert ist, wird diese als
-Sprache zur Beschreibung von Pseudocode verwendet.  Dabei wird kein
-Augenmerk auf die formale Korrektheit, geschweige denn auf die
-Lauffähigkeit des Pseudocodes gelegt.
+Alle Diagramme folgen dem UML 2 Standard~\footnote{
+    \href{http://www.omg.org/spec/UML/}{http://www.omg.org/spec/UML/}}.
 
 \subsubsection{Projekt-Struktur}
 \label{ssubsec:standards_guidelines:project_structure}

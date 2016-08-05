@@ -1,0 +1,47 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\section{Berechnung von Normalen-Vektoren}
+\label{sec:rendering:normals}
+
+Folgender Abschnitt basiert auf~\cite[S. 42 bis
+43]{osterwalder_sven_volume_2016}.
+
+Die Oberflächen-Normale kann gemäss~\citeauthor{hart_ray_1989} mittels dem
+Gradienten des Distanzfeldes für einen bestimmten Punkt auf einer impliziten
+Oberfläche berechnet werden~\parencite[S. 292 bis 293]{hart_ray_1989}.
+
+Verwendet man dies nun zusammen mit den entsprechenden Distanzfunktionen, so
+ergeben sich folgende Gleichungen:
+
+\begin{gather}
+    \bm{n}_{x} = f(x + \varepsilon, y, z) - f(x - \varepsilon, y, z) \\
+    \bm{n}_{y} = f(x, y + \varepsilon,  z) - f(x, y - \varepsilon,  z) \\
+    \bm{n}_{z} = f(x, y, z + \varepsilon) - f(x, y, z - \varepsilon) \\
+\end{gather}
+
+Dabei ist $\bm{n} = \begin{bmatrix} x_{n} \\ y_{n} \\ z_{n} \end{bmatrix}$ die
+Normale der Oberfläche in Form eines Vektors mit drei Komponenten und $f$ eine
+Distanzfunktion~\parencites[S. 292 bis 293]{hart_ray_1989}[S.
+13]{hart_ray_1993}.
+
+Es werden also insgesamt sechs Punkte abgetastet. $\varepsilon$ ist dabei ein
+Wert um alle benachbarten Punkte eines gegebenen Punktes der impliziten
+Oberfläche entlang der Koordinatenachsen zu erhalten. Da die Berechnung der
+Normalen somit direkt von $\varepsilon$ abhängt, wird für $\varepsilon$
+üblicherweise ein möglichst kleiner Wert verwendet.  \citeauthor{hart_ray_1989}
+geben $\varepsilon$ als die minimale Inkrementation eines (Licht-) Strahles an.
+Die Normale der Oberfläche sollte schliesslich noch normalisiert werden.
+
+``Liefert die oben genannte Gradiente, bestehend aus 6 Punkten, eine zu
+geringe Genauigkeit, so kann diese gemäss \citeauthor{hart_ray_1989}
+erweitert werden~\parencite[S. 293]{hart_ray_1989}.\\
+Die Erweiterung erfolgt durch Hinzunahme von Punkten, welche eine
+gemeinsame Kante haben. Dies erzeugt eine Gradiente bestehend aus 18
+Punkten. Werden noch die Punkte hinzugenommen, welche gemeinsame
+Eckpunkte haben, so ergibt sich eine Gradiente bestehend aus 26
+Punkten~\parencite[S. 293]{hart_ray_1989}.''~\cite[S.
+43]{osterwalder_sven_volume_2016}
+

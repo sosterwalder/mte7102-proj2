@@ -1,0 +1,33 @@
+% -*- coding: UTF-8 -*-
+% vim: autoindent expandtab tabstop=4 sw=4 sts=4 filetype=tex
+% vim: spelllang=de spell
+% chktex-file 27 - disable warning about missing include files
+
+\section{Repetitions-Operation}
+\label{sec:rendering:modulo}
+
+Wie unter~\cite[S. 37ff]{osterwalder_sven_volume_2016} aufgeführt, existieren
+für implizite Oberflächen diverse Operationen, wie Distanz- und
+Domänen-Operationen sowie -Deformationen.
+
+Möchte man nun aber dasselbe Objekt mehrmals darstellen, so repetiert man
+dieses anhand einer oder mehrerer Achsen. Dies geschieht durch Anpassung der
+Domäne, also der Anpassung des Raumes, in dem sich eine implizite Oberfläche
+befindet. Es handelt sich dabei also um eine Domänen-Operation.
+
+Die Anpassung der Domäne kann mittels der Modulo-Operation (\textit{mod}, \%)
+vorgenommen werden. Die Modulo-Operation gibt den (vorzeichenbehafteten) Rest
+einer Division zurück~\cite{maignan_integer_2008}.
+
+\begin{gather}
+    d(\bm{x}, \bm{c}) = \bm{x} \mod \bm{c} - {\bm{c} \over 2}\\
+    \text{repeat}(\bm{x}, \bm{c}) = f(d(\bm{x}, \bm{c}))
+\end{gather}
+
+Dabei ist $\bm{x}$ der Punkt einer impliziten Oberfläche $f$ und $\bm{c}$ der
+gewünschte Abstand zwischen den Objekten.
+
+Das Objekt wird erst mit der Hälfte des Abstandes $c$, also $c \over 2$, anhand
+der Koordinatenachsen verschoben, um es im Rahmen des gewünschten Abstandes
+$c$ zu zentrieren.  Danach wird die Repetition der Domäne angewendet. Danach
+wird das Objekt zum Ursprung seines Koordinatensystemes zurück verschoben.

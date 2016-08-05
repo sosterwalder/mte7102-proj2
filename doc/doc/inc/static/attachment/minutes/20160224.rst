@@ -1,0 +1,43 @@
+No.:              00
+Date:             24.02.2016 11:30 - 12:00
+Place:            Mr. Fuhrer's Office
+Involved persons: Claude Fuhrer    (CF)
+                  Sven Osterwalder (SO)
+
+Meeting minutes 2016-02-24
+==========================
+
+Presentation and discussion of the current state of the work (CF, SO)
+---------------------------------------------------------------------
+
+* Kick-off meeting of the project work. (CF, SO)
+
+* Try already choosing or at least looking at data formats for exporting data,
+  one example is X3D. (CF)
+
+* Work out details of sphere tracing which were not that clear during the
+  presentation of the previous project work: normal calculation and the modulo
+  operation. (CF)
+
+* If you are in good schedule, try maybe exploring methods for importing and
+  rendering meshes using sphere tracing. (CF)
+
+Further steps/proceedings (CF, SO)
+----------------------------------
+
+* Work on prototype
+* Create a framework for the documentation
+* Start documenting on the progress
+
+TODO for the next meeting
+=========================
+
+* Present the current state of the work (SO)
+* Discuss the current state of the work (CF, SO)
+* Define further steps/proceeding (CF, SO)
+
+Scheduling of the next meeting
+==============================
+
+Date:  tba
+Place: tba

@@ -13,18 +13,19 @@ Software in der
 Tabelle~\ref{table:requirements:additional-requirements:software} zur
 Umsetzung. Vor dieser Projektarbeit führte der Autor Recherchen betreffend
 Bibliotheken zur Erstellung und Darstellung von grafischen Benutzeroberflächen
-durch. Zuerst wurde Qt~\footnote{https://www.qt.io} in Betracht gezogen. Diese
+durch. Zuerst wurde Qt~\footnote{\url{https://www.qt.io}} in Betracht gezogen. Diese
 Bibliothek ist sehr umfangreich und bietet bereits viele der benötigten
 Merkmale. Allerdings hat sie den Nachteil, dass sie relativ gross ist und den
 Prototypen aufbläht.
 
 Der Autor stiess schliesslich auf
-NanoGUI~\footnote{https://github.com/wjakob/nanogui} von Jakob Wenzel. Es
+NanoGUI~\footnote{\url{https://github.com/wjakob/nanogui}} von Jakob Wenzel. Es
 handelt sich dabei um eine minimalistische, plattformübergreifende (Grafik-)
 Bibliothek für OpenGL 3.x~\cite{jakob_wenzel_wjakob/nanogui:_2016}.  Die
-Bibliothek basiert auf NanoVG~\footnote{https://github.com/memononen/NanoVG}
-von Mikko Mononen. NanoGUI bietet automatische Layout-Erzeugung, C++11
-Lambda-Callbacks, diverse Widget-Typen und Retina-fähiges
+Bibliothek basiert auf
+NanoVG~\footnote{\url{https://github.com/memononen/NanoVG}} von Mikko Mononen.
+NanoGUI bietet automatische Layout-Erzeugung, C++11 Lambda-Callbacks, diverse
+Widget-Typen und Retina-fähiges
 Rendering~\cite{jakob_wenzel_wjakob/nanogui:_2016}. Da dies genau den
 Anforderungen entsprechen zu schien, entschloss sich der Autor für die
 Verwendung von NanoGUI.\@
@@ -103,6 +104,22 @@ viele der benötigten Komponenten und Features bereits.
                            &\protect\footnotemark\footnotetext{
                                \url{http://eigen.tuxfamily.org}
                            }\\
+
+    spdlog     & 0.9.0   & Schnelle, header-only C++
+                           Bibliothek zur Protokollierung.
+                           &\footnote{
+                               \url{https://github.com/gabime/spdlog}{%
+                                   https://github.com/gabime/spdlog
+                                }
+                            }\\
+
+    Jinja2CppLight & --- & C++ Template-Bibliothek analog
+                            Jinja2 für Python.
+                           &\footnote{
+                               \url{https://github.com/hughperkins/Jinja2CppLight}{%
+                                   https://github.com/hughperkins/Jinja2CppLight
+                                }
+                            }\\
 
     CMake      & 3.3.2   & Software zur Verwaltung von Build-Prozessen von 
                            Software
