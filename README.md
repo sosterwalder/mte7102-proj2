@@ -59,11 +59,3 @@ hehe).
 
 This process was tested on Arch linux (kernel 4.5.0-1) as well as Apple Mac OS
 X (10.11.4). It does not work on Microsoft Windows yet.
-
-### Known issues and bugs
-
-A lot.
-
-### TODO
-
-A lot.
