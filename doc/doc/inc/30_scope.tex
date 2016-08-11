@@ -14,14 +14,29 @@ vorgestellte Renderingverfahren, Sphere-Tracing, optimiert das
 Ray-Tracing-Verfahren so weit, dass eine Darstellung von Szenen mit hoher
 Qualität in Echtzeit möglich ist.
 
-Das Verfahren nutzt implizite Funktionen um Objekte (und somit auch
-Szenen) zu definieren. Selbiges gilt auch für Operationen. Dies mag auf
-den ersten Blick praktisch erscheinen, da die Definitionen der meisten Objekte
-und Operationen nur wenige Zeilen lang sind. Dies hat jedoch zur Folge, dass
-einerseits Programme selbst bei kleinsten Änderungen neu kompiliert werden
-müssen und, dass andererseits bei komplexen Szenen schnell die Übersicht
-verloren geht. Möchte man Szenen beziehungsweise Objekte animieren, so erhöht dies die
-Komplexität erneut.
+Das Verfahren nutzt die parametrische Darstellung impliziter Oberflächen  um
+Objekte (und somit auch Szenen) zu definieren. Eine implizite Oberfläche ist
+entweder eine Kontur einer Funktion mit Wert 0 oder aber eine Funktion
+$f(\bm{x}) = \mathbb{R}^{3} \to \mathbb{R}$~\cite[S.
+29]{osterwalder_sven_volume_2016}. Jedem
+Punkt einer Menge $ \bm{p} \in \mathbb{R}^{3} $ wird ein skalarer
+Wert $ s \in \mathbb{R} $ zugewiesen. Dabei besteht die Oberfläche aus
+der Menge von Punkten $ \bm{x} \equiv (x, y, z) \in \mathbb{R}^{3}
+$~\cite[S. 29]{osterwalder_sven_volume_2016}. Bei Operationen, welche auf
+implizite Oberflächen angewendet werden, handelt es sich um Transformationen.
+Dabei wird der Raum, in dem sich eine implizite Oberfläche befindet,
+invertiert. Bei Transformationen handelt es sich um vom Vorzeichen abhängige
+Distanzfunktionen (\textit{signed distance functions})~\cite[S.
+37]{osterwalder_sven_volume_2016}. Mehr Details zu impliziten Oberflächen und
+Operationen finden sich unter~\cite[S. 29ff]{osterwalder_sven_volume_2016}
+sowie~\cite[S. 37ff]{osterwalder_sven_volume_2016}.
+
+Dies mag auf den ersten Blick praktisch erscheinen, da die
+Definitionen der meisten Objekte und Operationen nur wenige Zeilen lang sind.
+Dies hat jedoch zur Folge, dass einerseits Programme selbst bei kleinsten
+Änderungen neu kompiliert werden müssen und, dass andererseits bei komplexen
+Szenen schnell die Übersicht verloren geht. Möchte man Szenen beziehungsweise
+Objekte animieren, so erhöht dies die Komplexität erneut.
 
 Diese Projektarbeit stellt daher eine Software-Architektur für ein System zur
 einfachen Erstellung und Handhabung visueller Szenen in Echtzeit vor.
@@ -57,7 +72,7 @@ behandelt.
 \label{sec:objectives}
 
 Diese Projektarbeit besteht aus zwei Teilen. Der Beschreibung der
-Software-Architektur (\ref{chap:software-architecture}) sowie der Umsetzung
+Software-Architektur (siehe~\autoref{chap:software-architecture}) sowie der Umsetzung
 eines~\hyperref[chap:prototype]{Prototypen}. Dieser bildet einen Teil der
 Software-Architektur ab.
 

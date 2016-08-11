@@ -57,6 +57,10 @@
                     \item{Der Entwickler schliesst den Editor.}
                 \end{enumerate}
             }
+        \end{enumerate}\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall} &
+        \begin{enumerate}[label= (\alph*)]
             \item{Fehlerhafter Inhalt des Knotens
                 \begin{enumerate}[label= (\roman*)]
                     \item{Der Entwickler fügt dem Knoten keinen oder
@@ -74,6 +78,17 @@
                                 Punkt der Animation wieder her.}
                 \end{enumerate}
             }
+            \item{Der Knoten kann nicht persistiert werden
+                    \begin{enumerate}[label= (\roman*)]
+                        \item{Beim Speichern tritt ein Fehler auf.}
+                        \item{Der Entwickler wird via Dialog-Fenster über den Fehler
+                                informiert.}
+                        \item{Die Datei wird nicht gespeichert.}
+                        \item{Die Datei gilt nach wie vor als nicht persistiert.}
+                        \item{Die Datei muss zu einem späteren Zeitpunkt
+                                gespeichert werden.}
+                    \end{enumerate}
+                }
         \end{enumerate}
         \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}

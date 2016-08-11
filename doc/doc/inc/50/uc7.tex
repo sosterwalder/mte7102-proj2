@@ -68,6 +68,10 @@
                             zu speichern oder das Schliessen abzubrechen.}
                 \end{enumerate}
             }
+        \end{enumerate}\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall} &
+        \begin{enumerate}[label= (\alph*)]
             \item{Absturz/Ausfall des Systems
                 \begin{enumerate}[label= (\roman*)]
                         \item{Das System stürzt an einem beliebigen Punkt
@@ -75,6 +79,18 @@
                         \item{Neustart des Editors.}
                         \item{Der Editor stellt den ihm zuletzt bekannten
                                 Punkt der Animation wieder her.}
+                \end{enumerate}
+            }
+            \item{Es sind keine Knotentypen zum Hinzufügen vorhanden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Das Fenster zum Hinzufügen von Knoten-Typen ist leer.}
+                \end{enumerate}
+            }
+            \item{Es kann kein neuer Knoten erstellt werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Beim Erstellen des neuen Knotens tritt ein Fehler auf.}
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
                 \end{enumerate}
             }
         \end{enumerate}

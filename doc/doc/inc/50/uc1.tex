@@ -35,6 +35,9 @@
         \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Erweiterungen} &
+        ---\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall} &
         \begin{enumerate}[label= (\alph*)]
             \item{Vorzeitiger Abbruch durch den Betrachter
                 \begin{enumerate}[label= (\roman*)]
@@ -51,8 +54,15 @@
                         \item{Der Player beginnt die Animation von vorne.}
                 \end{enumerate}
             }
-        \end{enumerate}
-        \\
+            \item{Auflösungen und Bit-Tiefen können nicht ausgelesen werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Player meldet dies per Dialog-Fenster.}
+                    \item{Neustart des Players.}
+                    \item{Tritt der Fehler erneut auf, wird der Player mit
+                            entsprechendem Hinweis geschlossen.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
         ---\\

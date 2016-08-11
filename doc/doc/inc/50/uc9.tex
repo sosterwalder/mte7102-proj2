@@ -70,6 +70,10 @@
                             zu speichern oder das Schliessen abzubrechen.}
                 \end{enumerate}
             }
+        \end{enumerate}\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall} &
+        \begin{enumerate}[label= (\alph*)]
             \item{Absturz/Ausfall des Systems
                 \begin{enumerate}[label= (\roman*)]
                         \item{Das System stürzt an einem beliebigen Punkt
@@ -78,8 +82,15 @@
                         \item{Der Editor stellt den ihm zuletzt bekannten
                                 Punkt der Animation wieder her.}
                 \end{enumerate}
-            } \end{enumerate}
-        \\
+            }
+            \item{Es kann kein neues Schlüsselbild erzeugt werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Beim Erstellen des neuen Schlüsselbildes tritt ein Fehler auf.}
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
         --- \\

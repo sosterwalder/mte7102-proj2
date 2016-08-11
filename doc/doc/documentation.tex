@@ -177,6 +177,17 @@
     tab=\rightarrowfill,
     xleftmargin=0.7cm,
 }
+% Define a list style for XML
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}% list your attributes here
+}
 %---------------------------------------------------------------------------
 
 % Hyperref Package (Create links in a pdf)
@@ -291,7 +302,7 @@
 \setcounter{page}{1}
 \include{inc/static/title}
 \include{inc/static/versions}
-\listoftodos{}
+% \listoftodos{}
 \addcontentsline{toc}{chapter}{Abstract}
 \include{inc/static/abstract}
 %---------------------------------------------------------------------------

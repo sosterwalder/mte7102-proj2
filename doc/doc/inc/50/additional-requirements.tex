@@ -21,30 +21,30 @@ Qt, da er kein Frontend hat und möglichst schlank gehalten werden soll.
 % FYI:  Tabular and a fixed text-width of 79 sucks!
 % FYI2: set cursorcolumn with a lot of text sucks too!
 
-\begin{longtabu}{p{0.2\textwidth}p{0.1\textwidth}p{0.6\textwidth}p{0.1\textwidth}}
+\begin{longtabu}{p{0.2\textwidth}p{0.7\textwidth}p{0.1\textwidth}}
     \caption{Mögliche
         Software/Technologien}\label{table:requirements:additional-requirements:software}\\
     \toprule
-    \textbf{Komponente} & \textbf{Version} & \textbf{Beschreibung} & \textbf{Verweise} \\
+    \textbf{Komponente} & \textbf{Beschreibung} & \textbf{Verweise} \\
     \midrule
-    C++        & 11      & Objektorientierte Programmiersprache
+    C++        & Objektorientierte Programmiersprache
                            & \protect\footnotemark\footnotetext{
                                \url{http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=50372}
                            }\\
 
-    OpenGL     & 4.5     & Plattformunabhängige Programmierschnittstelle zur
+    OpenGL     & Plattformunabhängige Programmierschnittstelle zur
                            Entwicklung von 2D- und 3D-Computergrafikanwendungen
                            \parencite{wikipedia_the_free_encyclopedia_opengl_2015}
                            &\protect\footnotemark\footnotetext{
                                \url{https://www.opengl.org/registry/doc/glspec45.core.pdf}
                            }\\
 
-    Qt        & 5.7      & ``Qt ist eine C++-Klassenbibliothek für die
+    Qt        & ``Qt ist eine C++-Klassenbibliothek für die
                            plattformübergreifende Programmierung grafischer
-                           Benutzeroberflächen. Außerdem bietet Qt
+                           Benutzeroberflächen. Ausserdem bietet Qt
                            umfangreiche Funktionen zur Internationalisierung
                            sowie Datenbankfunktionen und XML-Unterstützung an
-                           und ist für eine große Zahl an Betriebssystemen bzw.
+                           und ist für eine grosse Zahl an Betriebssystemen bzw.
                            Grafikplattformen, wie X11 (Unix-Derivate), OS X,
                            Windows, iOS und Android
                            erhältlich.''~\parencite{wikipedia_foundation_qt_2016}.
@@ -52,7 +52,7 @@ Qt, da er kein Frontend hat und möglichst schlank gehalten werden soll.
                                \url{https://www.qt.io}
                            }\\
 
-    GLFW       & 3.1.2   & OpenGL-Bibliothek, welche die Erstellung und
+    GLFW       & OpenGL-Bibliothek, welche die Erstellung und
                            Verwaltung von Fenstern sowie OpenGL-Kontexte
                            vereinfacht
                            \parencite{wikipedia_the_free_encyclopedia_glfw_2015}.
@@ -60,14 +60,14 @@ Qt, da er kein Frontend hat und möglichst schlank gehalten werden soll.
                                \url{http://www.glfw.org}
                            }\\
 
-    GLEW       & 1.13    & OpenGL Extension Wrangler. Bibliothek zum Abfragen
+    GLEW       & OpenGL Extension Wrangler. Bibliothek zum Abfragen
                            und Laden von OpenGL-Erweiterungen (Extensions)
                            \parencite{wikipedia_the_free_encyclopedia_opengl_2015-1}.
                            &\protect\footnotemark\footnotetext{
                                \url{http://glew.sourceforge.net}
                            }\\
 
-    GLM        & 0.9.7.6 & Header-only C++ Mathematik-Bibliothek, basierend auf
+    GLM        & Header-only C++ Mathematik-Bibliothek, basierend auf
                            der Spezifikation der OpenGL Shader-Sprache GLSL.
                            Sie bietet eine Vielzahl an Datentypen wie etwa
                            Vektoren, Matrizen oder Quaternionen.
@@ -75,24 +75,24 @@ Qt, da er kein Frontend hat und möglichst schlank gehalten werden soll.
                                \url{https://glm.g-truc.net}
                            }\\
 
-    CMake      & 3.3.2   & Software zur Verwaltung von Build-Prozessen von 
+    CMake      & Software zur Verwaltung von Build-Prozessen von 
                            Software
                            &\protect\footnotemark\footnotetext{
                                \url{https://www.cmake.org}
                            }\\
 
-    LLVM       & 3.8.1   & Ansammlung von modularen und wiederverwendbaren
+    LLVM       & Ansammlung von modularen und wiederverwendbaren
                            Compilern und Toolchains.
                            &\protect\footnotemark\footnotetext{
                                \url{http://llvm.org}
                            }\\
 
-    Clang      & 3.8.1   & Compiler-Frontend für LLVM.\@
+    Clang      & Compiler-Frontend für LLVM.\@
                            &\protect\footnotemark\footnotetext{
                                \url{http://clang.llvm.org}
                            }\\
 
-    Boost      & 1.59.0  & Freie Bibliothek bestehend aus einer Vielzahl von
+    Boost      & Freie Bibliothek bestehend aus einer Vielzahl von
                            Bibliotheken, die den unterschiedlichsten
                            Aufgaben von Algorithmen auf Graphen über 
                            Metaprogrammierung bis hin zu Speicherverwaltung

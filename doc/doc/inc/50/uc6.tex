@@ -54,6 +54,10 @@
                             zu speichern oder das Schliessen abzubrechen.}
                 \end{enumerate}
             }
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+    \textbf{Fehlerfall} &
+        \begin{enumerate} \\
             \item{Absturz/Ausfall des Systems
                 \begin{enumerate}[label= (\roman*)]
                         \item{Das System stürzt an einem beliebigen Punkt
@@ -63,8 +67,29 @@
                                 Punkt der Animation wieder her.}
                 \end{enumerate}
             }
-        \end{enumerate}
-        \\
+            \item{Die Root-Szene ist nicht in der Bibliothek vorhanden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Die Root-Szene ist nicht in der Bibliothek vorhanden.}
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Der Editor wird geschlossen.}
+                \end{enumerate}
+            }
+            \item{Es erscheint kein Kontext-Menü
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Der Editor wird geschlossen.}
+                \end{enumerate}
+            }
+            \item{Es kann keine neue Szene erstellt werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Beim Erstellen der neuen Szene tritt ein Fehler auf.}
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
         --- \\

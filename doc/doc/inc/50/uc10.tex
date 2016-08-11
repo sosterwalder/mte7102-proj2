@@ -73,19 +73,73 @@
         \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Erweiterungen} &
+        ---\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall Editor} &
         \begin{enumerate}[label= (\alph*)]
             \item{Absturz/Ausfall des Systems
                 \begin{enumerate}[label= (\roman*)]
                         \item{Das System stürzt an einem beliebigen Punkt
                                 ab.}
-                        \item{Neustart des Editors/Players.}
+                        \item{Neustart des Editors.}
                         \item{Der Editor stellt den ihm zuletzt bekannten
-                                Punkt der Animation wieder her. Der Player
-                            beginnt die Animation von vorne --- sofern eine
-                        solche vorhanden ist.}
+                                Punkt der Animation wieder her.}
                 \end{enumerate}
-            } \end{enumerate}
-        \\
+            }
+            \item{Rendering ist nicht möglich
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                \end{enumerate}
+            }
+            \item{Ein Knoten kann nicht evaluiert werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall Player} &
+        \begin{enumerate}[label= (\alph*)]
+            \item{Absturz/Ausfall des Systems
+                \begin{enumerate}[label= (\roman*)]
+                        \item{Das System stürzt an einem beliebigen Punkt
+                                ab.}
+                        \item{Neustart des Players.}
+                        \item{Der Player beginnt die Animation von vorne ---
+                                sofern eine solche vorhanden ist.}
+                \end{enumerate}
+            }
+            \item{Das Demoskript kann nicht gefunden werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Betrachter wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Der Player wird geschlossen.}
+                \end{enumerate}
+            }
+            \item{Das Demoskript kann nicht evaluiert werden oder ist fehlerhaft
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Betrachter wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Der Player wird geschlossen.}
+                \end{enumerate}
+            }
+            \item{Rendering ist nicht möglich
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Betrachter wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Der Player wird geschlossen.}
+                \end{enumerate}
+            }
+            \item{Ein oder mehrere Knoten können nicht evaluiert werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Der Betrachter wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Der Player wird geschlossen.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
         --- \\

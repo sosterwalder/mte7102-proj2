@@ -31,38 +31,30 @@ Applikation ein Domänenmodell erstellt.
 \subsection{Player}
 \label{subsec:domain-model:player}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/player_domain_model.png}
-    \caption{Domänenmodell der
-        Player-Applikation\protect\footnotemark}\label{fig:domain-model:player}
-\end{figure}
-\footnotetext{Eigene Darstellung mittels Papyrus.}
-
 Abbildung~\ref{fig:domain-model:player} zeigt das Domänenmodell der
 Player-Applikation. Das Modell ist bewusst minimal gehalten und zeigt nur die
 nötigsten Komponenten. Im Zentrum steht das Player-Objekt. Dieses liest ein
-DemoScript, welches eine exportiert Echtzeit-Animation des Editors darstellt.
+DemoScript, welches eine exportierte Echtzeit-Animation des Editors darstellt.
 Ausgehend vom DemoScript kann schliesslich der Hauptknoten des Graphen gefunden
 evaluiert werden. Ausgehend von diesem wird so die gesamte Echtzeit-Animation
-aufgebaut und wiedergeben.
+aufgebaut und wiedergeben. DemoData dient der Verwaltung von DemoScript, also
+zum Export von diesem.
 
 Viele essentielle Konzepte beziehungsweise Objekte fehlen in diesem Modell
 bewusst. Diese werden während den Iterationen der darauffolgenden Projektarbeit
 erarbeitet. Ein Teil davon findet sich im Domänenmodell des Editors
-(\ref{subsec:domain-model:editor}) sowie im Klassendiagramm des Prototypen
-(\ref{chap:prototype}).
-
-\subsection{Editor}
-\label{subsec:domain-model:editor}
+(siehe~\autoref{subsec:domain-model:editor}) sowie im Klassendiagramm des Prototypen
+(siehe~\autoref{chap:prototype}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[angle=90,width=0.6\textwidth]{img/editor_domain_model.png}
+    \includegraphics{img/player_domain_model.pdf}
     \caption{Domänenmodell der
-        Editor-Applikation\protect\footnotemark}\label{fig:domain-model:editor}
+        Player-Applikation}\label{fig:domain-model:player}
 \end{figure}
-\footnotetext{Eigene Darstellung mittels Papyrus.}
+
+\subsection{Editor}
+\label{subsec:domain-model:editor}
 
 Abbildung~\ref{fig:domain-model:editor} zeigt das Domänenmodell der
 Editor-Applikation. Analog dem vorherigen Modell steht hier das Editor-Objekt
@@ -87,9 +79,16 @@ Elemente dieser dar. Es handelt sich bei Letzteren um Szenen.
 
 Auch hier fehlen wiederum etliche Details, wie zum Beispiel das gesamte
 Rendering inklusive den Shadern. Ein Teil davon ist wiederum im Klassendiagramm
-des Prototypen (\ref{chap:prototype}) ersichtlich.
+des Prototypen (siehe~\autoref{chap:prototype}) ersichtlich.
 
 Wie Eingangs erwähnt, ist es nicht das Ziel ein vollständiges oder
 ``korrektes'' Domänenmodell zu erstellen. Es geht viel mehr um einen ersten
 Anstoss zur eigentlichen Implementierung. Alle weiteren Details werden während
 den Iterationen der darauffolgenden Projektarbeit erarbeitet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=90,width=0.8\textwidth]{img/editor_domain_model.pdf}
+    \caption{Domänenmodell der
+        Editor-Applikation}\label{fig:domain-model:editor}
+\end{figure}

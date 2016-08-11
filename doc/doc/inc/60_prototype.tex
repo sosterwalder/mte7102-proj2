@@ -6,19 +6,103 @@
 \chapter{Prototyp}
 \label{chap:prototype}
 
-Nach dem Finden und Ausarbeiten der Vision (\ref{subsec:requirements:vision})
-sowie der Identifikation der wichtigsten Komponenten
-(\ref{sec:main-components}), wurde ein Prototyp von Teilen der geplanten
-Software umgesetzt. Dies diente auch der Identifikation der zusätzlichen
-Anforderungen (\ref{subsec:requirements:additional-requirements}).
+Nach dem Finden und Ausarbeiten der Vision
+(siehe~\autoref{subsec:requirements:vision}) sowie der Identifikation der
+wichtigsten Komponenten (siehe~\autoref{sec:main-components}), wurde ein
+Prototyp von Teilen der geplanten Software umgesetzt. Dies diente auch der
+Identifikation der zusätzlichen Anforderungen
+(siehe~\autoref{subsec:requirements:additional-requirements}).
 
 Der Prototyp erlaubt die Modellierung einer einfachen Szene, bestehend aus
 Primitiven, anhand der Graph-Komponente. Die Primitiven befinden sich in
 externen (Shader-) Dateien, welche zur Laufzeit zusammen mit einem Haupt-Shader
-geladen und zur Verfügung gestellt werden. Durch die Modellierung wird der
-Haupt-Shader um Teile ergänzt und neu kompiliert, dies geschieht alles zur
+geladen und zur Verfügung gestellt werden. Die nachfolgende Auflistung zeigt
+die möglichen Unterverzeichnisse und Datei-Typen.
+
+\begin{itemize}
+    \item \textbf{data/objects/*.fs.xml}\\
+        Sämtliche Objekt-Definitionen, wie zum Beispiel Kugel oder Würfel.
+    \item \textbf{data/operations/*.fs.xml}\\
+        Sämtliche Operationen, wie zum Beispiel die Vereinigung von Objekten.
+    \item \textbf{data/misc/*.fs.xml}\\
+        Diverse andere Definitionen, wie zum Beispiel Kameras.
+    \item \textbf{data/sphere\_tracer.fs}\\
+        Die Haupt-Shader-Datei, welche um Objekte, Operationen oder andere
+        Definitionen ergänzt wird.
+\end{itemize}
+
+Durch die Modellierung wird der Haupt-Shader um Teile ergänzt und neu kompiliert, dies geschieht alles zur
 Laufzeit in Echtzeit. Die Darstellung findet schliesslich mittels dem als
-Sphere-Tracing bekannten Ray-Tracing-Verfahren statt.
+Sphere-Tracing bekannten Ray-Tracing-Verfahren
+statt.~\autoref{listing:prototype:objects:sphere}
+und~\autoref{listing:prototype:operations:union} zeigen Beispiel von
+Shader-Defintionen.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=XML,caption={Objekt-Definition einer Kugel
+        in XML.},label={listing:prototype:objects:sphere},captionpos=b,emph={xmlns,version,type}]
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>sphere</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>position</name>
+            <builtin>vec3</builtin>
+            <type>property</type>
+            <call>position - {}</call>
+        </parameter>
+        <parameter>
+            <name>radius</name>
+            <builtin>float</builtin>
+            <type>property</type>
+            <call>{}</call>
+        </parameter>
+    </parameters>
+    <source>
+        // Returns the signed distance to a sphere with given radius for the
+        // given position.
+        float sphere(vec3 position, float radius)
+        {
+            return length(position) - radius;
+        }
+    </source>
+</function>
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=XML,caption={Definition des Vereinigungs-Operators
+        in XML.},label={listing:prototype:operations:union},captionpos=b,emph={castRay}]
+<?xml version="1.0" encoding="UTF-8"?>
+<function>
+    <name>opUnion</name>
+    <return-type>float</return-type>
+    <parameters>
+        <parameter>
+            <name>a</name>
+            <builtin>float</builtin>
+            <type>input</type>
+            <call>{}</call>
+        </parameter>
+        <parameter>
+            <name>b</name>
+            <builtin>float</builtin>
+            <type>input</type>
+            <call>{}</call>
+        </parameter>
+    </parameters>
+    <source>
+        // Returns the signed distance for a merge of given signed
+        // distance a and signed distance b.
+        float opUnion(float a, float b)
+        {
+            return min(a, b);
+        }
+    </source>
+</function>
+\end{lstlisting}
+\end{minipage}
 
 \input{inc/60/procedure}
 \input{inc/60/models}

@@ -50,7 +50,11 @@
                             die Möglichkeit diese zu speichern, diese nicht
                             zu speichern oder das Schliessen abzubrechen.}
                 \end{enumerate}
-            }
+            }\\
+        \end{enumerate}\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}
+        \textbf{Fehlerfall} &
+        \begin{enumerate}[label= (\alph*)]
             \item{Absturz/Ausfall des Systems
                 \begin{enumerate}[label= (\roman*)]
                         \item{Das System stürzt an einem beliebigen Punkt
@@ -60,8 +64,33 @@
                                 Punkt der Animation wieder her.}
                 \end{enumerate}
             }
-        \end{enumerate}
-        \\
+            \item{Es sind keine Elemente zum Hinzufügen vorhanden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Das Fenster zum Hinzufügen von Elementen ist leer.}
+                \end{enumerate}
+            }
+            \item{Die getätigte Arbeit kann nicht gespeichert werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Beim Speichern tritt ein Fehler auf.}
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Die Datei wird nicht gespeichert.}
+                    \item{Die Datei gilt nach wie vor als geändert.}
+                    \item{Die Datei muss zu einem späteren Zeitpunkt
+                            gespeichert werden.}
+                \end{enumerate}
+            }
+            \item{Die erstellte Animation kann nicht exportiert werden
+                \begin{enumerate}[label= (\roman*)]
+                    \item{Beim Exportieren tritt ein Fehler auf.}
+                    \item{Der Anwender wird via Dialog-Fenster über den Fehler
+                            informiert.}
+                    \item{Die Datei wird nicht exportiert.}
+                    \item{Die Datei muss zu einem späteren Zeitpunkt
+                            exportiert werden.}
+                \end{enumerate}
+            }
+        \end{enumerate} \\
     \cmidrule(r){1-1}\cmidrule(lr){2-2}
         \textbf{Zusätzliche Anforderungen} &
         Betreffend dem Exportieren ist das zu verwendende Format zum jetzigen
