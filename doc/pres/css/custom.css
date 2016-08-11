@@ -1,0 +1,15 @@
+.reveal .footnote {
+  position: fixed;
+  bottom: 5px;
+  left: 1em;
+  font-size: 0.5em;
+}
+
+.reveal h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.reveal h2 {
+    margin: 0;
+}

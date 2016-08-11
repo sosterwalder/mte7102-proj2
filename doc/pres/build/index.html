@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>QDE - A visual animation system</title>
+
+    <meta name="description" content="-- DESCRIPTION HERE --">
+    <meta name="author" content="so">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="css/highlight/styles/zenburn.css" id="highlight-theme">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="stylesheet" href="css/custom.css"><link rel="stylesheet" href="css/vis.min.css">
+
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides"><section id="intro" class="slide" data-has-notes="false">
+<script type="text/javascript" src="js/vis.min.js"></script>
+<style type="text/css">
+    #network {
+        width: 600px;
+        height: 400px;
+        border: 1px solid lightgray;
+    }
+</style>
+
+
+<h2>QDE &mdash; A visual animation system</h2>
+<h3>Software architecture</h3>
+<div id="network" style="width: 1024px; height: 300px; display: block;"></div>
+<br>
+<p style="float: left; text-align: left; font-size: 14px; border: 0;
+    padding-right: 15px;">
+    Student:<br>
+    Advisor:<br>
+    Date:
+</p>
+<p style="float: left; text-align: left; font-size: 14px; border: 0;">
+    Sven Osterwalder (ostes2@bfh.ch)<br>
+    Prof. Clauder Fuhrer (fuhrer@bfh.ch)<br>
+    2016-08-11
+</p>
+<p style="float: right; text-align: left; font-size: 14px; border: 0;">
+    <img src="images/bfh_logo.png" alt="Berne University of Applied Sciences"
+    style="border: 0; height: 128px; box-shadow: none;">
+</p>
+<p style="float: right; text-align: left; font-size: 14px; border: 0;">
+    <img src="images/echtzeit_logo.png" alt="Logo of Verein
+    Echtzeit" style="border: 0; width: 112px; box-shadow: none;">
+</p>
+<p style="float: right; text-align: left; font-size: 14px; border: 0;">
+    <img src="images/ccsa.png" alt="Creative Commons BY SA"
+    style="border: 0; height: 32px;">
+</p>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        {id: 1 , label: 'Cube'                               , shape: 'box'  , x: 10 , y: 10} ,
+        {id: 2 , label: 'Transform'                          , shape: 'box'  , x: 150 , y: 10} ,
+        {id: 3 , label: 'Sphere'                             , shape: 'box'  , x: 10 , y: 110} ,
+        {id: 4 , label: 'Transform'                          , shape: 'box'  , x: 150 , y: 110} ,
+        {id: 5 , label: 'Group'                              , shape: 'box'  , x: 280 , y: 70} ,
+        {id: 6 , label: 'Camera'                             , shape: 'box'  , x: 400 , y: 70} ,
+        {id: 7 , label: 'Timeclip : Scene 1\n00:00 - 27:00s' , shape: 'box'  , x: 550 , y: 70} ,
+        {id: 8 , label: 'Misc : Scene 1'                     , shape: 'box'  , x: 750 , y: 70}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 1, to: 2, arrows: 'to', smooth: { type: 'cubicBezier' }},
+        {from: 3, to: 4, arrows: 'to', smooth: { type: 'cubicBezier' }},
+        {from: 2, to: 5, arrows: 'to', smooth: { type: 'cubicBezier' }},
+        {from: 4, to: 5, arrows: 'to', smooth: { type: 'cubicBezier' }},
+        {from: 5, to: 6, arrows: 'to', smooth: { type: 'cubicBezier' }},
+        {from: 6, to: 7, arrows: 'to', smooth: { type: 'cubicBezier' }},
+        {from: 7, to: 8, arrows: 'to', smooth: { type: 'cubicBezier' }},
+    ]);
+
+    // create a network var
+    container = document.getElementById('network');
+
+    // provide the data in the vis format
+    var data = { nodes: nodes, edges: edges };
+    var options = {
+        nodes: {
+            fixed:  true,
+        },
+    };
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+</script>
+</section>
+
+<section id="chapter-motivation" class="chapter">
+<section id="motivation-intro" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Motivation</h1>
+<h2 >Possible outcome</h2>
+<img src="images/rendering.png" alt="Picture showing the motivation" style="border: 0;
+width: 60%; box-shadow: none">
+</section>
+
+<section id="motivation-motivation" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Motivation</h1>
+<h2 >Why?</h2>
+<ul class="fragment">
+    <li>Powerful GPUs</li>
+    <li class="fragment">&quot;Real-time&quot; ray tracing</li>
+    <li style="list-style-type: none;">
+        <ul class="fragment">
+            <li>Sphere-Tracing</li>
+        </ul>
+    </li>
+    <li class="fragment">Quality / Realism</li>
+    <li class="fragment">Easy modeling</li>
+</ul>
+</section>
+
+<section id="motivation-problems" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Motivation</h1>
+<h2 >Problems..</h2>
+<ul class="fragment">
+    <li>Easy modeling</li>
+    <li style="list-style-type: none;">
+        <ul class="fragment">
+            <li>In code</li>
+        </ul>
+    </li>
+    <li class="fragment">&quot;Conventional&quot; models</li>
+    <li class="fragment">Performance</li>
+</ul>
+<p>&nbsp;</p>
+<p class="fragment">&rArr; Solve them</p>
+</section>
+</section>
+
+<section id="chapter-arch" class="chapter">
+<section id="arch-arch" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Software Architecture</h1>
+<h2 >A definition</h2>
+<ul class="fragment">
+    <li>Set of significant decisions</li>
+    <li class="fragment">Big ideas</li>
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Motivations</li>
+            <li class="fragment">Constraints</li>
+            <li class="fragment">Organization</li>
+            <li class="fragment">Patterns</li>
+            <li class="fragment">Responsibilities</li>
+            <li class="fragment">Connections</li>
+        </ul>
+    </li>
+    <li style="list-style-type: none;">&nbsp;</li>
+</ul>
+<span class="footnote fragment">C. Larman, <i>Applying UML and Patterns</i>, 2004</span>
+</section>
+
+<section id="arch-procedure" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Software Architecture</h1>
+<h2 >Procedure</h2>
+
+<ul class="fragment">
+    <li>Unified Process: Iterative</li>
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Extreme Programming</li>
+            <li style="list-style-type: none;">
+                <ul>
+                    <li class="fragment">Test-driven development</li>
+                    <li class="fragment">Refactoring</li>
+                    <li class="fragment">Continuous integration</li>
+                </ul>
+            <li class="fragment">Scrum</li>
+        </ul>
+    </li>
+</ul>
+<p>&nbsp;</p>
+<span class="footnote fragment">C. Larman, <i>Applying UML and Patterns</i>, 2004</span>
+</section>
+</section>
+
+<section id="chapter-vision" class="chapter">
+<section id="vision-vision" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Vision</h1>
+
+<ul class="fragment">
+    <li>Software</li>
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Real-time animations</li>
+            <li style="list-style-type: none;">
+                <ul>
+                    <li class="fragment">Managing and editing</li>
+                    <li class="fragment">Allow export and import</li>
+                    <li class="fragment">Easily playable</li>
+                </ul>
+            </li>
+            <li class="fragment">Be intuitive</li>
+            <li class="fragment">Modular</li>
+        </ul>
+    </li>
+</ul>
+<p class="fragment">&rArr; 2 components</p>
+<ul class="fragment">
+    <li>Editor</li>
+    <li class="fragment">Player</li>
+</ul>
+</section>
+
+<section id="vision-gui" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Vision</h1>
+<h2>Envisioned</h2>
+
+<img src="images/vision.png" alt="Image showing the vision of the editor" style="border: 0; width: 80%; box-shadow: none">
+</section>
+
+<section id="vision-gui-action" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Vision</h1>
+<h2>Envisioned</h2>
+
+<img src="images/vision-action.png" alt="Image showing a vision of the editor rendering a scene" style="border: 0; box-shadow: none">
+</section>
+</section>
+
+<section id="steps" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>From vision..</h1>
+<h2 class="fragment">..to architecture</h2>
+
+<ul class="fragment">
+    <li>Requirements</li>
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Actors</li>
+            <li class="fragment">Use Cases</li>
+            <li class="fragment">Additional</li>
+        </ul>
+    </li>
+    <li class="fragment">Domain model</li>
+    <li class="fragment">Sequence diagrams</li>
+    <li class="fragment">Logical architecture</li>
+    <li class="fragment">Class diagrams</li>
+</ul>
+</section>
+
+<section id="chapter-layers" class="chapter">
+<section id="layers-intro" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Architecture</h1>
+<h2>Layers</h2>
+
+<p>
+    <img src="images/layers.svg" alt="Image showing layers of the architecture" style="border: 0; width: 20%; box-shadow: none">
+</p>
+<p class="fragment">
+    &rArr; Relaxed layered architecture
+</p>
+</section>
+
+<section id="layers-ui-app" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Architecture</h1>
+<h2>Layers: UI &amp; Application</h2>
+
+<p>
+    <img src="images/layers_ui_app.svg" alt="Image showing UI and application layers of the architecture" style="border: 0; box-shadow: none">
+</p>
+</section>
+
+<section id="layers-domain" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Architecture</h1>
+<h2>Layers: Domain</h2>
+
+<p>
+    <img src="images/layers_domain.svg" alt="Image showing domain layer of the architecture" style="border: 0; box-shadow: none">
+</p>
+</section>
+
+<section id="layers-tech-found" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Architecture</h1>
+<h2>Layers: Technical services &amp; Foundation</h2>
+
+<p>
+    <img src="images/layers_tech_found.svg" alt="Image showing technical
+    services and foundation layers of the architecture" style="border: 0; box-shadow: none">
+</p>
+</section>
+</section>
+
+<section id="chapter-prototype" class="chapter">
+<section id="prototype-intro" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>From theoretical..</h1>
+<h2 class="fragment">..to practical: Prototype</h2>
+
+<p class="fragment">
+    <img src="images/prototype.png" alt="Image showing realized prototype in
+    action" style="border: 0; box-shadow: none">
+</p>
+</section>
+
+<section id="prototype-goal" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Prototype</h1>
+<h2>Goal</h2>
+
+<ul class="fragment">
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Model simple scene</li>
+            <li class="fragment">Provide primitives</li>
+            <li class="fragment">Graph</li>
+        </ul>
+    </li>
+</ul>
+</section>
+
+<section id="prototype-procedure" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Prototype</h1>
+<h2>Procedure</h2>
+
+<ul class="fragment">
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Re-compilation of shaders</li>
+            <li class="fragment">Dynamically loading of shader files</li>
+            <li class="fragment">Shader-template</li>
+            <li class="fragment">Graph</li>
+        </ul>
+    </li>
+</ul>
+</section>
+</section>
+
+<section id="lessons-learned" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Lessons learned</h1>
+<h2>&amp; outlook</h2>
+
+<ul>
+    <li class="fragment">Iterations</li>
+    <li class="fragment">Simplicity</li>
+    <li class="fragment">Patterns</li>
+    <li class="fragment">Document</li>
+</ul>
+</section>
+
+<section id="outro" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Thank you..</h1>
+<h2 class="fragment">Questions?</h2>
+
+<img src="images/sozia.jpg" alt="Image showing a cat sleeping very relaxed on a chair" style="border: 0; width: 80%; box-shadow: none" class="fragment">
+</section></div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: Reveal.getQueryHash().transition || 'slide', // none/fade/slide/convex/concave/zoom
+
+      // Optional reveal.js plugins
+      dependencies: [
+        //{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        //{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        //{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: 'plugin/zoom-js/zoom.js', async: true },
+        { src: 'plugin/notes/notes.js', async: true }
+      ]
+    });
+    </script>
+
+    <script src="js/dynamic-theme.js"></script><script src="js/custom.js"></script>
+
+  </body>
+</html>
