@@ -27,7 +27,7 @@
     <packagedElement xmi:type="uml:Model" xmi:id="_FO9EAFQ6Eeaxw6J73r0lMA" name="Demoscript"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_VnLPoFQ6Eeaxw6J73r0lMA" name="Timeline"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Package" xmi:id="_ekNuAFQ4Eeaxw6J73r0lMA" name="Foundation">
+  <packagedElement xmi:type="uml:Package" xmi:id="_ekNuAFQ4Eeaxw6J73r0lMA" name="x">
     <packagedElement xmi:type="uml:Model" xmi:id="_d2vukFQ5Eeaxw6J73r0lMA" name="Array"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_LPGBgFQ6Eeaxw6J73r0lMA" name="DataStream"/>
     <packagedElement xmi:type="uml:Model" xmi:id="_jvhDUFQ6Eeaxw6J73r0lMA" name="GLM"/>

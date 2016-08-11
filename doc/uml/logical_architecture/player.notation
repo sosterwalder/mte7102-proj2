@@ -70,7 +70,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uLMxU1Q1Eeaxw6J73r0lMA"/>
     </children>
     <element xmi:type="uml:Package" href="player.uml#_uLK8IFQ1Eeaxw6J73r0lMA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uLMKQVQ1Eeaxw6J73r0lMA" x="20" y="520" width="221" height="201"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uLMKQVQ1Eeaxw6J73r0lMA" x="280" y="160" width="221" height="201"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_1scVMFQ1Eeaxw6J73r0lMA" type="Package_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_1scVMlQ1Eeaxw6J73r0lMA" type="Package_NameLabel"/>
@@ -128,7 +128,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_q-LgeFSdEeayrqQ18izFsA" x="24" y="22"/>
     </children>
     <element xmi:type="uml:Package" href="player.uml#_1sbHEFQ1Eeaxw6J73r0lMA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1scVMVQ1Eeaxw6J73r0lMA" x="20" y="160" width="261" height="201"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1scVMVQ1Eeaxw6J73r0lMA" x="20" y="160" width="241" height="201"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_Snkx4FSxEeayrqQ18izFsA" type="Package_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_Snkx4VSxEeayrqQ18izFsA" type="Package_NameLabel"/>
@@ -173,7 +173,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Snkya1SxEeayrqQ18izFsA"/>
     </children>
     <element xmi:type="uml:Package" href="player.uml#_SnjjwFSxEeayrqQ18izFsA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Snkyb1SxEeayrqQ18izFsA" x="20" y="380" width="481" height="121"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Snkyb1SxEeayrqQ18izFsA" x="280" y="20" width="481" height="121"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_8KgRoFnDEeabDsvNSCxfjw" type="Comment_Shape">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_8KgRoVnDEeabDsvNSCxfjw" source="PapyrusCSSForceValue">
@@ -181,7 +181,7 @@
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_8KgRo1nDEeabDsvNSCxfjw" type="Comment_BodyLabel"/>
     <element xmi:type="uml:Comment" href="player.uml#_8Kd1YFnDEeabDsvNSCxfjw"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8KgRpFnDEeabDsvNSCxfjw" x="360" y="620" width="101" height="141"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8KgRpFnDEeabDsvNSCxfjw" x="660" y="160" width="101" height="141"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_z-o1gFS3EeayrqQ18izFsA" type="Package_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="_z-o1gVS3EeayrqQ18izFsA" type="Package_NameLabel"/>
@@ -199,7 +199,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z-o1qFS3EeayrqQ18izFsA"/>
     </children>
     <element xmi:type="uml:Package" href="player.uml#_z-nnYFS3EeayrqQ18izFsA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z-o1rFS3EeayrqQ18izFsA" x="20" y="740" width="221"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z-o1rFS3EeayrqQ18izFsA" x="520" y="160" width="121"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_Du9hkVnEEeabDsvNSCxfjw" type="Model_Shape_CN">
     <children xmi:type="notation:DecorationNode" xmi:id="_Du9hklnEEeabDsvNSCxfjw" type="Model_NameLabel_CN"/>
@@ -208,7 +208,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Du9hlVnEEeabDsvNSCxfjw"/>
     </children>
     <element xmi:type="uml:Model" href="player.uml#_Du8TcFnEEeabDsvNSCxfjw"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Du9hmVnEEeabDsvNSCxfjw" x="380" y="660" width="61" height="37"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Du9hmVnEEeabDsvNSCxfjw" x="680" y="200" width="61" height="37"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_Du-IoFnEEeabDsvNSCxfjw" type="Model_Shape_CN" fillColor="12621752">
     <children xmi:type="notation:DecorationNode" xmi:id="_Du-IoVnEEeabDsvNSCxfjw" type="Model_NameLabel_CN"/>
@@ -217,7 +217,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Du-IpFnEEeabDsvNSCxfjw"/>
     </children>
     <element xmi:type="uml:Model" href="player.uml#_Du9hkFnEEeabDsvNSCxfjw"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Du-IqFnEEeabDsvNSCxfjw" x="380" y="700" width="65" height="33"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Du-IqFnEEeabDsvNSCxfjw" x="680" y="240" width="65" height="33"/>
   </children>
   <styles xmi:type="notation:StringValueStyle" xmi:id="_HuroEVQ1Eeaxw6J73r0lMA" name="diagram_compatibility_version" stringValue="1.2.0"/>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_HuroElQ1Eeaxw6J73r0lMA"/>
