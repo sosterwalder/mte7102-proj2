@@ -231,7 +231,7 @@
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ekO8JVQ4Eeaxw6J73r0lMA"/>
     </children>
     <element xmi:type="uml:Package" href="editor.uml#_ekNuAFQ4Eeaxw6J73r0lMA"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ekO8IVQ4Eeaxw6J73r0lMA" x="20" y="920" width="761"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ekO8IVQ4Eeaxw6J73r0lMA" x="20" y="920" width="621"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="__GftcFQ4Eeaxw6J73r0lMA" type="Package_Shape">
     <children xmi:type="notation:DecorationNode" xmi:id="__GftclQ4Eeaxw6J73r0lMA" type="Package_NameLabel"/>

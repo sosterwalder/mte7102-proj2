@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_kxbC8F_EEea0D7Rxloh9rg" name="RootElement">
+  <packagedElement xmi:type="uml:Package" xmi:id="_o8YAcF_EEea0D7Rxloh9rg" name="UI"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_o8bq0F_EEea0D7Rxloh9rg" name="Application">
+    <packagedElement xmi:type="uml:Model" xmi:id="_o8bq01_EEea0D7Rxloh9rg" name="Player"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_o8cR4F_EEea0D7Rxloh9rg" name="Domain"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_o8cR5V_EEea0D7Rxloh9rg" name="Technical services"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_o8c48F_EEea0D7Rxloh9rg" name="Foundation"/>
+</uml:Model>
