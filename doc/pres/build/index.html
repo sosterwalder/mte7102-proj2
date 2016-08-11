@@ -115,6 +115,59 @@
 </script>
 </section>
 
+<section id="chapter-vision" class="chapter">
+<section id="vision-vision" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Vision</h1>
+
+<ul class="fragment">
+    <li>Software</li>
+    <li style="list-style-type: none;">
+        <ul>
+            <li class="fragment">Real-time animations</li>
+            <li style="list-style-type: none;">
+                <ul>
+                    <li class="fragment">Sphere-Tracing</li>
+                    <li class="fragment">Managing and editing</li>
+                    <li class="fragment">Allow export and import</li>
+                    <li class="fragment">Easily playable</li>
+                </ul>
+            </li>
+            <li class="fragment">Be intuitive</li>
+            <li class="fragment">Modular</li>
+        </ul>
+    </li>
+</ul>
+<p class="fragment">&rArr; 2 components</p>
+<ul class="fragment">
+    <li>Editor</li>
+    <li class="fragment">Player</li>
+</ul>
+</section>
+
+<section id="vision-gui" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Vision</h1>
+<h2>Envisioned</h2>
+
+<img src="images/vision.png" alt="Image showing the vision of the editor" style="border: 0; width: 80%; box-shadow: none">
+</section>
+
+<section id="vision-gui-action" class="slide" data-has-notes="false">
+<!-- vim: set ts=4 sw=4 sts=4: -->
+<!-- vim: set spell spelllang=en: -->
+
+<h1>Vision</h1>
+<h2>Envisioned</h2>
+
+<img src="images/vision-action.png" alt="Image showing a vision of the editor rendering a scene" style="border: 0; box-shadow: none">
+</section>
+</section>
+
 <section id="chapter-motivation" class="chapter">
 <section id="motivation-intro" class="slide" data-has-notes="false">
 <!-- vim: set ts=4 sw=4 sts=4: -->
@@ -218,58 +271,6 @@ width: 60%; box-shadow: none">
 </section>
 </section>
 
-<section id="chapter-vision" class="chapter">
-<section id="vision-vision" class="slide" data-has-notes="false">
-<!-- vim: set ts=4 sw=4 sts=4: -->
-<!-- vim: set spell spelllang=en: -->
-
-<h1>Vision</h1>
-
-<ul class="fragment">
-    <li>Software</li>
-    <li style="list-style-type: none;">
-        <ul>
-            <li class="fragment">Real-time animations</li>
-            <li style="list-style-type: none;">
-                <ul>
-                    <li class="fragment">Managing and editing</li>
-                    <li class="fragment">Allow export and import</li>
-                    <li class="fragment">Easily playable</li>
-                </ul>
-            </li>
-            <li class="fragment">Be intuitive</li>
-            <li class="fragment">Modular</li>
-        </ul>
-    </li>
-</ul>
-<p class="fragment">&rArr; 2 components</p>
-<ul class="fragment">
-    <li>Editor</li>
-    <li class="fragment">Player</li>
-</ul>
-</section>
-
-<section id="vision-gui" class="slide" data-has-notes="false">
-<!-- vim: set ts=4 sw=4 sts=4: -->
-<!-- vim: set spell spelllang=en: -->
-
-<h1>Vision</h1>
-<h2>Envisioned</h2>
-
-<img src="images/vision.png" alt="Image showing the vision of the editor" style="border: 0; width: 80%; box-shadow: none">
-</section>
-
-<section id="vision-gui-action" class="slide" data-has-notes="false">
-<!-- vim: set ts=4 sw=4 sts=4: -->
-<!-- vim: set spell spelllang=en: -->
-
-<h1>Vision</h1>
-<h2>Envisioned</h2>
-
-<img src="images/vision-action.png" alt="Image showing a vision of the editor rendering a scene" style="border: 0; box-shadow: none">
-</section>
-</section>
-
 <section id="steps" class="slide" data-has-notes="false">
 <!-- vim: set ts=4 sw=4 sts=4: -->
 <!-- vim: set spell spelllang=en: -->
@@ -298,11 +299,12 @@ width: 60%; box-shadow: none">
 <!-- vim: set ts=4 sw=4 sts=4: -->
 <!-- vim: set spell spelllang=en: -->
 
-<h1>Architecture</h1>
+<h1>Logical Architecture</h1>
 <h2>Layers</h2>
 
 <p>
-    <img src="images/layers.svg" alt="Image showing layers of the architecture" style="border: 0; width: 20%; box-shadow: none">
+    <img src="images/layers.svg" alt="Image showing layers of the architecture"
+    style="border: 0; width: 15%; box-shadow: none">
 </p>
 <p class="fragment">
     &rArr; Relaxed layered architecture
@@ -313,7 +315,7 @@ width: 60%; box-shadow: none">
 <!-- vim: set ts=4 sw=4 sts=4: -->
 <!-- vim: set spell spelllang=en: -->
 
-<h1>Architecture</h1>
+<h1>Logical Architecture</h1>
 <h2>Layers: UI &amp; Application</h2>
 
 <p>
@@ -325,7 +327,7 @@ width: 60%; box-shadow: none">
 <!-- vim: set ts=4 sw=4 sts=4: -->
 <!-- vim: set spell spelllang=en: -->
 
-<h1>Architecture</h1>
+<h1>Logical Architecture</h1>
 <h2>Layers: Domain</h2>
 
 <p>
@@ -337,7 +339,7 @@ width: 60%; box-shadow: none">
 <!-- vim: set ts=4 sw=4 sts=4: -->
 <!-- vim: set spell spelllang=en: -->
 
-<h1>Architecture</h1>
+<h1>Logical Architecture</h1>
 <h2>Layers: Technical services &amp; Foundation</h2>
 
 <p>
@@ -371,7 +373,7 @@ width: 60%; box-shadow: none">
 <ul class="fragment">
     <li style="list-style-type: none;">
         <ul>
-            <li class="fragment">Model simple scene</li>
+            <li class="fragment">Model simple scenes</li>
             <li class="fragment">Provide primitives</li>
             <li class="fragment">Graph</li>
         </ul>
