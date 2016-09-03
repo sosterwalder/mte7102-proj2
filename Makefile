@@ -25,5 +25,6 @@ ifeq (${OS}, Darwin)
 else ifeq (${OS}, Linux)
 	cd bin/ && ./MTE7102
 else
-	@echo "You are running this Makefile from Windows? Seriously!?"
+	@echo "You are running this Makefile from Windows? Seriously!? Nice!"
+	@echo "But no! (not yet :))"
 endif
